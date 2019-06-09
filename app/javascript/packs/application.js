@@ -7,6 +7,7 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 
 import "bulma/css/bulma.css"
+import "@fortawesome/fontawesome-free/css/all.css";
 import "../stylesheets/application.scss"
 
 // Uncomment to copy all static images under ../images to the output folder and reference
