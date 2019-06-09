@@ -17,7 +17,7 @@ default: &default
   cache_manifest: false
 
   # Extract and emit a css file
-  extract_css: false
+  extract_css: true
 
   static_assets_extensions:
     - .jpg
@@ -32,6 +32,7 @@ default: &default
     - .ttf
     - .woff
     - .woff2
+    - .mp4
 
   extensions:
     - .mjs
@@ -47,6 +48,7 @@ default: &default
     - .gif
     - .jpeg
     - .jpg
+    - .mp4
 
 development:
   <<: *default
