@@ -29,9 +29,9 @@
       <div id="" class="navbar-menu">
         <div class="navbar-start">
           <% if current_user %>
-            <a class="navbar-item">Calendar</a>
-            <a class="navbar-item">Vote</a>
-            <a class="navbar-item">My Movies</a>
+            <%= link_to "Calendar", "#", class: "navbar-item" %>
+            <%= link_to "Vote", "#", class: "navbar-item" %>
+            <%= link_to "My Movies", "#", class: "navbar-item" %>
           <% end %>
         </div>
 
@@ -39,7 +39,7 @@
           <div class="navbar-item">
             <div class="buttons">
               <% if current_user %>
-                <%= link_to "Account", "#", class: "button"%>
+                <%= link_to "Account", "#", class: "button" %>
                 <%= link_to 'Log Out', logout_path, method: :delete, class: "button" %>
               <% else %>
                 <%= link_to "Log In", login_path, class: "button" %>
