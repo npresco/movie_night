@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+File.open("./app/assets/movies.txt", "r") do |file|
+  file.each_line do |line|
+    Movie.create(title: line)
+  end
+end
