@@ -18,3 +18,4 @@ import "../stylesheets/application.scss"
 // const imagePath = (name) => images(name, true)
 
 import "controllers"
+import "./turbolinks-get-render"
