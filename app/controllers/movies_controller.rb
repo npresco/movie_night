@@ -10,6 +10,10 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.limit(25)
+    if params[:query].present?
+      @movies = Movie.search_by_title(params[:query])
+    else
+      @movies = Movie.all.limit(25)
+    end
   end
 end

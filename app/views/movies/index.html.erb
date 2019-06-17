@@ -1,9 +1,37 @@
-<table class="table is-fullwidth">
-  <thead>
-    <th>Name</th>
-    <th>Description</th>
-  </thead>
-  <tbody>
-    <%= render @movies %>
-  </tbody>
-</table>
+<div data-controller="narrowing">
+  <div class="columns is-centered">
+    <div class="column is-half">
+      <div class="field">
+        <div class="control">
+          <%= form_with url: movies_path, method: :get,
+            data: { controller: "file",
+                    target: "file.form narrowing.form",
+                    action: "keypress->file#pressedEnter",
+                    "turbolinks-get-render" => true } do |form| %>
+
+                    <%= form.text_field "query", class: "input is-normal",
+                      data: { action: "keyup->narrowing#search",
+                              "turbolinks-permanent" => true },
+                              id: "index-search",
+                              autofocus: true,
+                              placeholder: "Search" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <section>
+      <table class="table is-fullwidth is-centered has-text-centered">
+        <thead>
+          <th>Name</th>
+          <th>Description</th>
+        </thead>
+        <tbody>
+          <%= render @movies %>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>
