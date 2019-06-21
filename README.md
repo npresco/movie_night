@@ -1,24 +1,14 @@
-# README
+** The Way It Works
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+-Create movie clubs from users
+-Users can curate list of movies they want to watch
+-Users put one movie in for the agreed night to watch movie
+-All users in club rank movies the would like to watch
+-App selects best fit movie to watch
 
-Things you may want to cover:
 
-* Ruby version
+** Built With
+Ruby 2.6.3
+Rails 6.0.0.rc1
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
