@@ -13,3 +13,6 @@ Ruby 2.6.3
 Rails 6.0.0.rc1
 
 
+- CSS - Bulma
+- Javascript - StimulusJS
+- Authentication - BCrype/`has_secure_password`
