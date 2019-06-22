@@ -1,4 +1,4 @@
-** The Way It Works
+**The Way It Works
 
 -Create movie clubs from users
 -Users can curate list of movies they want to watch
@@ -7,7 +7,8 @@
 -App selects best fit movie to watch
 
 
-** Built With
+**Built With
+
 Ruby 2.6.3
 Rails 6.0.0.rc1
 
