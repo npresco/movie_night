@@ -3,6 +3,6 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
 
-  has_many :watchlists
-  has_many :movies, through: :watchlist
+  has_many :watchlists, dependent: :destroy
+  has_many :movies, through: :watchlists
 end
