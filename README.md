@@ -12,7 +12,10 @@
 Ruby 2.6.3
 Rails 6.0.0.rc1
 
-
 - CSS - Bulma
-- Javascript - StimulusJS
+- Javascript - StimulusJS/Turbolinks
 - Authentication - BCrype/`has_secure_password`
+- Votings - Rangked Choice but way of head to head competition. All movies
+  are put up against each other in a bracket to determine persons ranked choices.
+- Calendar
+- Notifications
