@@ -25,12 +25,11 @@
     <section>
       <table class="table is-fullwidth is-centered has-text-centered">
         <thead>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Add To Watchlist</th>
+          <th width=80%>Name</th>
+          <th colspan=2></th>
         </thead>
         <tbody>
-          <%= render @movies %>
+          <%= render partial: @movies, locals: { redirect_path: movies_path } %>
         </tbody>
       </table>
     </section>

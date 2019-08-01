@@ -1,0 +1,7 @@
+<h1><%= @club.name %></h1>
+
+<% @club.users.each do |user| %>
+  <p>
+    <%= user.name %>
+  </p>
+<% end %>

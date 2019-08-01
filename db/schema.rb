@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_15_220935) do
+ActiveRecord::Schema.define(version: 2019_08_01_203821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "club_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "club_id", null: false
+    t.boolean "admin", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["club_id"], name: "index_club_users_on_club_id"
+    t.index ["user_id"], name: "index_club_users_on_user_id"
+  end
+
+  create_table "clubs", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "movies", force: :cascade do |t|
     t.string "title"
@@ -30,6 +46,14 @@ ActiveRecord::Schema.define(version: 2019_06_15_220935) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "viewings", force: :cascade do |t|
+    t.datetime "datetime"
+    t.bigint "club_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["club_id"], name: "index_viewings_on_club_id"
+  end
+
   create_table "watchlists", force: :cascade do |t|
     t.bigint "movie_id", null: false
     t.bigint "user_id", null: false
@@ -39,6 +63,9 @@ ActiveRecord::Schema.define(version: 2019_06_15_220935) do
     t.index ["user_id"], name: "index_watchlists_on_user_id"
   end
 
+  add_foreign_key "club_users", "clubs"
+  add_foreign_key "club_users", "users"
+  add_foreign_key "viewings", "clubs"
   add_foreign_key "watchlists", "movies"
   add_foreign_key "watchlists", "users"
 end

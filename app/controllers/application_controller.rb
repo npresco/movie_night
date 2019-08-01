@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate
+  include Pagy::Backend
 
   def home
   end

@@ -13,7 +13,9 @@ class MoviesController < ApplicationController
     if params[:query].present?
       @movies = Movie.search_by_title(params[:query])
     else
-      @movies = Movie.all.limit(25)
+      @movies = Movie.all.order(title: :asc)
     end
+
+      @pagy, @movies = pagy(@movies)
   end
 end
