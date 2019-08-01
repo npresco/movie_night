@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate
+
   def home
   end
 
@@ -9,5 +11,12 @@ class ApplicationController < ActionController::Base
 
   def authorize
     redirect_to login_path, alert: "You must be logged in to access this page." if current_user.nil?
+  end
+
+  # Take down once fail2ban is setup as well as belonging to a "club"
+  def authenticate
+    authenticate_or_request_with_http_basic do |u, p|
+      u == "movie" && p == "night"
+    end
   end
 end
