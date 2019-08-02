@@ -2,25 +2,40 @@
   <td>
     <%= movie.title %>
   </td>
-  <td></td>
-  <td>
     <% if current_user.movies.include?(movie) %>
-      <%= button_to "Remove from watchlist",
-        watchlist_path(current_user.watchlists.find { |w| w.movie == movie }.id),
-        method: :delete,
-        form: { data: { action: "ajax:success->form#dataAdded" } },
-        remote: true,
-        class: "button is-danger is-small"  %>
+      <td>
+        <%= button_to "Remove from watchlist",
+          watchlist_path(current_user.watchlists.find { |w| w.movie == movie }.id),
+          method: :delete,
+          form: { data: { action: "ajax:success->form#dataAdded" } },
+          params: { redirect_to: redirect_path },
+          remote: true,
+          class: "button is-danger is-small"  %>
+
+      </td>
     <% else %>
-      <%= button_to "Add to watchlist",
-        watchlists_path,
-        method: :post,
-        form: { data: { action: "ajax:success->form#dataAdded" } },
-        params: { "watchlist[movie_id]" => movie.id,
-                  "watchlist[user_id]" => current_user.id },
+      <td colspan=2>
+        <%= button_to "Add to watchlist",
+          watchlists_path,
+          method: :post,
+          form: { data: { action: "ajax:success->form#dataAdded" } },
+          params: { "watchlist[movie_id]" => movie.id,
+                    "watchlist[user_id]" => current_user.id },
         remote: true,
         class: "button is-link is-small"  %>
+      </td>
     <% end%>
-  </td>
+  <% if current_user.movies.include?(movie) %>
+    <td>
+        <%= button_to "Submit to movie night",
+          watchlists_path,
+          method: :post,
+          form: { data: { action: "ajax:success->form#dataAdded" } },
+          params: { "watchlist[movie_id]" => movie.id,
+                    "watchlist[user_id]" => current_user.id },
+        remote: true,
+        class: "button is-small"  %>
+    </td>
+  <% end %>
 </tr>
 

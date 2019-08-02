@@ -5,4 +5,7 @@ class User < ApplicationRecord
 
   has_many :watchlists, dependent: :destroy
   has_many :movies, through: :watchlists
+
+  has_many :club_users
+  has_many :clubs, through: :club_users
 end

@@ -18,7 +18,7 @@ class WatchlistsController < ApplicationController
   def destroy
     Watchlist.find(params[:id]).destroy
     flash[notice] = "Movie was removed from watchlist"
-    redirect_to movies_path
+    redirect_to params[:redirect_to]
   end
 
   private

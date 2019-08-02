@@ -1,0 +1,16 @@
+  <div>
+    <section>
+      <table class="table is-fullwidth is-centered has-text-centered">
+        <thead>
+          <th width=80%>Name</th>
+          <th colspan=2></th>
+        </thead>
+        <tbody>
+          <% @clubs.each do |club| %>
+            <td><%= link_to club.name, club_path(club) %></td>
+            <td><%= club.admin?(current_user) %></td>
+          <% end %>
+        </tbody>
+      </table>
+    </section>
+  </div>
