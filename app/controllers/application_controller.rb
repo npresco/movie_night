@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
 
   def home
+    # For now just deal with one club
+    @club = current_user.clubs.first
+    @viewing = @club.viewings.last
   end
 
   def current_user

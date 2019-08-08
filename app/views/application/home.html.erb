@@ -1,7 +1,13 @@
 <section class="section">
+
   <p class="size-4 has-text-weight-semibold">
     This is the app for choosing what to watch during movie night!
   </p>
+
+  <div class="box">
+    Next viewing is on:
+    <%= @viewing.datetime.to_formatted_s(:long_ordinal) %>
+  </div>
 
   <hr />
 

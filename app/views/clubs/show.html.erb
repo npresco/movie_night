@@ -1,7 +1,34 @@
-<h1><%= @club.name %></h1>
+<div class="container">
+  <h1><%= @club.name %></h1>
 
-<% @club.users.each do |user| %>
-  <p>
-    <%= user.name %>
-  </p>
-<% end %>
+  <table class="table">
+    <tr>
+      <th>Name</th>
+    </tr>
+    <% @club.users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.name %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <% if @club.admin?(current_user) %>
+
+    <h3>Create Viewing</h3>
+
+    <div class="columns">
+      <div class="column is-3 has-text-black">
+        <div>
+          <%= form_with model: Viewing.new do |form| %>
+            <%= form.text_field :datetime, data: { controller: "flatpickr", flatpickr_enable_time: true }, class: "input" %>
+            <%= form.text_field :club_id, value: @club.id, class: "is-hidden" %>
+            <%= form.submit "Create Viewing", class: "button" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+</div>

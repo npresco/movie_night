@@ -1,25 +1,5 @@
-<div data-controller="narrowing">
-  <div class="columns is-centered">
-    <div class="column is-half">
-      <div class="field">
-        <div class="control">
-        </div>
-      </div>
-    </div>
+<section class="section">
+  <div class="columns is-multiline">
+    <%= render partial: @movies, locals: { redirect_path: watchlists_path } %>
   </div>
-
-  <div>
-    <section>
-      <table class="table is-fullwidth is-centered has-text-centered">
-        <thead>
-          <th width="80%">Name</th>
-          <th></th>
-          <th></th>
-        </thead>
-        <tbody>
-          <%= render partial: @movies, locals: { redirect_path: watchlists_path } %>
-        </tbody>
-      </table>
-    </section>
-  </div>
-</div>
+</section>

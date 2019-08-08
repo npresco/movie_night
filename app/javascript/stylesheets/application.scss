@@ -1,3 +1,8 @@
+@import "bulma/bulma.sass";
+@import "bulma-extensions/src/sass/index.sass";
+@import "flatpickr/dist/themes/light.css";
+@import "animate.css/animate.css";
+
 video {
   filter: opacity(35%);
 }
@@ -5,3 +10,41 @@ video {
 .has-opacity-50 {
   opacity: 0.9;
 }
+
+.has-opacity-75 {
+  opacity: 0.75;
+}
+
+.image .overlay-button {
+  position: absolute;
+  top: 0.5rem; 
+  right: 0.5rem;
+  z-index: 9999;
+}
+
+.image .overlay-box {
+  position: absolute;
+  bottom: 0px; 
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 1rem;
+  animation-duration: 0.5s;
+}
+
+// For Embed
+// .video-container {
+//   position: relative;
+//   padding-bottom: 40%;
+//   padding-top: 30px; height: 0; overflow: hidden;
+// }
+//
+// .video-container iframe,
+// .video-container object,
+// .video-container embed {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+// }

@@ -11,11 +11,15 @@ class MoviesController < ApplicationController
 
   def index
     if params[:query].present?
-      @movies = Movie.search_by_title(params[:query])
+      # If searching, make request to reel good for search and create movie and embed for each result
+      @movies = ::Omdb.search(params[:query])
+      # @movies = Movie.search_by_title(params[:query])
+
+      @pagy, @movies = pagy_array(@movies)
     else
-      @movies = Movie.all.order(title: :asc)
-    end
+      @movies = Movie.none
 
       @pagy, @movies = pagy(@movies)
+    end
   end
 end

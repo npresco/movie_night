@@ -16,4 +16,5 @@ Rails.application.routes.draw do
 
   resources :watchlists, only: [:index, :create, :destroy]
   resources :clubs, only: [:index, :show]
+  resources :viewings, only: [:create]
 end

@@ -19,3 +19,8 @@ Rails 6.0.0.rc1
   are put up against each other in a bracket to determine persons ranked choices.
 - Calendar
 - Notifications
+
+## Notes
+
+Poll - All users votes
+Vote - Single users vote on a viewing
