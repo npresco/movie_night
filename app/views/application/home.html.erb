@@ -1,12 +1,22 @@
 <section class="section">
 
-  <p class="size-4 has-text-weight-semibold">
+  <p class="subtitle">
     This is the app for choosing what to watch during movie night!
   </p>
 
   <div class="box">
-    Next viewing is on:
-    <%= @viewing.datetime.to_formatted_s(:long_ordinal) %>
+    <% if @viewing.present? %>
+
+      <p>Next viewing is on: <%= @viewing.datetime.to_formatted_s(:long_ordinal) %> </p>
+
+      <hr />
+
+      <p>Nominations must be in by <%= (@viewing.datetime - 2.weeks).to_formatted_s(:long_ordinal) %></p>
+      <p>Votes must be in by <%= (@viewing.datetime - 1.weeks).to_formatted_s(:long_ordinal) %></p>
+
+    <% else %>
+      <p>No viewings currently scheduled</p>
+    <% end %>
   </div>
 
   <hr />
@@ -24,11 +34,17 @@
         User can add/create a movie to their watchlist
       </li>
       <li>
-        User can submit movie to watch for movie night
+        User can submit movie to watch for movie night, nominating a movie can be done upto one week before movie night
       </li>
       <li>
         All users vote for movie they want to watch from pool and movie is selected from vote
-        Currently voting rules are very simple, most votes wins.
+
+        Voting happens starts one week from selected date and can take place up to the one night before
+
+        Voting:
+        All users can give a thumbs up, push, or thumbs down to any movie
+        Most votes wins
+        Tiebreaker chooses one of tied movies at random
       </li>
     </ul>
   </div>

@@ -15,6 +15,23 @@ video {
   opacity: 0.75;
 }
 
+.is-flex-column {
+  flex-direction: column;
+}
+
+.has-border-gray {
+  border: 0.5rem solid gray !important;
+ }
+
+.has-border-link {
+  border: 0.5rem solid hsl(217, 71%, 53%) !important;
+ }
+
+.has-border-danger {
+  border: 0.5rem solid hsl(348, 100%, 61%) !important;
+ }
+
+
 .image .overlay-button {
   position: absolute;
   top: 0.5rem; 

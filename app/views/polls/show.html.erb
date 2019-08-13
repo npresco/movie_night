@@ -1,0 +1,49 @@
+<section class="section" data-controller="vote">
+  <div class="columns is-centered">
+    <div class="column is-3">
+
+      <div class="notification has-text-centered">
+        <% if @locked %>
+          <p>Voting is locked</p>
+        <% else %>
+          <p>You have <%= distance_of_time_in_words( Time.current, @viewing.datetime - 1.weeks ) %>  left to nominate</p>
+        <% end %>
+      </div>
+
+      <div class="box <%= @vote.new_record? ? 'has-border-danger' : 'has-border-link'%> ">
+        <h2 class="subtitle">Your Vote</h2>
+        <%= form_with model: @vote do |f| %>
+          <%= f.text_field :poll_id, value: @poll.id, class: "is-hidden" %>
+          <%= f.text_field :user_id, value: current_user.id, class: "is-hidden" %>
+          <div class="field">
+            <% @nominations.each do |nomination| %>
+              <p>
+                <%= nomination.movie.title %><span data-movie="<%= nomination.movie.id %>">
+                  <% case f.object.choices[nomination.movie.title]
+                  when "1" %>
+                - <span class="icon is-small has-text-link"><i class="fas fa-thumbs-up"></i></span>
+              <% when "0" %>
+              <% when "-1" %>
+                - <span class="icon is-small has-text-danger"><i class="fas fa-thumbs-down"></i></span>
+              <% end %>
+                </span>
+                <%= f.text_field "choices[#{nomination.movie.title}]",
+                  value: f.object.choices[nomination.movie.title] || 0,
+                  data: { movie: nomination.movie.id },
+                  class: "is-hidden" %>
+              </p>
+            <% end %>
+          </div>
+          <div class="field">
+            <div class="control">
+              <%= f.submit "Vote", class: "button", disabled: @locked %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="columns is-multiline">
+    <%= render partial: @nominations %>
+  </div>
+</section>

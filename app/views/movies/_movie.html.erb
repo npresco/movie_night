@@ -6,49 +6,71 @@
               data-action="mouseenter->poster#show mouseleave->poster#hide">
         <%= image_tag movie.poster_or_default, height: "200", width: "300", class: "poster" %>
 
-        <% if current_user.movies.include?(movie) %>
-          <%= button_to "Remove from watchlist",
-            watchlist_path(current_user.watchlists.find { |w| w.movie == movie }.id),
-            method: :delete,
-            params: { redirect_to: redirect_path },
+        <!-- Add/Remove movie from watchlist -->
+        <div class="is-flex is-flex-column overlay-button">
+          <% if current_user.movies.include?(movie) %>
+            <div class="field">
+              <%= button_to watchlist_path(current_user.watchlists.find { |w| w.movie == movie }.id),
+                method: :delete,
+                params: { redirect_to: redirect_path },
+                remote: true,
+                class: "button is-danger is-small is-fullwidth" do %>
+                <span class='icon is-small'>
+                  <i class='fas fa-minus'></i>
+                </span>
+              <% end %>
+
+            </div>
+
+            <% if current_user.current_nomination %>
+              <div class="field">
+                <%= button_to "Nominate",
+                  nomination_path(current_user.current_nomination.id),
+                  method: :patch,
+                  params: { "nomination[poll_id]" => current_user.current_poll,
+                            "nomination[movie_id]" => movie.id, 
+                            "nomination[user_id]" => current_user.id },
+                remote: true,
+                disabled: @locked,
+                class: "button is-small is-fullwidth"  %>
+              </div>
+            <% else %>
+              <div class="field">
+                <%= button_to "Nominate",
+                  nominations_path,
+                  method: :post,
+                  params: { "nomination[poll_id]" => current_user.current_poll,
+                            "nomination[movie_id]" => movie.id, 
+                            "nomination[user_id]" => current_user.id },
+                remote: true,
+                class: "button is-small is-fullwidth"  %>
+              </div>
+            <% end %>
+          <% else %>
+            <%= button_to watchlists_path,
+              method: :post,
+              params: { "watchlist[movie_id]" => movie.id,
+                        "watchlist[user_id]" => current_user.id },
             remote: true,
-            class: "button is-danger is-small overlay-button"  %>
-        <% else %>
-          <%= button_to "Add to watchlist",
-            watchlists_path,
-            method: :post,
-            params: { "watchlist[movie_id]" => movie.id,
-                      "watchlist[user_id]" => current_user.id },
-          remote: true,
-          class: "button is-link is-small overlay-button"  %>
+            class: "button is-link is-small is-fullwidth" do %>
+                <span class='icon is-small'>
+                  <i class='fas fa-plus'></i>
+                </span>
+              <% end %>
         <% end %>
+        </div>
 
         <div
           class="overlay-box has-opacity-75 is-flex is-hidden"
           style="background-color:white;justify-content:center;align-items:center"
           data-target="poster.overlay">
           <div class="is-centered has-text-centered has-text-weight-semibold">
-            <p class="is-size-6"><%= movie.title %></p>
-            <p class="is-size-7"><%= movie.year %></p>
+            <p class="is-size-5"><%= movie.title %></p>
+            <p class="is-size-6"><%= movie.year %></p>
           </div>
         </div>
 
       </figure>
-
     </div>
-
-    <%# if current_user.movies.include?(movie) %>
-    <%#= button_to "Submit to movie night",
-    watchlists_path,
-    method: :post,
-    form: { data: { action: "ajax:success->form#dataAdded" } },
-    params: { "watchlist[movie_id]" => movie.id,
-              "watchlist[user_id]" => current_user.id },
-    remote: true,
-    class: "button is-small"  %>
-  <%# end %>
-
-
   </div>
-
 </div>

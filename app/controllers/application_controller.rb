@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   def home
     # For now just deal with one club
     @club = current_user.clubs.first
-    @viewing = @club.viewings.last
+    @viewing = @club.current_viewing
   end
 
   def current_user

@@ -30,7 +30,7 @@
         <div class="navbar-start">
           <% if current_user %>
             <%# <%= link_to "Calendar", "#", class: "navbar-item" %>
-            <%= link_to "Vote", "#", class: "navbar-item" %>
+            <%= link_to "Vote", poll_path(current_user.current_poll), class: "navbar-item" %>
             <%= link_to "Watchlist", watchlists_path, class: "navbar-item" %>
             <%= link_to "Movies", movies_path, class: "navbar-item" %>
           <% end %>

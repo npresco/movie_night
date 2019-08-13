@@ -13,8 +13,10 @@ Rails.application.routes.draw do
   delete "/logout" => "sessions#destroy"
 
   resources :movies
-
   resources :watchlists, only: [:index, :create, :destroy]
   resources :clubs, only: [:index, :show]
   resources :viewings, only: [:create]
+  resources :nominations, only: [:create, :update]
+  resources :polls, only: [:show]
+  resources :votes, only: [:create, :update]
 end

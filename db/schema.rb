@@ -43,8 +43,15 @@ ActiveRecord::Schema.define(version: 2019_08_08_150052) do
   end
 
   create_table "nominations", force: :cascade do |t|
+    t.bigint "poll_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "movie_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_nominations_on_movie_id"
+    t.index ["poll_id", "user_id"], name: "index_nominations_on_poll_id_and_user_id", unique: true
+    t.index ["poll_id"], name: "index_nominations_on_poll_id"
+    t.index ["user_id"], name: "index_nominations_on_user_id"
   end
 
   create_table "polls", force: :cascade do |t|
@@ -73,10 +80,9 @@ ActiveRecord::Schema.define(version: 2019_08_08_150052) do
   create_table "votes", force: :cascade do |t|
     t.bigint "poll_id", null: false
     t.bigint "user_id", null: false
-    t.bigint "movie_id", null: false
+    t.jsonb "choices", default: "{}", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["movie_id"], name: "index_votes_on_movie_id"
     t.index ["poll_id"], name: "index_votes_on_poll_id"
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
@@ -92,9 +98,11 @@ ActiveRecord::Schema.define(version: 2019_08_08_150052) do
 
   add_foreign_key "club_users", "clubs"
   add_foreign_key "club_users", "users"
+  add_foreign_key "nominations", "movies"
+  add_foreign_key "nominations", "polls"
+  add_foreign_key "nominations", "users"
   add_foreign_key "polls", "viewings"
   add_foreign_key "viewings", "clubs"
-  add_foreign_key "votes", "movies"
   add_foreign_key "votes", "polls"
   add_foreign_key "votes", "users"
   add_foreign_key "watchlists", "movies"
