@@ -5,9 +5,7 @@ class PollsController < ApplicationController
     @vote = current_user.current_vote || Vote.new
     @viewing = current_user.current_viewing
 
-    if @viewing.datetime - 1.week < Time.current
-      @locked = true
-    end
+    @locked = Time.current > @viewing.datetime - 1.week || Time.current < @viewing.datetime - 2.weeks
   end
 
   def poll_params

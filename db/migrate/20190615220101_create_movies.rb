@@ -7,11 +7,9 @@ class CreateMovies < ActiveRecord::Migration[6.0]
       t.string :description
       t.string :poster
 
-
-
       t.timestamps
     end
 
-    add_index :movies, :title, unique: true
+    add_index :movies, [:title, :imdbID], unique: true
   end
 end

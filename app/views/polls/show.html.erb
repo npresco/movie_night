@@ -6,7 +6,7 @@
         <% if @locked %>
           <p>Voting is locked</p>
         <% else %>
-          <p>You have <%= distance_of_time_in_words( Time.current, @viewing.datetime - 1.weeks ) %>  left to nominate</p>
+          <p>You have <%= distance_of_time_in_words( Time.current, @viewing.datetime - 1.weeks ) %>  left to vote</p>
         <% end %>
       </div>
 

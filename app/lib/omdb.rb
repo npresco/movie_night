@@ -6,9 +6,9 @@ class Omdb
     body = JSON.parse(response.body)
     movies = []
     body["Search"].each do |movie_hash|
-      movie = Movie.create_or_find_by(title: movie_hash["Title"])
+      movie = Movie.create_or_find_by(title: movie_hash["Title"], imdbID: movie_hash["imdbID"])
       poster = movie_hash["Poster"] == "N/A" ? nil : movie_hash["Poster"]
-      movie.update!(year: movie_hash["Year"], imdbID: movie_hash["imdbID"], poster: poster)
+      movie.update!(year: movie_hash["Year"], poster: poster)
       movies << movie
     end
     movies
@@ -19,9 +19,9 @@ class Omdb
     body = JSON.parse(response.body)
     movies = []
     body["Search"].each do |movie_hash|
-      movie = Movie.create_or_find_by(title: movie_hash["Title"])
+      movie = Movie.create_or_find_by(title: movie_hash["Title"], imdbID: movie_hash["imdbID"])
       poster = movie_hash["Poster"] == "N/A" ? nil : movie_hash["Poster"]
-      movie.update!(year: movie_hash["Year"], imdbID: movie_hash["imdbID"], poster: poster)
+      movie.update!(year: movie_hash["Year"], poster: poster)
       movies << movie
     end
     movies

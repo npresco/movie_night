@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_150052) do
     t.string "poster"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["title"], name: "index_movies_on_title", unique: true
+    t.index ["title", "imdbID"], name: "index_movies_on_title_and_imdbID", unique: true
   end
 
   create_table "nominations", force: :cascade do |t|
