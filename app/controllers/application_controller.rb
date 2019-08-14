@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate
+  before_action :authenticate_site_access
+  before_action :authenticate_user
   include Pagy::Backend
 
   def home
@@ -13,14 +14,14 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
-  def authorize
+  def authenticate_user
     redirect_to login_path, alert: "You must be logged in to access this page." if current_user.nil?
   end
 
   # Take down once fail2ban is setup as well as belonging to a "club"
-  def authenticate
-    authenticate_or_request_with_http_basic do |u, p|
-      u == "movie" && p == "night"
-    end
+  def authenticate_site_access
+    # authenticate_or_request_with_http_basic do |u, p|
+    #   u == "movie" && p == "night"
+    # end
   end
 end

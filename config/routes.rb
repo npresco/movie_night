@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  root to: "users#new"
+  root to: "application#home"
 
-  get "/home" => "application#home"
+  # get "/home" => "application#home"
 
   # Users
   get "users/new"  => "users#new", as: :new_user

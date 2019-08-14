@@ -24,7 +24,7 @@
                     <%= image_tag @nomination.movie.poster_or_default,
                       height: "200",
                       width: "300",
-                      class: "poster has-border-gray" %>
+                      class: "poster has-border-link" %>
 
                     <!-- Add/Remove movie from watchlist -->
                     <div class="is-flex is-flex-column overlay-button">
@@ -42,7 +42,7 @@
             </figure>
           </div>
         <% else %>
-          <div class="box">
+          <div class="box has-border-danger">
             <div class="has-text-centered">
               Nothing nominated yet
             </div>

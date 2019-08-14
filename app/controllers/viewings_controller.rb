@@ -3,7 +3,7 @@ class ViewingsController < ApplicationController
     @viewing = Viewing.new(viewing_params)
 
     if @viewing.save
-      redirect_to home_path
+      redirect_to root_path
     else
       render :new
     end

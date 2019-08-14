@@ -1,25 +1,27 @@
-<div data-turbolinks-scroll=false>
-  <div class="columns is-centered">
-    <div class="column is-half">
-      <%= form_with url: movies_path, method: :get, data: { "turbolinks-get-render" => true } do |form| %>
-        <div class="field has-addons">
-          <div class="control is-expanded">
-            <%= form.text_field "query", class: "input is-normal",
-              id: "index-search",
-              autofocus: true,
-              placeholder: "Search" %>
+<section class="section">
+  <div data-turbolinks-scroll=false>
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <%= form_with url: movies_path, method: :get, data: { "turbolinks-get-render" => true } do |form| %>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <%= form.text_field "query", class: "input is-normal",
+                id: "index-search",
+                autofocus: true,
+                placeholder: "Search" %>
+            </div>
+            <div class="control">
+              <%= form.submit "Search", class: "button" %>
+            </div>
           </div>
-          <div class="control">
-            <%= form.submit "Search", class: "button" %>
-          </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
 
-  <section class="section">
-    <div class="columns is-centered is-multiline">
-      <%= render partial: @movies, locals: { redirect_path: movies_path } %>
-    </div>
-  </section>
-</div>
+    <section class="section">
+      <div class="columns is-centered is-multiline">
+        <%= render partial: @movies, locals: { redirect_path: movies_path } %>
+      </div>
+    </section>
+  </div>
+</section>

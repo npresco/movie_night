@@ -24,26 +24,33 @@
 
             <% if current_user.current_nomination %>
               <div class="field">
-                <%= button_to "Nominate",
-                  nomination_path(current_user.current_nomination.id),
+                <%= button_to nomination_path(current_user.current_nomination.id),
                   method: :patch,
                   params: { "nomination[poll_id]" => current_user.current_poll,
                             "nomination[movie_id]" => movie.id, 
                             "nomination[user_id]" => current_user.id },
                 remote: true,
                 disabled: @locked,
-                class: "button is-small is-fullwidth"  %>
+                class: "button is-small is-fullwidth" do  %>
+                  <span class='icon is-small'>
+                    <i class='fas fa-person-booth'></i>
+                  </span>
+                <% end %>
               </div>
             <% else %>
               <div class="field">
-                <%= button_to "Nominate",
-                  nominations_path,
+                <%= button_to nominations_path,
                   method: :post,
                   params: { "nomination[poll_id]" => current_user.current_poll,
                             "nomination[movie_id]" => movie.id, 
                             "nomination[user_id]" => current_user.id },
                 remote: true,
-                class: "button is-small is-fullwidth"  %>
+                disabled: @locked,
+                class: "button is-small is-fullwidth" do %>
+                  <span class='icon is-small'>
+                    <i class='fas fa-person-booth'></i>
+                  </span>
+                <% end %>
               </div>
             <% end %>
           <% else %>
