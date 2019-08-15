@@ -19,9 +19,13 @@
     </div>
 
     <section class="section">
-      <div class="columns is-centered is-multiline">
-        <%= render partial: @movies, locals: { redirect_path: movies_path } %>
-      </div>
+      <% if @movies.present? %>
+        <div class="columns is-centered is-multiline">
+          <%= render partial: @movies, locals: { redirect_path: movies_path } %>
+        </div>
+      <% else %>
+        <p>No results, trying another search term</p>
+      <% end %>
     </section>
   </div>
 </section>

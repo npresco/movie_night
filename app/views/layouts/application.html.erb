@@ -40,7 +40,8 @@
           <div class="navbar-item">
             <div class="buttons">
               <% if current_user %>
-                <%= link_to "Account", "#", class: "button" %>
+                <%# <%= link_to "Account", "#", class: "button" %>
+                <div class="navbar-item">Welcome <%= current_user.name %></div>
                 <%= link_to "Clubs", "/clubs", class: "button" %>
                 <%= link_to 'Log Out', logout_path, method: :delete, class: "button" %>
               <% else %>

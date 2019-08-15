@@ -17,6 +17,7 @@ gem 'turbolinks_render'
 gem 'pagy'
 gem 'watir'
 gem 'webdrivers'
+gem 'chartkick'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

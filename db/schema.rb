@@ -56,8 +56,10 @@ ActiveRecord::Schema.define(version: 2019_08_08_150052) do
 
   create_table "polls", force: :cascade do |t|
     t.bigint "viewing_id", null: false
+    t.bigint "movie_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_polls_on_movie_id"
     t.index ["viewing_id"], name: "index_polls_on_viewing_id"
   end
 
@@ -101,6 +103,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_150052) do
   add_foreign_key "nominations", "movies"
   add_foreign_key "nominations", "polls"
   add_foreign_key "nominations", "users"
+  add_foreign_key "polls", "movies"
   add_foreign_key "polls", "viewings"
   add_foreign_key "viewings", "clubs"
   add_foreign_key "votes", "polls"
