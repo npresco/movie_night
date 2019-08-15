@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: movie_night
-  username: movie_night
-  password: <%= ENV['MOVIE_NIGHT_DATABASE_PASSWORD'] %>
+  username: <%= Rails.application.credentials.db_username %>
+  password: <%= Rails.application.credentials.db_password %>
