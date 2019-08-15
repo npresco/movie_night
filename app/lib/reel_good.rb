@@ -1,7 +1,7 @@
 # require 'watir'
 # require 'webdrivers'
 #
-# class ReelGood
+class ReelGood
 #
 #   def self.search(query)
 #     # Create watir browser
@@ -40,4 +40,4 @@
 #       b.close
 #     end
 #   end
-# end
+end
