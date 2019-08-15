@@ -8,6 +8,8 @@
               <%= form.text_field "query", class: "input is-normal",
                 id: "index-search",
                 autofocus: true,
+                value: @query,
+                onfocus: "this.setSelectionRange(this.value.length,this.value.length);",
                 placeholder: "Search" %>
             </div>
             <div class="control">

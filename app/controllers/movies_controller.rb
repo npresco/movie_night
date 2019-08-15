@@ -16,6 +16,7 @@ class MoviesController < ApplicationController
       # @movies = Movie.search_by_title(params[:query])
 
       @pagy, @movies = pagy_array(@movies)
+      @query = params[:query]
       @no_result = true if @movies.empty?
     else
       @movies = Movie.none
