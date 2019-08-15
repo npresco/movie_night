@@ -20,8 +20,8 @@ class ApplicationController < ActionController::Base
 
   # Take down once fail2ban is setup as well as belonging to a "club"
   def authenticate_site_access
-    # authenticate_or_request_with_http_basic do |u, p|
-    #   u == "movie" && p == "night"
-    # end
+    authenticate_or_request_with_http_basic do |u, p|
+      u == "movie" && p == "night"
+    end
   end
 end
