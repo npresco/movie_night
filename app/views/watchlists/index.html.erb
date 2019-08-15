@@ -1,6 +1,6 @@
 <section class="section">
   <div class="columns is-centered">
-    <div class="column is-2 has-text-centered">
+    <div class="column is-10 has-text-centered">
 
       <% if @viewing.present? %>
         <div class="notification has-text-centered">
@@ -12,46 +12,58 @@
         </div>
       <% end %>
 
-      <% if @nomination %>
-        <div class="field">
-          <h2 class="is-size-5 has-text-weight-semibold">Your Nomination</h2>
-        </div>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-2by3"
-                    data-controller="poster"
-                    data-action="mouseenter->poster#show mouseleave->poster#hide">
-                    <%= image_tag @nomination.movie.poster_or_default,
-                      height: "200",
-                      width: "300",
-                      class: "poster has-border-link" %>
+      <div class="columns is-centered">
+        <div class="column is-2">
 
-                    <!-- Add/Remove movie from watchlist -->
-                    <div class="is-flex is-flex-column overlay-button">
-                    </div>
+          <% if @nomination %>
 
-                    <div
-                      class="overlay-box has-opacity-75 is-flex is-hidden"
-                      style="background-color:white;justify-content:center;align-items:center"
-                      data-target="poster.overlay">
-                      <div class="is-centered has-text-centered has-text-weight-semibold">
-                        <p class="is-size-6"><%= @nomination.movie.title %></p>
-                        <p class="is-size-7"><%= @nomination.movie.year %></p>
-                      </div>
-                    </div>
-            </figure>
-          </div>
-        <% else %>
-          <div class="box has-border-danger">
-            <div class="has-text-centered">
-              Nothing nominated yet
+            <div class="field">
+              <h2 class="is-size-5 has-text-weight-semibold">Your Nomination</h2>
             </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-2by3"
+                        data-controller="poster"
+                        data-action="mouseenter->poster#show mouseleave->poster#hide">
+                        <%= image_tag @nomination.movie.poster_or_default,
+                          height: "200",
+                          width: "300",
+                          class: "poster has-border-link" %>
 
+                        <!-- Add/Remove movie from watchlist -->
+                        <div class="is-flex is-flex-column overlay-button">
+                        </div>
+
+                        <div
+                          class="overlay-box has-opacity-75 is-flex is-hidden"
+                          style="background-color:white;justify-content:center;align-items:center"
+                          data-target="poster.overlay">
+                          <div class="is-centered has-text-centered has-text-weight-semibold">
+                            <p class="is-size-6"><%= @nomination.movie.title %></p>
+                            <p class="is-size-7"><%= @nomination.movie.year %></p>
+                          </div>
+                        </div>
+                </figure>
+              </div>
+            </div>
+
+            <% else %>
+
+              <div class="box has-border-danger">
+                <div class="has-text-centered">
+                  Nothing nominated yet
+                </div>
+              </div>
+            </div>
+
+          <% end %>
+
+        </div>
+      </div>
+
+    </div>
   </div>
+
   <div class="columns is-centered is-multiline">
     <%= render partial: @movies, locals: { redirect_path: watchlists_path } %>
   </div>
