@@ -1,37 +1,39 @@
-<div data-controller="narrowing">
-  <div class="columns is-centered">
-    <div class="column is-half">
-      <div class="field">
-        <div class="control">
-          <%= form_with url: movies_path, method: :get,
-            data: { controller: "file",
-                    target: "file.form narrowing.form",
-                    action: "keypress->file#pressedEnter",
-                    "turbolinks-get-render" => true } do |form| %>
-
-                    <%= form.text_field "query", class: "input is-normal",
-                      data: { action: "keyup->narrowing#search",
-                              "turbolinks-permanent" => true },
-                              id: "index-search",
-                              autofocus: true,
-                              placeholder: "Search" %>
-          <% end %>
-        </div>
+<section class="section">
+  <div data-turbolinks-scroll=false>
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <%= form_with url: movies_path, method: :get, data: { "turbolinks-get-render" => true } do |form| %>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <%= form.text_field "query", class: "input is-normal",
+                id: "index-search",
+                autofocus: true,
+                value: @query,
+                onfocus: "this.setSelectionRange(this.value.length,this.value.length);",
+                placeholder: "Search" %>
+            </div>
+            <div class="control">
+              <%= form.submit "Search", class: "button" %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
-  </div>
 
-  <div>
-    <section>
-      <table class="table is-fullwidth is-centered has-text-centered">
-        <thead>
-          <th width=80%>Name</th>
-          <th colspan=2></th>
-        </thead>
-        <tbody>
+    <section class="section">
+      <% if @movies.present? %>
+        <div class="columns is-centered is-multiline">
           <%= render partial: @movies, locals: { redirect_path: movies_path } %>
-        </tbody>
-      </table>
+        </div>
+      <% elsif @no_result %>
+        <div class="columns is-centered">
+          <div class="column is-half">
+            <div class="notification has-text-centered has-text-weight-semibold">
+              <p>No results or too many, try a different search term</p>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </section>
   </div>
-</div>
+</section>

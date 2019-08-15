@@ -1,0 +1,55 @@
+<div class="column is-2">
+  <div class="card">
+    <div class="card-image">
+      <figure class="image is-2by3"
+              data-controller="poster"
+              data-action="mouseenter->poster#show mouseleave->poster#hide">
+              <%= image_tag nomination.movie.poster_or_default, height: "200", width: "300", class: "poster" %>
+
+              <!-- Add/Remove movie from watchlist -->
+              <div class="is-flex is-flex-column overlay-button" data-movie="<%= nomination.movie.id %>">
+                <div class="field">
+                  <button class="button is-link" data-action="click->vote#upvote" <%= @locked ? 'disabled' : '' %>>
+                    <span class="icon is-small">
+                      <i class="fas fa-thumbs-up"></i>
+                    </span>
+                  </button>
+                </div>
+
+                <div class="field">
+                  <button class="button" data-action="click->vote#push" <%= @locked ? 'disabled' : '' %>>
+                    <span class="icon is-small">
+                      <i class="fas fa-equals"></i>
+                    </span>
+                  </button>
+                </div>
+
+                <div class="field">
+                  <button class="button is-danger" data-action="click->vote#downvote" <%= @locked ? 'disabled' : '' %>>
+                    <span class="icon is-small">
+                      <i class="fas fa-thumbs-down"></i>
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              <div
+                class="overlay-box has-opacity-75 is-flex is-hidden"
+                style="background-color:white;justify-content:center;align-items:center"
+                data-target="poster.overlay">
+                <div class="is-centered has-text-centered has-text-weight-semibold">
+                  <p class="is-size-5"><%= nomination.movie.title %></p>
+                  <p class="is-size-6"><%= nomination.movie.year %></p>
+                </div>
+              </div>
+
+      </figure>
+      <div class="card-content">
+        <h2 class="content is-size-5 has-text-weight-semibold has-text-centered">
+          <%= nomination.user.name %>
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>
+

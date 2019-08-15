@@ -5,8 +5,10 @@
 
 require("@rails/ujs").start()
 require("turbolinks").start()
+require("chartkick")
+require("chart.js")
 
-import "bulma/css/bulma.css"
+// import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "../stylesheets/application.scss"
 
@@ -19,3 +21,18 @@ import "../stylesheets/application.scss"
 
 import "controllers"
 import "./turbolinks-get-render"
+import "./turbolinks-scroll"
+
+
+// Flatpickr Stimulus setup
+import { Application } from "stimulus";
+// import Flatpickr
+import Flatpickr from "stimulus-flatpickr";
+
+import { definitionsFromContext } from "stimulus/webpack-helpers";
+const application = Application.start();
+// const context = require.context("../controllers", true, /\.js$/);
+// application.load(definitionsFromContext(context));
+
+// Manually register Flatpickr as a stimulus controller
+application.register("flatpickr", Flatpickr);

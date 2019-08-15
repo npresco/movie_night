@@ -1,7 +1,64 @@
+@import "bulma/bulma.sass";
+@import "bulma-extensions/src/sass/index.sass";
+@import "flatpickr/dist/themes/light.css";
+@import "animate.css/animate.css";
+
 video {
   filter: opacity(35%);
 }
 
+.hero-video {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-video video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: cover;
+}
+
 .has-opacity-50 {
   opacity: 0.9;
+}
+
+.has-opacity-75 {
+  opacity: 0.75;
+}
+
+.is-flex-column {
+  flex-direction: column;
+}
+
+.has-border-gray {
+  border: 0.5rem solid gray !important;
+ }
+
+.has-border-link {
+  border: 0.5rem solid hsl(217, 71%, 53%) !important;
+ }
+
+.has-border-danger {
+  border: 0.5rem solid hsl(348, 100%, 61%) !important;
+ }
+
+
+.image .overlay-button {
+  position: absolute;
+  top: 0.5rem; 
+  right: 0.5rem;
+  z-index: 9999;
+}
+
+.image .overlay-box {
+  position: absolute;
+  bottom: 0px; 
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 1rem;
+  animation-duration: 0.5s;
 }

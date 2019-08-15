@@ -12,7 +12,7 @@
   <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item" href="/home">
+        <a class="navbar-item" href="/">
           <span class="icon is-medium">
             <i class="fas fa-film"></i>
           </span>
@@ -30,7 +30,7 @@
         <div class="navbar-start">
           <% if current_user %>
             <%# <%= link_to "Calendar", "#", class: "navbar-item" %>
-            <%= link_to "Vote", "#", class: "navbar-item" %>
+            <%= link_to "Vote", poll_path(current_user.current_poll), class: "navbar-item" %>
             <%= link_to "Watchlist", watchlists_path, class: "navbar-item" %>
             <%= link_to "Movies", movies_path, class: "navbar-item" %>
           <% end %>
@@ -40,7 +40,8 @@
           <div class="navbar-item">
             <div class="buttons">
               <% if current_user %>
-                <%= link_to "Account", "#", class: "button" %>
+                <%# <%= link_to "Account", "#", class: "button" %>
+                <div class="navbar-item">Welcome <%= current_user.name %></div>
                 <%= link_to "Clubs", "/clubs", class: "button" %>
                 <%= link_to 'Log Out', logout_path, method: :delete, class: "button" %>
               <% else %>

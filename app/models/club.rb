@@ -11,4 +11,12 @@ class Club < ApplicationRecord
   def admin?(user)
     admins.any? { |u| u.id == user.id }
   end
+
+  def current_viewing
+    @_current_viewing ||= viewings.where("datetime > ?", DateTime.current).order(:datetime).limit(1).first
+  end
+
+  def current_poll
+    current_viewing.poll
+  end
 end
