@@ -22,6 +22,7 @@ import "../stylesheets/application.scss"
 import "controllers"
 import "./turbolinks-get-render"
 import "./turbolinks-scroll"
+import "./burger-show-hide"
 
 
 // Flatpickr Stimulus setup
