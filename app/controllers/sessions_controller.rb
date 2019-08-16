@@ -9,11 +9,21 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:login][:password])
       session[:user_id] = user.id.to_s
+      session[:club_id] = user.default_club.try(:id).try(:to_s)
       redirect_to root_path, notice: 'Successfully logged in!'
     else
       flash.now.alert = "Incorrect email or password, try again."
       render :new
     end
+  end
+
+  def update
+    return unless current_user
+
+    club = current_user.clubs.detect { |c| c.id == params[:club_id].to_i }
+    session[:club_id] = club.id if club
+
+    redirect_back fallback_location: root_path
   end
 
   def destroy

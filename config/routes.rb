@@ -10,11 +10,13 @@ Rails.application.routes.draw do
   # Login
   get "/login"     => "sessions#new"
   post "/login"    => "sessions#create"
+  post "/session"  => "sessions#update"
   delete "/logout" => "sessions#destroy"
 
   resources :movies
   resources :watchlists, only: [:index, :create, :destroy]
-  resources :clubs, only: [:index, :show]
+  resources :clubs, only: [:index, :show, :new, :create, :destroy]
+  resources :club_requests, only: [:create, :destroy, :update]
   resources :viewings, only: [:create]
   resources :nominations, only: [:create, :update]
   resources :polls, only: [:show]

@@ -16,6 +16,7 @@ class Poll < ApplicationRecord
     winners = tally.select { |k, v| v == max_votes }
     winner = winners.to_a.sample(1).to_h
     update(movie_id: winner.keys.first.to_i)
+    movie
   end
 
   def tally
