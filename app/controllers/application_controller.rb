@@ -4,15 +4,28 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
 
   def home
-    # For now just deal with one club
-    @club = current_user.clubs.first
-    @viewing = @club.current_viewing
+    if current_club
+      @viewing = current_club.current_viewing
+    end
   end
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    begin
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    rescue ActiveRecord::RecordNotFound
+      @current_user = nil
+    end
   end
   helper_method :current_user
+
+  def current_club
+    begin
+      @current_club ||= Club.find(session[:club_id]) if session[:club_id]
+    rescue ActiveRecord::RecordNotFound
+      @current_club = nil
+    end
+  end
+  helper_method :current_club
 
   def authenticate_user
     redirect_to login_path, alert: "You must be logged in to access this page." if current_user.nil?

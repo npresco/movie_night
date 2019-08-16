@@ -11,55 +11,96 @@
       </div>
 
 
-      <div class="box <%= @vote.new_record? ? 'has-border-danger' : 'has-border-link'%> ">
-        <section class="section box">
-          <h2 class="subtitle">Your Vote</h2>
-          <%= form_with model: @vote do |f| %>
-            <%= f.text_field :poll_id, value: @poll.id, class: "is-hidden" %>
-            <%= f.text_field :user_id, value: current_user.id, class: "is-hidden" %>
-            <div class="field">
-              <% @nominations.each do |nomination| %>
-                <p>
-                  <%= nomination.movie.title %><span data-movie="<%= nomination.movie.id %>">
-                    <% case f.object.choices[nomination.movie.id.to_s]
-                    when "1" %>
-                  - <span class="icon is-small has-text-link"><i class="fas fa-thumbs-up"></i></span>
-                <% when "0" %>
-                <% when "-1" %>
-                  - <span class="icon is-small has-text-danger"><i class="fas fa-thumbs-down"></i></span>
+
+      <% if !@locked %>
+        <div class="box <%= @vote.new_record? ? 'has-border-danger' : 'has-border-link'%> ">
+          <section class="section box">
+            <h2 class="is-size-5 has-text-weight-semibold">Your Vote</h2>
+            <hr />
+
+            <%= form_with model: @vote do |f| %>
+              <%= f.text_field :poll_id, value: @poll.id, class: "is-hidden" %>
+              <%= f.text_field :user_id, value: current_user.id, class: "is-hidden" %>
+              <div class="field">
+                <% @nominations.each do |nomination| %>
+                  <p>
+                    <%= nomination.movie.title %><span data-movie="<%= nomination.movie.id %>">
+                      <% case f.object.choices[nomination.movie.id.to_s]
+                      when "1" %>
+                    - <span class="icon is-small has-text-link"><i class="fas fa-thumbs-up"></i></span>
+                  <% when "0" %>
+                  <% when "-1" %>
+                    - <span class="icon is-small has-text-danger"><i class="fas fa-thumbs-down"></i></span>
+                  <% end %>
+                    </span>
+                    <%= f.text_field "choices[#{nomination.movie.id}]",
+                      value: f.object.choices[nomination.movie.id] || 0,
+                      data: { movie: nomination.movie.id },
+                      class: "is-hidden" %>
+                  </p>
                 <% end %>
-                  </span>
-                  <%= f.text_field "choices[#{nomination.movie.id}]",
-                    value: f.object.choices[nomination.movie.id] || 0,
-                    data: { movie: nomination.movie.id },
-                    class: "is-hidden" %>
-                </p>
-              <% end %>
-            </div>
-            <div class="field">
-              <div class="control">
-                <div class="columns is-centered">
-                  <div class="column is-8">
-                    <%= f.submit "Vote", class: "button is-large is-link is-fullwidth", disabled: @locked %>
+              </div>
+              <div class="field">
+                <div class="control">
+                  <div class="columns is-centered">
+                    <div class="column is-3">
+                      <%= f.submit "Vote", class: "button is-large is-link is-fullwidth", disabled: @locked %>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          <% end %>
-        </section>
+            <% end %>
+          </section>
 
-        <section class="section box">
-          <% if @poll.movie %>
-            <div class="field">
-              <h2>Results</h2>
-            </div>
-            <div class="field">
-              <p>The winner is <%= @poll.movie.title %></p>
-            </div>
-            <%= column_chart @poll.tally.each_with_object({}) { |(key, value), obj| obj[Movie.find(key).title] = value } %>
-          <% end %>
-        </section>
-      </div>
+          <section class="section box">
+            <% if @poll.movie %>
+              <div class="field">
+                <h2 class="is-size-5 has-text-weight-semibold">Results</h2>
+              </div>
+              <hr />
+              <div class="field ">
+                <div>The winner is:</div>
+
+                <div class="columns is-centered">
+                  <div class="column is-2">
+
+                      <div class="card">
+                        <div class="card-image">
+                          <figure class="image is-2by3"
+                                  data-controller="poster"
+                                  data-action="mouseenter->poster#show mouseleave->poster#hide">
+                                  <%= image_tag @poll.movie.poster_or_default,
+                                    height: "200",
+                                    width: "300",
+                                    class: "poster has-border-link" %>
+
+                                  <!-- Add/Remove movie from watchlist -->
+                                  <div class="is-flex is-flex-column overlay-button">
+                                  </div>
+
+                                  <div
+                                    class="overlay-box has-opacity-75 is-flex is-hidden"
+                                    style="background-color:white;justify-content:center;align-items:center"
+                                    data-target="poster.overlay">
+                                    <div class="is-centered has-text-centered has-text-weight-semibold">
+                                      <p class="is-size-6"><%= @poll.movie.title %></p>
+                                      <p class="is-size-7"><%= @poll.movie.year %></p>
+                                    </div>
+                                  </div>
+                          </figure>
+                        </div>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+              <%= column_chart @poll.tally.each_with_object({}) { |(key, value), obj| obj[Movie.find(key).title] = value } %>
+              </div>
+            <% end %>
+          </section>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="columns is-centered is-multiline">

@@ -1,34 +1,71 @@
-<div class="container">
-  <h1><%= @club.name %></h1>
+<section class="section">
+  <div>
+    <h1><%= @club.name %></h1>
 
-  <table class="table">
-    <tr>
-      <th>Name</th>
-    </tr>
-    <% @club.users.each do |user| %>
+    <table class="table">
       <tr>
-        <td>
-          <%= user.name %>
-        </td>
+        <th>Name</th>
       </tr>
-    <% end %>
-  </table>
+      <% @club.users.each do |user| %>
+        <tr>
+          <td>
+            <%= user.name %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
 
-  <% if @club.admin?(current_user) %>
+    <% if @club.admin?(current_user) %>
 
-    <h3>Create Viewing</h3>
+      <%= button_to "Delete club",
+        club_path(@club),
+        method: :delete,
+        class: "button is-danger" %>
 
-    <div class="columns">
-      <div class="column is-3 has-text-black">
-        <div>
-          <%= form_with model: Viewing.new do |form| %>
-            <%= form.text_field :datetime, data: { controller: "flatpickr", flatpickr_enable_time: true }, class: "input" %>
-            <%= form.text_field :club_id, value: @club.id, class: "is-hidden" %>
-            <%= form.submit "Create Viewing", class: "button" %>
+      <h3>Requests</h3>
+
+      <table class="table">
+        <thead>
+          <th>Name</th>
+          <th>Approve</th>
+          <th>Deny</th>
+        </thead>
+        <tbody>
+          <% @club_requests.each do |club_request| %>
+            <tr>
+              <td><%= club_request.user.name %></td>
+              <td>
+                <%= button_to "Approve",
+                  club_request_path(club_request),
+                  method: :patch,
+                  params: { "club_request[status]" => "approved" },
+                  class: "button is-link" %>
+              </td>
+              <td>
+                <%= button_to "Approve",
+                  club_request_path(club_request),
+                  method: :patch,
+                  params: { "club_request[status]" => "denied" },
+                  class: "button is-danger" %>
+              </td>
+            </tr>
           <% end %>
+        </tbody>
+      </table>
+
+      <h3>Create Viewing</h3>
+      <div class="columns">
+        <div class="column is-3 has-text-black">
+          <div>
+            <%= form_with model: Viewing.new do |form| %>
+              <%= form.text_field :datetime, data: { controller: "flatpickr", flatpickr_enable_time: true }, class: "input" %>
+              <%= form.text_field :club_id, value: @club.id, class: "is-hidden" %>
+              <%= form.submit "Create Viewing", class: "button" %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
 
-  <% end %>
-</div>
+    <% end %>
+  </div>
+</section>
