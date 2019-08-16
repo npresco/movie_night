@@ -7,6 +7,11 @@ class Poll < ApplicationRecord
   # Nomination lock is 2 weeks before viewing
   # Vote lockis 1 week before viewing
 
+  def self.pick_winners
+    # TODO optimized
+    Poll.all.select { |p| Time.current > p.viewing.datetime - 1.week }.each(&:pick_winner)
+  end
+
   def winner
     movie || pick_winner
   end
