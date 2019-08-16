@@ -1,8 +1,11 @@
 class WatchlistsController < ApplicationController
   def index
     @movies = current_user.movies
-    @nomination = current_user.current_nomination(current_club.current_poll)
-    @viewing = current_club.current_viewing
+
+    if current_club
+      @nomination = current_user.current_nomination(current_club.current_poll)
+      @viewing = current_club.current_viewing
+    end
 
     if @viewing
       @locked = Time.current > @viewing.datetime - 2.weeks
