@@ -16,6 +16,7 @@ gem 'pg_search'
 gem 'turbolinks_render'
 gem 'pagy'
 gem 'chartkick'
+gem 'whenever', require: false
 
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'
