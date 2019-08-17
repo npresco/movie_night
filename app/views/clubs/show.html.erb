@@ -1,71 +1,125 @@
 <section class="section">
-  <div>
-    <h1><%= @club.name %></h1>
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <h1 class="title"><%= @club.name %></h1>
 
-    <table class="table">
-      <tr>
-        <th>Name</th>
-      </tr>
-      <% @club.users.each do |user| %>
-        <tr>
-          <td>
-            <%= user.name %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-
-    <% if @club.admin?(current_user) %>
-
-      <%= button_to "Delete club",
-        club_path(@club),
-        method: :delete,
-        class: "button is-danger" %>
-
-      <h3>Requests</h3>
-
-      <table class="table">
-        <thead>
-          <th>Name</th>
-          <th>Approve</th>
-          <th>Deny</th>
-        </thead>
-        <tbody>
-          <% @club_requests.each do |club_request| %>
-            <tr>
-              <td><%= club_request.user.name %></td>
-              <td>
-                <%= button_to "Approve",
-                  club_request_path(club_request),
-                  method: :patch,
-                  params: { "club_request[status]" => "approved" },
-                  class: "button is-link" %>
-              </td>
-              <td>
-                <%= button_to "Approve",
-                  club_request_path(club_request),
-                  method: :patch,
-                  params: { "club_request[status]" => "denied" },
-                  class: "button is-danger" %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-
-      <h3>Create Viewing</h3>
-      <div class="columns">
-        <div class="column is-3 has-text-black">
-          <div>
-            <%= form_with model: Viewing.new do |form| %>
-              <%= form.text_field :datetime, data: { controller: "flatpickr", flatpickr_enable_time: true }, class: "input" %>
-              <%= form.text_field :club_id, value: @club.id, class: "is-hidden" %>
-              <%= form.submit "Create Viewing", class: "button" %>
-            <% end %>
-          </div>
+        <div class="box">
+          <h3 class="subtitle">Club Members</h3>
+          <table class="table is-fullwidth is-hoverable">
+            <thead class="thead">
+              <tr>
+                <th>Name</th>
+                <th>Movies in Watchlist</th>
+              </tr>
+            </thead>
+            <tbody class="tbody">
+              <% @club.users.each do |user| %>
+                <tr>
+                  <td>
+                    <%= user.name %>
+                  </td>
+                  <td>
+                    <%= user.movies.size %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
-
-    <% end %>
+    </div>
   </div>
 </section>
+
+<% if @club.admin?(current_user) %>
+  <section class="section">
+    <div class="container">
+
+      <div class="columns is-centered">
+        <div class="column is-half">
+
+          <div class="level">
+            <div class="level-left">
+              <h3 class="subtitle has-text-weight-bold level-item">Admin</h3>
+            </div>
+            <div class="level-right">
+              <%= button_to "Delete club",
+                club_path(@club),
+                method: :delete,
+                class: "button is-danger level-item" %>
+            </div>
+          </div>
+
+          <div class="box">
+            <h3 class="subtitle">Requests</h3>
+            <table class="table is-fullwidth is-hoverable">
+              <thead>
+                <th>Name</th>
+                <th>Approve</th>
+                <th>Deny</th>
+              </thead>
+              <tbody>
+                <% @club_requests.each do |club_request| %>
+                  <tr>
+                    <td><%= club_request.user.name %></td>
+                    <td>
+                      <%= button_to "Approve",
+                        club_request_path(club_request),
+                        method: :patch,
+                        params: { "club_request[status]" => "approved" },
+                        class: "button is-link" %>
+                    </td>
+                    <td>
+                      <%= button_to "Deny",
+                        club_request_path(club_request),
+                        method: :patch,
+                        params: { "club_request[status]" => "denied" },
+                        class: "button is-danger" %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="box">
+            <h3 class="subtitle">Viewings</h3>
+            <table class="table is-fullwidth is-hoverable">
+              <thead>
+                <th>Date</th> 
+                <th>Movie</th>
+              </thead>
+              <tbody>
+                <% @viewings.each_with_index do |viewing, i| %>
+                  <tr class="<%= viewing == @club.current_viewing ? 'is-selected' : '' %>">
+                    <td><%= i + 1 %></td>
+                    <td><%= viewing.datetime.to_formatted_s(:long_ordinal) %></td>
+                    <td><%= viewing.movie %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+            <h3 class="subtitle">Create Viewing</h3>
+
+            <div>
+              <%= form_with model: Viewing.new do |form| %>
+                <%= form.text_field :club_id, value: @club.id, class: "is-hidden" %>
+                <div class="field has-addons">
+                  <div class="control is-expanded">
+                    <%= form.text_field :datetime, data: { controller: "flatpickr", flatpickr_enable_time: true }, class: "input" %>
+                  </div>
+                  <div class="control">
+                    <%= form.submit "Create Viewing", class: "button" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

@@ -3,10 +3,12 @@ class ViewingsController < ApplicationController
     @viewing = Viewing.new(viewing_params)
 
     if @viewing.save
-      redirect_to root_path
+      # TODO created viewing flash
     else
-      render :new
+      # TODO failed flash
     end
+
+    redirect_back fallback_location: root_path
   end
 
   def viewing_params
