@@ -4,7 +4,11 @@
       <figure class="image is-2by3"
               data-controller="poster"
               data-action="mouseenter->poster#show mouseleave->poster#hide">
-        <%= image_tag movie.poster_or_default, height: "200", width: "300", class: "poster" %>
+              <% if movie.poster %>
+                <%= image_tag movie.poster, height: "200", width: "300", class: "poster" %>
+              <% else %>
+                <%= image_pack_tag ("dark_movie_poster.jpeg"), height: "200", width: "300", class: "poster" %>
+              <% end %>
 
         <!-- Add/Remove movie from watchlist -->
         <div class="is-flex is-flex-column overlay-button">
