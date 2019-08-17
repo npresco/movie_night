@@ -24,7 +24,7 @@ class ClubsController < ApplicationController
   def show
     @club = Club.find(params[:id])
     @club_requests = @club.requests
-    @viewing = Viewing.new
+    @viewings = @club.viewings
   end
 
   def destroy
