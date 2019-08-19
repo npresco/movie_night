@@ -1,61 +1,66 @@
-<section class="section">
-  <div class="columns is-centered">
-    <div class="column is-10 has-text-centered">
+<section class="section" data-controller="quickview">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10 has-text-centered">
 
-      <% if @viewing.present? %>
-        <div class="notification has-text-centered">
-          <% if @locked %>
-            <p>Nominations are locked, please vote</p>
-          <% else %>
-            <p>You have <%= distance_of_time_in_words( Time.current, @viewing.datetime - 2.weeks ) %>  left to nominate</p>
-          <% end %>
-        </div>
-      <% end %>
+        <% if @viewing.present? %>
+          <div class="notification has-text-centered">
+            <% if @locked %>
+              <p>Nominations are locked, please vote</p>
+            <% else %>
+              <p>You have <%= distance_of_time_in_words( Time.current, @viewing.datetime - 2.weeks ) %>  left to nominate</p>
+            <% end %>
+          </div>
+        <% end %>
 
-      <div class="columns is-centered">
-        <div class="column is-2">
+        <div class="columns is-centered">
+          <div class="column is-3">
 
-          <% if @nomination %>
-            <div class="field">
-              <h2 class="is-size-5 has-text-weight-semibold">Your Nomination</h2>
-            </div>
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-2by3"
-                        data-controller="poster"
-                        data-action="mouseenter->poster#show mouseleave->poster#hide">
-
-                        <% if @nomination.movie.poster %>
-                          <%= image_tag @nomination.movie.poster, height: "200", width: "300", class: "poster has-border-link" %>
-                        <% else %>
-                          <%= image_pack_tag ("dark_movie_poster.jpeg"), height: "200", width: "300", class: "poster has-border-link" %>
-                        <% end %>
-
-                        <!-- Add/Remove movie from watchlist -->
-                        <div class="is-flex is-flex-column overlay-button">
-                        </div>
-
-                        <div
-                          class="overlay-box has-opacity-75 is-flex is-hidden"
-                          style="background-color:white;justify-content:center;align-items:center"
-                          data-target="poster.overlay">
-                          <div class="is-centered has-text-centered has-text-weight-semibold">
-                            <p class="is-size-6"><%= @nomination.movie.title %></p>
-                            <p class="is-size-7"><%= @nomination.movie.year %></p>
-                          </div>
-                        </div>
-                </figure>
+            <% if @nomination %>
+              <div class="field">
+                <h2 class="is-size-5 has-text-weight-semibold">Your Nomination</h2>
               </div>
-            </div>
-          <% end %>
+              <div class="card">
+                <div class="card-image">
+                  <figure class="image is-2by3"
+                          data-controller="poster"
+                          data-action="mouseenter->poster#show mouseleave->poster#hide">
 
+                          <% if @nomination.movie.poster %>
+                            <%= image_tag @nomination.movie.poster, height: "200", width: "300", class: "poster has-border-link" %>
+                          <% else %>
+                            <%= image_pack_tag ("dark_movie_poster.jpeg"), height: "200", width: "300", class: "poster has-border-link" %>
+                          <% end %>
+
+                          <!-- Add/Remove movie from watchlist -->
+                          <div class="is-flex is-flex-column overlay-button">
+                          </div>
+
+                          <div
+                            class="overlay-box has-opacity-75 is-flex is-hidden"
+                            style="background-color:white;justify-content:center;align-items:center"
+                            data-target="poster.overlay">
+                            <div class="is-centered has-text-centered has-text-weight-semibold">
+                              <p class="is-size-5"><%= @nomination.movie.title %></p>
+                              <p class="is-size-6"><%= @nomination.movie.year %></p>
+                            </div>
+                          </div>
+                  </figure>
+                </div>
+              </div>
+            <% end %>
+
+          </div>
         </div>
+
       </div>
-
     </div>
-  </div>
 
-  <div class="columns is-centered is-multiline">
-    <%= render partial: @movies, locals: { redirect_path: watchlists_path } %>
+    <div data-target="quickview.quickview" class="quickview">
+    </div>
+
+    <div class="columns is-centered is-multiline">
+      <%= render partial: @movies, locals: { redirect_path: watchlists_path } %>
+    </div>
   </div>
 </section>

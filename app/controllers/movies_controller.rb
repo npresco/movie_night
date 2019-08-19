@@ -11,9 +11,7 @@ class MoviesController < ApplicationController
 
   def index
     if params[:query].present?
-      # If searching, make request to reel good for search and create movie and embed for each result
       @movies = ::Omdb.search(params[:query])
-      # @movies = Movie.search_by_title(params[:query])
 
       @pagy, @movies = pagy_array(@movies)
       @query = params[:query]
@@ -23,5 +21,19 @@ class MoviesController < ApplicationController
 
       @pagy, @movies = pagy(@movies)
     end
+  end
+
+  # For the side quickview
+  def show
+    @movie = Movie.find(params[:id])
+
+    unless @movie.omdb_checked_date && 6.months.since(@movie.omdb_checked_date) < Date.current
+      # Omdb request for movie info and update
+      Omdb.info(@movie)
+    end
+
+    @movie.reload
+
+    render :show, layout: false
   end
 end

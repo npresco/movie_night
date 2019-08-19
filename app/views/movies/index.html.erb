@@ -1,5 +1,5 @@
-<section class="section">
-  <div data-turbolinks-scroll=false>
+<section class="section" data-controller="quickview">
+  <div class="container" data-turbolinks-scroll=false>
     <div class="columns is-centered">
       <div class="column is-half">
         <%= form_with url: movies_path, method: :get, data: { "turbolinks-get-render" => true } do |form| %>
@@ -35,5 +35,9 @@
         </div>
       <% end %>
     </section>
+
+    <div data-target="quickview.quickview" class="quickview">
+    </div>
+
   </div>
 </section>

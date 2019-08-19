@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_16_001310) do
+ActiveRecord::Schema.define(version: 2019_08_19_130851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,19 @@ ActiveRecord::Schema.define(version: 2019_08_16_001310) do
     t.string "poster"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "omdb_checked_date"
+    t.string "rated"
+    t.string "runtime"
+    t.text "plot"
+    t.string "language"
+    t.string "country"
+    t.string "production"
+    t.string "awards"
+    t.text "genre"
+    t.string "director"
+    t.string "writer"
+    t.text "actors"
+    t.jsonb "ratings", default: "{}"
     t.index ["title", "imdbID"], name: "index_movies_on_title_and_imdbID", unique: true
   end
 
