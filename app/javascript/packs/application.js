@@ -24,7 +24,7 @@ import "./turbolinks-scroll"
 import "./burger-show-hide"
 
 
-// Flatpickr Stimulus setup
+// TODO Flatpickr Stimulus setup
 import { Application } from "stimulus";
 // import Flatpickr
 import Flatpickr from "stimulus-flatpickr";
@@ -36,3 +36,11 @@ const application = Application.start();
 
 // Manually register Flatpickr as a stimulus controller
 application.register("flatpickr", Flatpickr);
+
+
+// TODO Put in quickview js file
+import { bulmaQuickview } from "bulma-extensions/dist/js/bulma-extensions.js";
+
+document.addEventListener("turbolinks:load", ()=> {
+  var quickviews = bulmaQuickview.attach(); 
+})

@@ -1,4 +1,4 @@
-<section class="section">
+<section class="section" data-controller="quickview">
   <div class="columns is-centered">
     <div class="column is-10 has-text-centered">
 
@@ -50,6 +50,23 @@
           <% end %>
 
         </div>
+      </div>
+
+      <div data-target="quickview.quickview" class="quickview">
+        <header class="quickview-header">
+          <p class="title">Quickview title</p>
+          <span class="delete" data-dismiss="quickview"></span>
+        </header>
+
+        <div class="quickview-body">
+          <div class="quickview-block">
+            ...
+          </div>
+        </div>
+
+        <footer class="quickview-footer">
+
+        </footer>
       </div>
 
     </div>

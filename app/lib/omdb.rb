@@ -16,4 +16,11 @@ class Omdb
     end
     movies
   end
+
+  def self.info(movie)
+    response = HTTParty.get("http://www.omdbapi.com/?apikey=#{Rails.application.credentials.omdb_api_key}&i=#{movie.imdbID}&type=movie")
+    # if response["Response"] == "True"
+    #   p JSON.parse(response.body)
+    # end
+  end
 end
