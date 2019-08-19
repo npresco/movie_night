@@ -1,5 +1,5 @@
 <section class="section" data-controller="quickview">
-  <div data-turbolinks-scroll=false>
+  <div class="container" data-turbolinks-scroll=false>
     <div class="columns is-centered">
       <div class="column is-half">
         <%= form_with url: movies_path, method: :get, data: { "turbolinks-get-render" => true } do |form| %>
@@ -37,20 +37,6 @@
     </section>
 
     <div data-target="quickview.quickview" class="quickview">
-      <header class="quickview-header">
-        <p class="title">Quickview title</p>
-        <span class="delete" data-action="click->quickview#hide"></span>
-      </header>
-
-      <div class="quickview-body">
-        <div class="quickview-block">
-          ...
-        </div>
-      </div>
-
-      <footer class="quickview-footer">
-
-      </footer>
     </div>
 
   </div>

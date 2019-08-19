@@ -14,13 +14,26 @@ class Omdb
         movies << movie
       end
     end
-    movies
+    movies.each(&:reload)
   end
 
   def self.info(movie)
     response = HTTParty.get("http://www.omdbapi.com/?apikey=#{Rails.application.credentials.omdb_api_key}&i=#{movie.imdbID}&type=movie")
-    # if response["Response"] == "True"
-    #   p JSON.parse(response.body)
-    # end
+    if response["Response"] == "True"
+      movie.update(omdb_checked_date: Date.current,
+                   rated: response["Rated"],
+                   runtime: response["Runtime"],
+                   plot: response["Plot"],
+                   language: response["Language"],
+                   country: response["Country"],
+                   production: response["Production"],
+                   awards: response["Awards"],
+                   genre: response["Genre"],
+                   director: response["Director"],
+                   writer: response["Writer"],
+                   actors: response["Actors"],
+                   ratings: response["Ratings"])
+    end
+    movie.reload
   end
 end
