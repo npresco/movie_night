@@ -1,15 +1,9 @@
-<div class="box column is-3 has-text-centered">
-
-  <h3 class="subtitle">
-    <%= nomination.user.name %>
-  </h3>
-
-  <hr />
-
+<div class="column is-2 has-text-centered">
   <div class="card">
     <div class="card-image">
-      <figure class="image is-2by3"
+      <figure class="image is-2by3 has-badge-left has-badge-link has-badge-large"
               data-controller="poster"
+              data-badge="<%= nomination.user.name %>"
               data-action="mouseenter->poster#show mouseleave->poster#hide">
               <% if nomination.movie.poster %>
                 <%= image_tag nomination.movie.poster,
@@ -65,4 +59,3 @@
     </div>
   </div>
 </div>
-
