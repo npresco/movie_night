@@ -1,17 +1,44 @@
 <section class="section">
   <div class="container">
-    <div class="columns is-centered">
+    <div class="columns is-centered is-multiline">
       <div class="column is-10 has-text-centered">
-        <div class="tile is-ancestor">
+        <div class="columns is-multiline">
           <% @lists.each do |list| %>
-            <div class="tile is-parent">
-              <div class="tile is-child box">
-                <%= link_to list.name, list_path(list), class: "is-link" %>
-              </div>
+            <div class="column is-4">
+              <a href="<%= list_path(list) %>" class="box">
+                <div class="field">
+                  <%= list.name %>
+                </div>
+                <figure class="image is-4by3">
+                  <%= image_pack_tag "#{list.name}.jpg" %>
+                </figure>
+              </a>
             </div>
           <% end %>
         </div>
       </div>
+
+      <div class="column is-10">
+        <cite class="box">
+          Photos by:
+          <li>
+            Craig Sybert on Unsplash
+          </li>
+          <li>
+            Chris Fowler on Unsplash
+          </li>
+          <li>
+            Eric Marty on Unsplash
+          </li>
+          <li>
+            Orlova Maria on Unsplash
+          </li>
+          <li>
+            Frederick Tubiermont on Unsplash
+          </li>
+        </cite>
+      </div>
+
     </div>
   </div>
 </section>
