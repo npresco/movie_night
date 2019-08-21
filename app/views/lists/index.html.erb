@@ -1,0 +1,69 @@
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered is-multiline">
+      <div class="column is-10 has-text-centered">
+        <div class="columns is-multiline">
+          <% @lists.each do |list| %>
+            <div class="column is-4">
+              <a href="<%= list_path(list) %>" class="box">
+                <div class="field">
+                  <%= list.name %>
+                </div>
+                <figure class="image is-4by3">
+
+                  <%= image_pack_tag "#{list.name}.jpg" %>
+                </figure>
+              </a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="column is-10">
+        <cite class="box is-size-7">
+          Photos by:
+          <p>
+            Craig Sybert on Unsplash
+          </p>
+          <p>
+            Chris Fowler on Unsplash
+          </p>
+          <p>
+            Eric Marty on Unsplash
+          </p>
+          <p>
+            Orlova Maria on Unsplash
+          </p>
+          <p>
+            Frederick Tubiermont on Unsplash
+          </p>
+          <p>
+            Jeremy Yap on Unsplash
+          </p>
+          <p>
+            Ian Valerio on Unsplash
+          </p>
+          <p>
+            Itay Kabalo on Unsplash
+          </p>
+          <p>
+            Sam McGhee on Unsplash
+          </p>
+          <p>
+            Steven Lelham on Unsplash
+          </p>
+          <p>
+            Jon Tyson on Unsplash
+          </p>
+          <p>
+            Haley Lawrence on Unsplash
+          </p>
+          <p>
+            Josh Felise on Unsplash
+          </p>
+        </cite>
+      </div>
+
+    </div>
+  </div>
+</section>

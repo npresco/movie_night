@@ -1,18 +1,21 @@
 <div class="column is-2">
   <div class="card">
     <div class="card-image">
-      <figure class="image is-2by3"
-              data-controller="poster"
-              data-action="mouseenter->poster#show mouseleave->poster#hide">
-              <% if movie.poster %>
-                <%= image_tag movie.poster,
-                  height: "200",
-                  width: "300",
-                  class: "poster",
-                  onerror: "this.onerror = null;this.src = '#{image_pack_tag('dark_movie_poster.jpeg')[/img.*?src="(.*?)"/i,1]}'" %>
-              <% else %>
-                <%= image_pack_tag ("dark_movie_poster.jpeg"), height: "200", width: "300", class: "poster" %>
-              <% end %>
+      <figure class="image is-2by3 has-badge-link has-badge-left has-badge-large"
+        data-controller="poster"
+        <% if show_badges %>
+          data-badge="<%= movie_iteration.size - movie_iteration.index %>"
+        <% end %>
+        data-action="mouseenter->poster#show mouseleave->poster#hide">
+        <% if movie.poster %>
+          <%= image_tag movie.poster,
+            height: "200",
+            width: "300",
+            class: "poster",
+            onerror: "this.onerror = null;this.src = '#{image_pack_tag('dark_movie_poster.jpeg')[/img.*?src="(.*?)"/i,1]}'" %>
+        <% else %>
+          <%= image_pack_tag ("dark_movie_poster.jpeg"), height: "200", width: "300", class: "poster" %>
+        <% end %>
 
         <!-- Add/Remove movie from watchlist -->
         <div class="is-flex is-flex-column overlay-button">
@@ -69,25 +72,25 @@
               params: { "watchlist[movie_id]" => movie.id,
                         "watchlist[user_id]" => current_user.id,
                         "query" => @query },
-            remote: true,
-            class: "button is-link is-small is-fullwidth" do %>
-                <span class='icon is-small'>
-                  <i class='fas fa-plus'></i>
-                </span>
-              <% end %>
-        <% end %>
+                        remote: true,
+                        class: "button is-link is-small is-fullwidth" do %>
+                        <span class='icon is-small'>
+                          <i class='fas fa-plus'></i>
+                        </span>
+                      <% end %>
+                    <% end %>
         </div>
 
         <div
-          class="overlay-box has-opacity-75 is-flex is-hidden"
-          style="background-color:white;justify-content:center;align-items:center"
-          data-target="poster.overlay"
-          data-action="click->quickview#show"
-          data-movie-id="<%= movie.id %>">
-          <div class="is-centered has-text-centered has-text-weight-semibold">
-            <p class="is-size-5"><%= movie.title %></p>
-            <p class="is-size-6"><%= movie.year %></p>
-          </div>
+        class="overlay-box has-opacity-75 is-flex is-hidden"
+        style="background-color:white;justify-content:center;align-items:center"
+        data-target="poster.overlay"
+        data-action="click->quickview#show"
+        data-movie-id="<%= movie.id %>">
+        <div class="is-centered has-text-centered has-text-weight-semibold">
+          <p class="is-size-5"><%= movie.title %></p>
+          <p class="is-size-6"><%= movie.year %></p>
+        </div>
         </div>
 
       </figure>
