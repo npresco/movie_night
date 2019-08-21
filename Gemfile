@@ -17,6 +17,7 @@ gem 'turbolinks_render'
 gem 'pagy'
 gem 'chartkick'
 gem 'whenever', require: false
+gem 'differ', require: false
 
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'
@@ -35,7 +36,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry-rails'
   gem 'faker'
-  gem 'differ'
 end
 
 group :test do
