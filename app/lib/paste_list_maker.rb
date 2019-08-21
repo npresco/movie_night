@@ -171,9 +171,7 @@ class PasteListMaker
         puts ">>> #{movies.join("\n>>> ")}"
         puts "\n"
       else
-        puts "===> Try entering a new search term"
-        new_term = gets.chomp
-        movies << search(new_term, order, line.strip, true)
+        movies << search(title, order, line.strip)
       end
     end
 
