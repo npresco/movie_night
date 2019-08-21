@@ -1,0 +1,16 @@
+<section class="section" data-controller="quickview">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10 has-text-centered">
+      </div>
+    </div>
+
+    <div data-target="quickview.quickview" class="quickview">
+    </div>
+
+    <div class="columns is-centered is-multiline">
+      <%= render partial: @movies, locals: { redirect_path: watchlists_path } %>
+    </div>
+
+  </div>
+</section>

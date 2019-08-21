@@ -1,0 +1,104 @@
+100 - A Trip to the Moon - 1902 - tt0000417
+99 - Alphaville - 1965 - tt0058898
+98 - Barbarella - 1968 - tt0062711
+97 - Sleeper - 1973 - tt0070707
+96 - Stargate - 1994 - tt0111282
+95 - The Brother from Another Planet - 1984 - tt0087004
+94 - Outland - 1981 - tt0082869
+93 - Moon - 2009 - tt1182345
+92 - Galaxy Quest - 1999 - tt0177789
+91 - The Hidden - 1987 - tt0093185
+90 - Westworld - 1973 - tt0070909
+89 - Independence Day - 1996 - tt0116629
+88 - Silent Running - 1972 - tt0067756
+87 - Strange Days - 1995 - tt0114558
+86 - Rogue One: A Star Wars Story - 2016 - tt3748528
+85 - Dark City - 1998 - tt0118929
+84 - A.I. Artificial Intelligence - 2001 - tt0212720
+83 - Guardians of the Galaxy - 2014 - tt2015381
+82 - Inception - 2010 - tt1375666
+81 - Ghost in the Shell - 1995 - tt0113568
+80 - District 9 - 2009 - tt1136608
+79 - Attack the Block - 2011 - tt1478964
+78 - Upstream Color - 2013 - tt2084989
+77 - TRON - 1982 - tt0084827
+76 - Pi - 1998 - tt0138704
+75 - Looper - 2012 - tt1276104
+74 - The Truman Show - 1998 - tt0120382
+73 - The Chronicles of Riddick - 2004 - tt0296572
+72 - Okja - 2017 - tt3967856
+71 - The Man Who Fell to Earth - 1976 - tt0074851
+70 - Re-Animator - 1985 - tt0089885
+69 - Gattaca - 1997 - tt0119177
+68 - Evolution - 2015 - tt4291590
+67 - Twelve Monkeys - 1995 - tt0114746
+66 - Contact - 1997 - tt0118884
+65 - THX 1138 - 1971 - tt0066434
+64 - Edge of Tomorrow - 2014 - tt1631867
+63 - Star Wars: Episode VI - Return of the Jedi - 1983 - tt0086190
+62 - Avatar - 2009 - tt0499549
+61 - Star Wars: The Last Jedi - 2017 - tt2527336
+60 - Dark Star - 1974 - tt0069945
+59 - Interstellar - 2014 - tt0816692
+58 - Nausicaä of the Valley of the Wind - 1984 - tt0087544
+57 - Star Trek - 2009 - tt0796366
+56 - Logan's Run - 1976 - tt0074812
+55 - Star Wars: Episode VII - The Force Awakens - 2015 - tt2488496
+54 - Men in Black - 1997 - tt0119654
+53 - Minority Report - 2002 - tt0181689
+52 - Videodrome - 1983 - tt0086541
+51 - Soylent Green - 1973 - tt0070723
+50.1 - World of Tomorrow - 2015 - tt4171032
+50.2 - World of Tomorrow – Episode Two: The Burden of Other People’s Thoughts - 2017 - tt7278178
+49 - Paprika - 2006 - tt0851578
+48 - The Face of Another - 1966 - tt0061065
+47 - Annihilation - 2018 - tt2798920
+46 - Primer - 2004 - tt0390384
+45 - Arrival - 2016 - tt2543164
+44 - Blade Runner 2049 - 2017 - tt1856101
+43 - Starship Troopers - 1997 - tt0120201
+42 - Planet of the Apes - 1968 - tt0063442
+41 - Ex Machina - 2014 - tt0470752
+40 - World on a Wire - 1973 - tt0070904
+39 - Predator - 1987 - tt0093773
+38 - Seconds - 1966 - tt0060955
+37 - The Fifth Element - 1997 - tt0119116
+36 - Invasion of the Body Snatchers - 1978 - tt0077745
+35 - Forbidden Planet - 1956 - tt0049223
+34 - Total Recall - 1990 - tt0100802
+33 - Fantastic Planet - 1973 - tt0070544
+32 - A Clockwork Orange - 1971 - tt0066921
+31 - The Thing - 1982 - tt0084787
+30 - Je t’aime, je t’aime - 1968 - tt0063152
+29 - Star Trek II: The Wrath of Khan - 1982 - tt0084726
+28 - They Live - 1988 - tt0096256
+27.1 - The Fly - 1958 - tt0051622
+27.2 - The Fly - 1986 - tt0091064 
+26 -  E.T. the Extra-Terrestrial - 1982 - tt0083866
+25 - Akira - 1988 - tt0094625
+24 - Eternal Sunshine of the Spotless Mind - 2004 - tt0338013
+23 - Close Encounters of the Third Kind - 1977 - tt0075860
+22 - Her - 2013 - tt1798709
+21 - The Terminator - 1984 - tt0088247
+20 - The Iron Giant - 1999 - tt0129167
+19 - Jurassic Park - 1993 - tt0107290
+18 - Metropolis - 1927 - tt0017136
+17 - Solyaris - 1968 - tt00069293
+16 - Terminator 2: Judgment Day - 1991 - tt0103064
+15 - WALL·E - 2008 - tt0910970
+14.1 - Back to the Future - 1985 - tt0088763
+14.2 - Back to the Future Part II - 1989 - tt0096874
+14.3 - Back to the Future Part III - 1990 - tt0099088
+13 - The Day the Earth Stood Still - 1951 - tt0043456
+12 - RoboCop - 1987 - tt0093870
+11 - The Matrix - 1999 - tt0133093
+10 - La Jetée - 1962 - tt0056119
+9 - Alien - 1979 - tt0078748
+8 - Brazil - 1985 - tt0088846
+7 - Under the Skin - 2013 - tt1441395
+6 - Stalker - 1979 - tt0079944
+5 - Star Wars: Episode IV - A New Hope - 1977 - tt0076759
+4 - Aliens - 1986 - tt0090605
+3 - Star Wars: Episode V - The Empire Strikes Back - 1980 - tt0080684
+2 - Blade Runner - 1982 - tt0083658
+1 - 2001: A Space Odyssey - 1968 - tt0062622

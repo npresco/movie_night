@@ -1,0 +1,17 @@
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10 has-text-centered">
+        <div class="tile is-ancestor">
+          <% @lists.each do |list| %>
+            <div class="tile is-parent">
+              <div class="tile is-child box">
+                <%= link_to list.name, list_path(list), class: "is-link" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
