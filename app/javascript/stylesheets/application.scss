@@ -12,6 +12,12 @@
   z-index: 9;
 }
 
+.image .overlay-play {
+  position: absolute;
+  bottom: 0.5rem;
+  z-index: 9;
+}
+
 .image .overlay-box {
   position: absolute;
   bottom: 0px; 
@@ -33,11 +39,11 @@
   opacity: 100;
 }
 
-.card .button {
+.card .button-expand {
   transition: all 110ms ease;
 }
 
-.card:hover .button {
+.card:hover .button-expand {
   padding-right: 0.75rem;
   transition: all 110ms ease;
 }
@@ -48,7 +54,13 @@
   padding-right: 0.25rem;
 }
 
+// Badges
+[data-badge]::after {
+  z-index: 1;
+}
+
 // Video 
+
 video {
   filter: opacity(35%);
 }

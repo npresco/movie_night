@@ -30,3 +30,5 @@ module MovieNight
     # the framework and any gems in your application.
   end
 end
+
+Tmdb::Api.key(Rails.application.credentials.tmdb_api_key)

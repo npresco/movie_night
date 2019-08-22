@@ -18,6 +18,7 @@ gem 'pagy'
 gem 'chartkick'
 gem 'whenever', require: false
 gem 'differ', require: false
+gem "themoviedb-api"
 
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'
