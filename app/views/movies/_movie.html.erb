@@ -25,7 +25,7 @@
                 method: :delete,
                 params: { redirect_to: redirect_path, query: params[:query] },
                 remote: true,
-                class: "button is-small is-danger is-fullwidth" do %>
+                class: "button button-expand is-small is-danger is-fullwidth" do %>
                 <span class="icon is-small is-marginless">
                   <i class="fas fa-minus"></i>
                 </span>
@@ -46,7 +46,7 @@
                               "nomination[user_id]" => current_user.id },
                   remote: true,
                   disabled: @locked,
-                  class: "button is-small is-fullwidth" do  %>
+                  class: "button button-expand is-small is-fullwidth" do  %>
                   <span class="icon is-small is-marginless">
                     <i class="fas fa-person-booth"></i>
                   </span>
@@ -65,7 +65,7 @@
                               "nomination[user_id]" => current_user.id },
                   remote: true,
                   disabled: @locked,
-                  class: "button is-small is-fullwidth" do %>
+                  class: "button button-expand is-small is-fullwidth" do %>
                   <span class="icon is-small is-marginless">
                     <i class="fas fa-person-booth"></i>
                   </span>
@@ -84,7 +84,7 @@
                         "watchlist[user_id]" => current_user.id,
                         "query" => @query },
                         remote: true,
-                        class: "button is-link is-small is-fullwidth" do %>
+                        class: "button button-expand is-link is-small is-fullwidth" do %>
                         <span class="icon is-small is-marginless">
                           <i class="fas fa-plus"></i>
                         </span>
@@ -102,12 +102,19 @@
         data-target="poster.overlay"
         data-action="click->quickview#show"
         data-movie-id="<%= movie.id %>">
-        <div class="is-centered has-text-centered has-text-weight-semibold">
-          <p class="is-size-5"><%= movie.title %></p>
-          <p class="is-size-6"><%= movie.year %></p>
-        </div>
-        </div>
+          <div class="is-centered has-text-centered has-text-weight-semibold">
+            <p class="is-size-5"><%= movie.title %></p>
+            <p class="is-size-6"><%= movie.year %></p>
 
+            <button class="button is-small is-rounded is-link"
+                    data-action="click->modal#show">
+              <span class="icon is-small">
+                <i class="fas fa-play"></i>
+              </span>
+            </button>
+          </div>
+
+        </div>
       </figure>
     </div>
   </div>

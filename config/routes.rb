@@ -21,5 +21,6 @@ Rails.application.routes.draw do
   resources :viewings, only: [:create]
   resources :nominations, only: [:create, :update]
   resources :polls, only: [:show]
+  resources :movie_trailers, only: [:show]
   resources :votes, only: [:create, :update]
 end
