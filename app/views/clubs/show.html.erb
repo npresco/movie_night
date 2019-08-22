@@ -17,7 +17,9 @@
               <% @club.users.each do |user| %>
                 <tr>
                   <td>
+                    <%# TODO scope this to being in club %>
                     <%= link_to user.name, watchlist_path(user) %>
+                    <%= user.name %>
                   </td>
                   <td>
                     <%= user.movies.size %>
