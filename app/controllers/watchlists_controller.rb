@@ -12,6 +12,19 @@ class WatchlistsController < ApplicationController
     end
   end
 
+  def show
+    @movies = User.find(params[:id]).movies
+
+    if current_club
+      @nomination = current_user.current_nomination(current_club.current_poll)
+      @viewing = current_club.current_viewing
+    end
+
+    if @viewing
+      @locked = Time.current > @viewing.datetime - 2.weeks
+    end
+  end
+
   def create
     @watchlist = Watchlist.new(watchlist_params)
 

@@ -9,6 +9,8 @@
     "bulma-extensions": "^6.2.7",
     "chart.js": "^2.8.0",
     "chartkick": "^3.1.1",
+    "lodash": "4.17.3",
+    "lodash.template": "4.5.0",
     "stimulus": "^1.1.1",
     "stimulus-flatpickr": "^1.0.0",
     "turbolinks": "^5.2.0"
