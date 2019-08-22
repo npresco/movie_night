@@ -18,29 +18,36 @@
 
               <!-- Add/Remove movie from watchlist -->
               <div class="is-flex is-flex-column overlay-button" data-movie="<%= nomination.movie.id %>">
-                <div class="field">
-                  <button class="button is-link" data-action="click->vote#upvote" <%= @locked ? 'disabled' : '' %>>
-                    <span class="icon is-small">
-                      <i class="fas fa-thumbs-up"></i>
-                    </span>
-                  </button>
-                </div>
 
-                <div class="field">
-                  <button class="button" data-action="click->vote#push" <%= @locked ? 'disabled' : '' %>>
-                    <span class="icon is-small">
-                      <i class="fas fa-equals"></i>
-                    </span>
-                  </button>
-                </div>
+                <button class="button is-link is-small" data-action="click->vote#upvote" <%= @locked ? 'disabled' : '' %>>
+                  <span class="icon is-small is-marginless">
+                    <i class="fas fa-thumbs-up"></i>
+                  </span>
 
-                <div class="field">
-                  <button class="button is-danger" data-action="click->vote#downvote" <%= @locked ? 'disabled' : '' %>>
-                    <span class="icon is-small">
-                      <i class="fas fa-thumbs-down"></i>
-                    </span>
-                  </button>
-                </div>
+                  <div class="button-message">
+                    +1
+                  </div>
+                </button>
+
+                <button class="button is-small" data-action="click->vote#push" <%= @locked ? 'disabled' : '' %>>
+                  <span class="icon is-small is-marginless">
+                    <i class="fas fa-equals"></i>
+                  </span>
+
+                  <div class="button-message">
+                    0
+                  </div>
+                </button>
+
+                <button class="button is-danger is-small" data-action="click->vote#downvote" <%= @locked ? 'disabled' : '' %>>
+                  <span class="icon is-small is-marginless">
+                    <i class="fas fa-thumbs-down"></i>
+                  </span>
+
+                  <div class="button-message">
+                    -1
+                  </div>
+                </button>
               </div>
 
               <div
@@ -59,3 +66,7 @@
     </div>
   </div>
 </div>
+
+<% unless nomination_iteration.last? %>
+  <div class="is-divider-vertical"></div>
+<% end %>

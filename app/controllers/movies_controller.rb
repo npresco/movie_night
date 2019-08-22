@@ -13,9 +13,19 @@ class MoviesController < ApplicationController
     if params[:query].present?
       @movies = ::Omdb.search(params[:query])
 
+      # Save the current query in session to it can be used during redirect_back
+      session[:query] = params[:query].to_s
+
       @pagy, @movies = pagy_array(@movies)
       @query = params[:query]
       @no_result = true if @movies.empty?
+    elsif session[:query].present?
+      @movies = ::Omdb.search(session[:query])
+
+      @pagy, @movies = pagy_array(@movies)
+      @query = session[:query]
+      @no_result = true if @movies.empty?
+
     else
       @movies = Movie.none
 

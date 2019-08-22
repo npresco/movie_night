@@ -3,6 +3,52 @@
 @import "flatpickr/dist/themes/light.css";
 @import "animate.css/animate.css";
 
+// Poster
+
+.image .overlay-button {
+  position: absolute;
+  top: 0.5rem; 
+  right: 0.5rem;
+  z-index: 9;
+}
+
+.image .overlay-box {
+  position: absolute;
+  bottom: 0px; 
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 1rem;
+  animation-duration: 0.5s;
+}
+
+.button-message {
+  display: none;
+  opacity: 0;
+  padding-left: 0.25rem;
+}
+
+.card:hover .button-message {
+  display: block;
+  opacity: 100;
+}
+
+.card .button {
+  transition: all 110ms ease;
+}
+
+.card:hover .button {
+  padding-right: 0.75rem;
+  transition: all 110ms ease;
+}
+
+.overlay-button .button {
+  margin-bottom: 0.75rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+// Video 
 video {
   filter: opacity(35%);
 }
@@ -21,6 +67,8 @@ video {
   object-fit: cover;
 }
 
+// Utility
+
 .has-opacity-50 {
   opacity: 0.9;
 }
@@ -29,12 +77,12 @@ video {
   opacity: 0.75;
 }
 
-.is-flex-column {
-  flex-direction: column;
-}
-
 .has-border-gray {
   border: 0.5rem solid gray !important;
+ }
+
+ .is-flex-column {
+   flex-direction: column;
  }
 
 .has-border-link {
@@ -45,20 +93,3 @@ video {
   border: 0.5rem solid hsl(348, 100%, 61%) !important;
  }
 
-
-.image .overlay-button {
-  position: absolute;
-  top: 0.5rem; 
-  right: 0.5rem;
-  z-index: 9;
-}
-
-.image .overlay-box {
-  position: absolute;
-  bottom: 0px; 
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  padding: 1rem;
-  animation-duration: 0.5s;
-}

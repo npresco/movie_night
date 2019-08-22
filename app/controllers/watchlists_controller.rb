@@ -17,7 +17,9 @@ class WatchlistsController < ApplicationController
 
     if @watchlist.save
       flash[:notice] = "Movie added to watchlist"
-      redirect_to movies_url(query: params[:query])
+      # TODO Remove these params
+      # redirect_to movies_url(query: params[:query])
+      redirect_back fallback_location: root_path
     else
       flash.now.alert = "Could not save movie"
       render :new
@@ -27,11 +29,15 @@ class WatchlistsController < ApplicationController
   def destroy
     Watchlist.find(params[:id]).destroy
     flash[notice] = "Movie was removed from watchlist"
-    if params[:redirect_to] == movies_path
-      redirect_to params[:redirect_to] + "?query=#{params[:query]}"
-    else
-      redirect_to params[:redirect_to]
-    end
+
+    redirect_back fallback_location: root_path
+
+    # TODO Remove these unused params, session and redirect_back are working instead
+    # if params[:redirect_to] == movies_path
+      # redirect_to params[:redirect_to] + "?query=#{params[:query]}"
+    # else
+      # redirect_back fallback_location: root_path
+    # end
   end
 
   private

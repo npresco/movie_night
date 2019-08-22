@@ -18,24 +18,27 @@
         <% end %>
 
         <!-- Add/Remove movie from watchlist -->
-        <div class="is-flex is-flex-column overlay-button">
+        <div class="overlay-button is-paddingless">
           <% if current_user.movies.include?(movie) %>
-            <div class="field">
+            <div class="">
               <%= button_to watchlist_path(current_user.watchlists.find { |w| w.movie == movie }.id),
                 method: :delete,
                 params: { redirect_to: redirect_path, query: params[:query] },
                 remote: true,
-                class: "button is-danger is-small is-fullwidth" do %>
-                <span class='icon is-small'>
-                  <i class='fas fa-minus'></i>
+                class: "button is-small is-danger is-fullwidth" do %>
+                <span class="icon is-small is-marginless">
+                  <i class="fas fa-minus"></i>
                 </span>
-              <% end %>
 
+                <div class="button-message">
+                  from Watchlist
+                </div>
+              <% end %>
             </div>
 
             <% if current_user && current_club && current_club.current_poll %>
               <% if current_user.current_nomination(current_club.current_poll.id) %>
-                <div class="field">
+                <div class="">
                   <%= button_to nomination_path(current_user.current_nomination(current_club.current_poll.id).id),
                     method: :patch,
                     params: { "nomination[poll_id]" => current_club.current_poll.id,
@@ -44,13 +47,17 @@
                   remote: true,
                   disabled: @locked,
                   class: "button is-small is-fullwidth" do  %>
-                  <span class='icon is-small'>
-                    <i class='fas fa-person-booth'></i>
+                  <span class="icon is-small is-marginless">
+                    <i class="fas fa-person-booth"></i>
                   </span>
+
+                  <div class="button-message">
+                    Nominate
+                  </div>
                 <% end %>
                 </div>
               <% else %>
-                <div class="field">
+                <div class="">
                   <%= button_to nominations_path,
                     method: :post,
                     params: { "nomination[poll_id]" => current_club.current_poll.id,
@@ -59,9 +66,13 @@
                   remote: true,
                   disabled: @locked,
                   class: "button is-small is-fullwidth" do %>
-                  <span class='icon is-small'>
-                    <i class='fas fa-person-booth'></i>
+                  <span class="icon is-small is-marginless">
+                    <i class="fas fa-person-booth"></i>
                   </span>
+
+                  <div class="button-message">
+                    Nominate
+                  </div>
                 <% end %>
                 </div>
               <% end %>
@@ -74,9 +85,13 @@
                         "query" => @query },
                         remote: true,
                         class: "button is-link is-small is-fullwidth" do %>
-                        <span class='icon is-small'>
-                          <i class='fas fa-plus'></i>
+                        <span class="icon is-small is-marginless">
+                          <i class="fas fa-plus"></i>
                         </span>
+
+                        <div class="button-message">
+                          to Watchlist
+                        </div>
                       <% end %>
                     <% end %>
         </div>
