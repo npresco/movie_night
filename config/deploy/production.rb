@@ -1,6 +1,6 @@
 #server '1.2.3.4', user: 'deploy', roles: %w{app db web} server-based syntax
 
-server '67.205.171.106', user: 'deploy', roles: %w{app db web}
+server "#{YAML.load(`rails credentials:show`)["domain"]}", user: 'deploy', roles: %w{app db web}
 
 # ======================
 # Defines a single server with a list of roles and multiple properties.
