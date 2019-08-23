@@ -18,7 +18,8 @@ gem 'pagy'
 gem 'chartkick'
 gem 'whenever', require: false
 gem 'differ', require: false
-gem "themoviedb-api"
+gem 'themoviedb-api'
+gem 'premailer-rails'
 
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'
@@ -37,6 +38,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry-rails'
   gem 'faker'
+  gem 'letter_opener'
 end
 
 group :test do
