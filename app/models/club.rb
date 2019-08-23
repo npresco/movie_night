@@ -10,7 +10,7 @@ class Club < ApplicationRecord
   end
 
   def admin?(user)
-    admins.any? { |u| u.id == user.id }
+    admins.any? { |u| u.user_id == user.id }
   end
 
   def requests
