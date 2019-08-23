@@ -20,6 +20,11 @@ export default class extends Controller {
   }
 
   toggle(e) {
+    let iframe = this.modal_contentTarget.querySelector("iframe")
+    if (iframe) {
+      iframe.setAttribute("src", "");
+    }
+
     this.modal_containerTarget.classList.toggle("is-active")
   }
 }
