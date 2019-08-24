@@ -4,7 +4,7 @@
       <div class="column is-10 has-text-centered">
 
         <% if @viewing.present? %>
-          <div class="notification has-text-centered">
+          <div class="box has-text-centered has-text-weight-semibold">
             <% if @locked %>
               <p>Nominations are locked, please vote</p>
             <% else %>
@@ -67,7 +67,7 @@
       <button data-action="modal#toggle" class="modal-close is-large" aria-label="close"></button>
     </div>
 
-    <div class="columns is-centered is-multiline">
+    <div class="columns is-centered is-multiline is-mobile">
       <%= render partial: @movies, locals: { redirect_path: watchlists_path, show_badges: false } %>
     </div>
   </div>

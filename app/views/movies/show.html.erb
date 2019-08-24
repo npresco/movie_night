@@ -1,11 +1,106 @@
 <header class="quickview-header">
   <p class="title is-size-4"><%= @movie.title %></p>
-  <span class="delete" data-action="click->quickview#hide"></span>
+  <span class="delete" data-action="click->quickview#close"></span>
 </header>
 
 <div class="quickview-body">
   <div class="quickview-block content">
     <div class="box">
+
+      <div class="is-hidden-desktop">
+        <div class="level">
+
+          <div class="level-item">
+            <%# Play trailer %>
+            <div data-movie-id="<%= @movie.id %>">
+              <button class="button is-medium is-rounded is-link has-opacity-100 is-outlined"
+                data-action="click->modal#show">
+                <span class="icon">
+                  <i class="fas fa-play"></i>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <div class="level-item buttons">
+            <% if current_user.movies.include?(@movie) %>
+              <div class="">
+                <%= button_to watchlist_path(current_user.watchlists.find { |w| w.movie == @movie }.id),
+                  method: :delete,
+                  remote: true,
+                  class: "button button-expand is-small is-danger" do %>
+                  <span class="icon is-small is-marginless">
+                    <i class="fas fa-minus"></i>
+                  </span>
+
+                  <div class="button-message">
+                    from Watchlist
+                  </div>
+                <% end %>
+              </div>
+
+              <% if current_user && current_club && current_club.current_poll %>
+                <% if current_user.current_nomination(current_club.current_poll.id) %>
+                  <div>
+                    <%= button_to nomination_path(current_user.current_nomination(current_club.current_poll.id).id),
+                      method: :patch,
+                      params: { "nomination[poll_id]" => current_club.current_poll.id,
+                                "nomination[movie_id]" => @movie.id, 
+                                "nomination[user_id]" => current_user.id },
+                    remote: true,
+                    disabled: @locked,
+                    class: "button button-expand is-small" do  %>
+                    <span class="icon is-small is-marginless">
+                      <i class="fas fa-person-booth"></i>
+                    </span>
+
+                    <div class="button-message">
+                      Nominate
+                    </div>
+                  <% end %>
+                  </div>
+                <% else %>
+                  <div class="">
+                    <%= button_to nominations_path,
+                      method: :post,
+                      params: { "nomination[poll_id]" => current_club.current_poll.id,
+                                "nomination[movie_id]" => @movie.id, 
+                                "nomination[user_id]" => current_user.id },
+                    remote: true,
+                    disabled: @locked,
+                    class: "button button-expand is-small" do %>
+                    <span class="icon is-small is-marginless">
+                      <i class="fas fa-person-booth"></i>
+                    </span>
+
+                    <div class="button-message">
+                      Nominate
+                    </div>
+                  <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= button_to watchlists_path,
+                method: :post,
+                params: { "watchlist[movie_id]" => @movie.id,
+                          "watchlist[user_id]" => current_user.id,
+                          "query" => @query },
+                          remote: true,
+                          class: "button button-expand is-link is-small" do %>
+                          <span class="icon is-small is-marginless">
+                            <i class="fas fa-plus"></i>
+                          </span>
+
+                          <div class="button-message">
+                            to Watchlist
+                          </div>
+                        <% end %>
+                      <% end %>
+          </div>
+        </div>
+      </div>
+
       <% [ :rated, :runtime, :plot, :language, :country, :production,
            :awards, :genre, :director, :writer, :actors, :ratings ].each do |attr| %>
 

@@ -4,7 +4,7 @@
     <div class="columns is-centered">
       <div class="column is-10 has-text-centered">
 
-        <div class="notification has-text-centered">
+        <div class="box has-text-centered has-text-weight-semibold">
           <% if @locked %>
             <p>Voting is locked</p>
           <% else %>
@@ -117,7 +117,7 @@
       <button data-action="modal#toggle" class="modal-close is-large" aria-label="close"></button>
     </div>
 
-    <div class="columns is-centered is-multiline">
+    <div class="columns is-centered is-multiline is-mobile">
       <%= render partial: @nominations %>
     </div>
   </div>
