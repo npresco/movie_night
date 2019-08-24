@@ -1,4 +1,4 @@
-<div class="column is-2 has-text-centered">
+<div class="column is-2-desktop is-5-mobile has-text-centered">
   <div class="card">
     <div class="card-image">
       <figure class="image is-2by3 has-badge-left has-badge-link has-badge-large"
@@ -17,7 +17,7 @@
               <% end %>
 
               <!-- Add/Remove movie from watchlist -->
-              <div class="is-flex is-flex-column overlay-button" data-movie="<%= nomination.movie.id %>">
+              <div class="is-flex is-flex-column overlay-button is-hidden-mobile" data-movie="<%= nomination.movie.id %>">
 
                 <button class="button button-expand is-link is-small" data-action="click->vote#upvote" <%= @locked ? 'disabled' : '' %>>
                   <span class="icon is-small is-marginless">
@@ -56,10 +56,10 @@
                 data-target="poster.overlay"
                 data-action="click->quickview#show"
                 data-movie-id="<%= nomination.movie.id %>">
-                <div class="is-centered has-text-centered has-text-weight-semibold">
+                <div class="is-centered has-text-centered has-text-weight-semibold is-hidden-mobile">
                   <p class="is-size-5"><%= nomination.movie.title %></p>
                   <p class="is-size-6"><%= nomination.movie.year %></p>
-                  <button class="button is-small is-rounded is-link"
+                  <button class="button is-medium is-rounded is-link"
                           data-action="click->modal#show">
                           <span class="icon is-small">
                             <i class="fas fa-play"></i>

@@ -1,9 +1,12 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "quickview" ]
+  static targets = [ "quickview", "overlay" ]
 
   show(e) {
+    // Stop close
+    e.stopPropagation()
+
     // Fetch data about movie
     let movieId = e.currentTarget.getAttribute("data-movie-id")
 
@@ -16,8 +19,7 @@ export default class extends Controller {
     this.quickviewTarget.classList.add("is-active")
   }
 
-  hide(e) {
+  close(e) {
     this.quickviewTarget.classList.remove("is-active")
   }
 }
-

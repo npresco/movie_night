@@ -1,5 +1,13 @@
 <% if @trailer.try(:key) %>
-  <iframe style="height:315px !important; width: 560px !important" width="560" height="315" src="https://www.youtube.com/embed/<%= @trailer.key %>" allowfullscreen=true frameborder="0"></iframe> 
+  <div class="is-video-wrapper">
+    <iframe  src="https://www.youtube.com/embed/<%= @trailer.key %>" allowfullscreen=true frameborder="0"></iframe> 
+  </div>
 <% else %>
-  <h1>No trailer</h1>
+  <div class="columns is-mobile is-centered">
+    <div class="column is-half">
+      <div class="box has-text-centered">
+        <p class="has-text-weight-bold">No trailer</p>
+      </div>
+    </div>
+  </div>
 <% end %>

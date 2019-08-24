@@ -8,7 +8,7 @@ export default class extends Controller {
     e.stopPropagation();
 
     // Fetch data about movie
-    let movieId = e.target.closest(".overlay-box").getAttribute("data-movie-id")
+    let movieId = e.target.closest("[data-movie-id]").getAttribute("data-movie-id")
 
     fetch(`/movie_trailers/${movieId}`).
       then(response => response.text()).
@@ -20,6 +20,9 @@ export default class extends Controller {
   }
 
   toggle(e) {
+    // Prevent quickview from closing
+    e.stopPropagation();
+
     let iframe = this.modal_contentTarget.querySelector("iframe")
     if (iframe) {
       iframe.setAttribute("src", "");
