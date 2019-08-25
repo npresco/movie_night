@@ -78,6 +78,20 @@
         </div>
       </div>
     </nav>
-    <%= yield %>
+
+    <div class="section"
+             data-controller="flash"
+             data-action="messageConnected->flash#handleRenderedFlashMessage">
+             <%= yield %>
+
+             <div data-controller="rendered-flash-message"
+                  data-target="flash.flashContainer"
+                  id="toast-container"
+                  data-turbolinks-permanent>
+             </div>
+             <div data-target="flash.hiddenFlashContainer" class="is-hidden">
+               <%= render partial: "shared/flash" %>
+             </div>
+    </div>
   </body>
 </html>

@@ -1,0 +1,7 @@
+<% flash.each do |key, value| %>
+  <div data-target="renderedFlashMessage.message"
+       class="notification is-link toast has-text-weight-bold">
+    <%= simple_format(value) %>
+    <button data-action="click->flash#closeFlash" class="delete is-small"></button>
+  </div>
+<% end %>

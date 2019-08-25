@@ -119,3 +119,25 @@ video {
 .has-border-danger {
   border: 0.5rem solid hsl(348, 100%, 61%) !important;
 }
+
+// Toast
+
+#toast-container {
+  width:100%;
+  z-index:99999;
+  position:fixed;
+  pointer-events:none;
+  display:flex;
+  flex-direction:column;
+  padding:15px;
+  right:0;
+  bottom:0;
+  text-align: right;
+  align-items: flex-end;
+}
+
+.toast {
+  width:auto;
+  pointer-events:auto;
+  display:inline-flex;
+}
