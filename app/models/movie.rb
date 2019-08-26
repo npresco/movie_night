@@ -19,4 +19,16 @@ class Movie < ApplicationRecord
       nil
     end
   end
+
+  def backdrop
+    tmdb_id = Tmdb::Find.movie(imdbID, external_source: 'imdb_id').first.id
+
+    if tmdb_id.present?
+      # This is an array of all backdrops, for now just take the first
+      backdrop = Tmdb::Movie.backdrops(tmdb_id).first
+      "https://image.tmdb.org/t/p/original#{backdrop.file_path}" if backdrop
+    else
+      nil
+    end
+  end
 end

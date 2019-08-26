@@ -79,9 +79,9 @@
       </div>
     </nav>
 
-    <div class="section"
-             data-controller="flash"
-             data-action="messageConnected->flash#handleRenderedFlashMessage">
+    <div data-controller="flash"
+         data-action="messageConnected->flash#handleRenderedFlashMessage">
+
              <%= yield %>
 
              <div data-controller="rendered-flash-message"

@@ -64,6 +64,7 @@ GEM
     bindex (0.7.0)
     bootsnap (1.4.4)
       msgpack (~> 1.0)
+    brakeman (4.6.1)
     builder (3.2.3)
     byebug (11.0.1)
     capistrano (3.11.0)
@@ -273,6 +274,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
+  brakeman
   byebug
   capistrano (~> 3.11)
   capistrano-passenger (~> 0.2.0)

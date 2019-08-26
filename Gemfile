@@ -39,6 +39,7 @@ group :development do
   gem 'pry-rails'
   gem 'faker'
   gem 'letter_opener'
+  gem 'brakeman'
 end
 
 group :test do
