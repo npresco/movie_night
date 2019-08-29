@@ -40,6 +40,7 @@ group :development do
   gem 'faker'
   gem 'letter_opener'
   gem 'brakeman'
+  gem 'awesome_print'
 end
 
 group :test do
