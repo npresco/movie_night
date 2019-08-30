@@ -13,45 +13,47 @@
           </div>
         <% end %>
 
-        <div class="columns is-centered">
-          <div class="column is-3">
-
-            <% if @nomination %>
-              <div class="field">
-                <h2 class="is-size-5 has-text-weight-semibold">Your Nomination</h2>
-              </div>
-              <div class="card">
-                <div class="card-image">
-                  <figure class="image is-2by3"
-                          data-controller="poster"
-                          data-action="mouseenter->poster#show mouseleave->poster#hide">
-
-                          <% if @nomination.movie.poster %>
-                            <%= image_tag @nomination.movie.poster, height: "200", width: "300", class: "poster has-border-link" %>
-                          <% else %>
-                            <%= image_pack_tag ("dark_movie_poster.jpeg"), height: "200", width: "300", class: "poster has-border-link" %>
-                          <% end %>
-
-                          <!-- Add/Remove movie from watchlist -->
-                          <div class="is-flex is-flex-column overlay-button">
-                          </div>
-
-                          <div
-                            class="overlay-box has-opacity-75 is-flex is-hidden"
-                            style="background-color:white;justify-content:center;align-items:center"
-                            data-target="poster.overlay">
-                            <div class="is-centered has-text-centered has-text-weight-semibold">
-                              <p class="is-size-5"><%= @nomination.movie.title %></p>
-                              <p class="is-size-6"><%= @nomination.movie.year %></p>
-                            </div>
-                          </div>
-                  </figure>
-                </div>
-              </div>
-            <% end %>
-
-          </div>
-        </div>
+        <%# Current Nomination %>
+        <%# TODO Remove? %>
+        <!-- <div class="columns is&#45;centered"> -->
+        <!--   <div class="column is&#45;3"> -->
+        <!--  -->
+        <!--     <%# if @nomination %> -->
+        <!--       <div class="field"> -->
+        <!--         <h2 class="is&#45;size&#45;5 has&#45;text&#45;weight&#45;semibold">Your Nomination</h2> -->
+        <!--       </div> -->
+        <!--       <div class="card"> -->
+        <!--         <div class="card&#45;image"> -->
+        <!--           <figure class="image is&#45;2by3" -->
+        <!--                   data&#45;controller="poster" -->
+        <!--                   data&#45;action="mouseenter&#45;>poster#show mouseleave&#45;>poster#hide"> -->
+        <!--  -->
+        <!--                   <%# if @nomination.movie.poster %> -->
+        <!--                     <%#= image_tag @nomination.movie.poster, height: "200", width: "300", class: "poster has&#45;border&#45;link" %> -->
+        <!--                   <%# else %> -->
+        <!--                     <%#= image_pack_tag ("dark_movie_poster.jpeg"), height: "200", width: "300", class: "poster has&#45;border&#45;link" %> -->
+        <!--                   <%# end %> -->
+        <!--  -->
+        <!--                   <!&#45;&#45; Add/Remove movie from watchlist &#45;&#45;> -->
+        <!--                   <div class="is&#45;flex is&#45;flex&#45;column overlay&#45;button"> -->
+        <!--                   </div> -->
+        <!--  -->
+        <!--                   <div -->
+        <!--                     class="overlay&#45;box has&#45;opacity&#45;75 is&#45;flex is&#45;hidden" -->
+        <!--                     style="background&#45;color:white;justify&#45;content:center;align&#45;items:center" -->
+        <!--                     data&#45;target="poster.overlay"> -->
+        <!--                     <div class="is&#45;centered has&#45;text&#45;centered has&#45;text&#45;weight&#45;semibold"> -->
+        <!--                       <p class="is&#45;size&#45;5"><%#= @nomination.movie.title %></p> -->
+        <!--                       <p class="is&#45;size&#45;6"><%#= @nomination.movie.year %></p> -->
+        <!--                     </div> -->
+        <!--                   </div> -->
+        <!--           </figure> -->
+        <!--         </div> -->
+        <!--       </div> -->
+        <!--     <%# end %> -->
+        <!--  -->
+        <!--   </div> -->
+        <!-- </div> -->
 
       </div>
     </div>
@@ -67,8 +69,41 @@
       <button data-action="modal#toggle" class="modal-close is-large" aria-label="close"></button>
     </div>
 
-    <div class="columns is-centered is-multiline is-mobile">
-      <%= render partial: @movies, locals: { redirect_path: watchlists_path, show_badges: false } %>
+    <div class="columns">
+      <div class="column is-2">
+        <aside class="menu" style="position: fixed">
+          <p class="menu-label">
+            Genres
+          </p>
+          <ul class="menu-list">
+            <li>
+              <%= link_to "All",
+                watchlists_path,
+                form: { class: "" },
+                class: "is-link is-small" %>
+            </li>
+            <% @genres.each do |genre| %>
+              <li>
+                <%= link_to genre.name,
+                  watchlists_path(params: { genre: genre.id }),
+                  form: { class: "" },
+                  class: "is-link is-small" %>
+              </li>
+            <% end %>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="column is-10">
+
+        <div class="field">
+          <%== pagy_bulma_nav(@pagy) %>
+        </div>
+
+        <div class="columns is-centered is-multiline is-mobile">
+          <%= render partial: @movies, locals: { redirect_path: watchlists_path, show_badges: false } %>
+        </div>
+      </div>
     </div>
   </div>
 </section>

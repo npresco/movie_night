@@ -1,6 +1,15 @@
 class WatchlistsController < ApplicationController
   def index
-    @movies = current_user.movies
+    @genres = Genre.all
+
+    @movies = current_user.movies.order(title: :asc)
+
+    # Filters
+    if params[:genre].present?
+      @movies = @movies.joins(:genres).where(genres: { id: params[:genre] })
+    end
+
+    @pagy, @movies = pagy(@movies)
 
     if current_club
       @nomination = current_user.current_nomination(current_club.current_poll)
@@ -26,6 +35,12 @@ class WatchlistsController < ApplicationController
   end
 
   def create
+    @movie = Movie.find(watchlist_params[:movie_id])
+
+    # TODO Background Jobs
+    save_omdb_info(@movie)
+    save_tmdb_info(@movie)
+
     @watchlist = Watchlist.new(watchlist_params)
 
     if @watchlist.save
@@ -54,6 +69,19 @@ class WatchlistsController < ApplicationController
   end
 
   private
+
+  def save_omdb_info(movie)
+    unless @movie.omdb_checked_date && 6.months.since(@movie.omdb_checked_date) < Date.current
+      Omdb.info(@movie)
+    end
+
+  end
+
+  def save_tmdb_info(movie)
+    unless @movie.tmdb_checked_date && 6.months.since(@movie.tmdb_checked_date) < Date.current
+      TmdbWrapper.info(@movie)
+    end
+  end
 
   def watchlist_params
     params.require(:watchlist).permit(:movie_id, :user_id)

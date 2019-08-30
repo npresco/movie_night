@@ -16,7 +16,7 @@ class Omdb
         body = JSON.parse(response.body)
         movies = []
         body["Search"].each do |movie_hash|
-          movie = Movie.create_or_find_by(title: movie_hash["Title"], imdbID: movie_hash["imdbID"])
+          movie = Movie.create_or_find_by(title: movie_hash["Title"], imdb_id: movie_hash["imdbID"])
           poster = movie_hash["Poster"] == "N/A" ? nil : movie_hash["Poster"]
           movie.update!(year: movie_hash["Year"], poster: poster)
           movies << movie
@@ -30,7 +30,7 @@ class Omdb
     response = HTTParty.get("http://www.omdbapi.com/?apikey=#{KEY}&t='#{CGI::escape(title)}'&type=movie&y='#{year}'")
     if response["Response"] == "True"
       ActiveRecord::Base.logger.silence do
-        movie = Movie.create_or_find_by(title: response["Title"], imdbID: response["imdbID"])
+        movie = Movie.create_or_find_by(title: response["Title"], imdb_id: response["imdbID"])
         poster = response["Poster"] == "N/A" ? nil : response["Poster"]
         movie.update!(year: response["Year"], poster: poster)
         movie
@@ -38,11 +38,11 @@ class Omdb
     end
   end
 
-  def self.imdbID(imdbID)
-    response = HTTParty.get("http://www.omdbapi.com/?apikey=#{KEY}&i=#{CGI::escape(imdbID)}")
+  def self.imdb_id(imdb_id)
+    response = HTTParty.get("http://www.omdbapi.com/?apikey=#{KEY}&i=#{CGI::escape(imdb_id)}")
     if response["Response"] == "True"
       ActiveRecord::Base.logger.silence do
-        movie = Movie.create_or_find_by(title: response["Title"], imdbID: response["imdbID"])
+        movie = Movie.create_or_find_by(title: response["Title"], imdb_id: response["imdbID"])
         poster = response["Poster"] == "N/A" ? nil : response["Poster"]
         movie.update!(year: response["Year"], poster: poster)
         movie
@@ -51,7 +51,9 @@ class Omdb
   end
 
   def self.info(movie)
-    response = HTTParty.get("http://www.omdbapi.com/?apikey=#{KEY}&i=#{movie.imdbID}&type=movie")
+    response = HTTParty.get("http://www.omdbapi.com/?apikey=#{KEY}&i=#{movie.imdb_id}&type=movie")
+
+    # Omdb info
     if response["Response"] == "True"
       movie.update(omdb_checked_date: Date.current,
                    rated: response["Rated"],
@@ -61,12 +63,22 @@ class Omdb
                    country: response["Country"],
                    production: response["Production"],
                    awards: response["Awards"],
-                   genre: response["Genre"],
                    director: response["Director"],
                    writer: response["Writer"],
                    actors: response["Actors"],
                    ratings: response["Ratings"])
     end
+
+    # Tmdb info
+    tmdb_response = Tmdb::Find.movie(movie.imdb_id, external_source: "imdb_id").first
+    if tmdb_response
+      tmdb_response[:genre_ids].each do |genre_id|
+        genre = Genre.find_by_tmdb_genre_id(genre_id)
+        JoinGenreToMovie.create_or_find_by(genre_id: genre.id, movie_id: movie.id)
+      end
+      movie.save
+    end
+
     movie.reload
   end
 end

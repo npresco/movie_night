@@ -81,7 +81,7 @@ class ListChallengesMaker
         selection = gets.chomp
 
         if selection == "y"
-          movies << "#{order} - #{movie_record.title} - #{movie_record.year} - #{movie_record.imdbID}"
+          movies << "#{order} - #{movie_record.title} - #{movie_record.year} - #{movie_record.imdb_id}"
         else selection == "n"
           movies << search(title, order, line.strip)
         end
@@ -102,8 +102,8 @@ class ListChallengesMaker
     list = List.create_or_find_by(name: LIST_TYPES[type][:list_name])
 
     File.open("app/assets/movie_lists/paste_#{type}_fixed.txt", "r+").each do |line|
-      order, imdbID = line.match(/(\d+|\d+\.\d+)\s-\s.+(?<=\s-\s)(tt\d+)/).captures
-      movie_record = Omdb.imdbID(imdbID)
+      order, imdb_id = line.match(/(\d+|\d+\.\d+)\s-\s.+(?<=\s-\s)(tt\d+)/).captures
+      movie_record = Omdb.imdb_id(imdb_id)
       JoinListToMovie.create(order: order, movie_id: movie_record.id, list_id: list.id)
     end
   end
@@ -112,7 +112,7 @@ class ListChallengesMaker
     movie_records = Omdb.search(title)
 
     movie_arrays =  movie_records.map do |movie_record|
-      [order, movie_record.title, movie_record.year, movie_record.imdbID]
+      [order, movie_record.title, movie_record.year, movie_record.imdb_id]
     end
     option_hash = movie_arrays.zip([*"a".."z"]).map(&:reverse).map { |k, v| [k, "#{v.join(' - ')}"] }.to_h
 

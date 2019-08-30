@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_23_162319) do
+ActiveRecord::Schema.define(version: 2019_08_30_140825) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "club_requests", force: :cascade do |t|
@@ -42,6 +43,23 @@ ActiveRecord::Schema.define(version: 2019_08_23_162319) do
     t.index ["name"], name: "index_clubs_on_name", unique: true
   end
 
+  create_table "genres", force: :cascade do |t|
+    t.integer "tmdb_genre_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "join_genre_to_movies", force: :cascade do |t|
+    t.bigint "genre_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["genre_id"], name: "index_join_genre_to_movies_on_genre_id"
+    t.index ["movie_id", "genre_id"], name: "index_join_genre_to_movies_on_movie_id_and_genre_id", unique: true
+    t.index ["movie_id"], name: "index_join_genre_to_movies_on_movie_id"
+  end
+
   create_table "join_list_to_movies", force: :cascade do |t|
     t.bigint "list_id", null: false
     t.bigint "movie_id", null: false
@@ -63,7 +81,7 @@ ActiveRecord::Schema.define(version: 2019_08_23_162319) do
   create_table "movies", force: :cascade do |t|
     t.string "title"
     t.string "year"
-    t.string "imdbID"
+    t.string "imdb_id"
     t.string "description"
     t.string "poster"
     t.datetime "created_at", precision: 6, null: false
@@ -76,12 +94,12 @@ ActiveRecord::Schema.define(version: 2019_08_23_162319) do
     t.string "country"
     t.string "production"
     t.string "awards"
-    t.text "genre"
     t.string "director"
     t.string "writer"
     t.text "actors"
     t.jsonb "ratings", default: "{}"
-    t.index ["title", "imdbID"], name: "index_movies_on_title_and_imdbID", unique: true
+    t.date "tmdb_checked_date"
+    t.index ["title", "imdb_id"], name: "index_movies_on_title_and_imdb_id", unique: true
   end
 
   create_table "nominations", force: :cascade do |t|
@@ -147,6 +165,8 @@ ActiveRecord::Schema.define(version: 2019_08_23_162319) do
   add_foreign_key "club_requests", "users"
   add_foreign_key "club_users", "clubs"
   add_foreign_key "club_users", "users"
+  add_foreign_key "join_genre_to_movies", "genres"
+  add_foreign_key "join_genre_to_movies", "movies"
   add_foreign_key "join_list_to_movies", "lists"
   add_foreign_key "join_list_to_movies", "movies"
   add_foreign_key "nominations", "movies"
