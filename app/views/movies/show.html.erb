@@ -115,7 +115,7 @@
              <% end %>
            <% elsif attr == :genres %>
              <% @movie.send(attr).each do |genre| %>
-               <p class="tag" >
+               <p class="tag is-medium" >
                  <%= genre.name %>
                </p>
              <% end %>
