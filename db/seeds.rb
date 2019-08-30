@@ -5,9 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+#
 
-File.open("./app/assets/movies.txt", "r") do |file|
-  file.each_line do |line|
-    Movie.create(title: line)
+ActiveRecord::Base.transaction do
+  ['common', Rails.env].each do |seedfile|
+    seed_file = "#{Rails.root}/db/seeds/#{seedfile}.rb"
+    if File.exists?(seed_file)
+      puts "- - Seeding data from file: #{seedfile}"
+      require seed_file
+    end
   end
 end

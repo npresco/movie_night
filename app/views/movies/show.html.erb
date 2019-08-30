@@ -102,7 +102,7 @@
       </div>
 
       <% [ :rated, :runtime, :plot, :language, :country, :production,
-           :awards, :genre, :director, :writer, :actors, :ratings ].each do |attr| %>
+           :awards, :genres, :director, :writer, :actors, :ratings ].each do |attr| %>
 
            <h3 class="is-size-6 has-text-weight-semibold">
              <%= attr.to_s.capitalize %>
@@ -111,6 +111,12 @@
              <% @movie.send(attr).each do |rating| %>
                <p>
                  <span><%= rating["Source"] %></span> - <span><%= rating["Value"] %></span>
+               </p>
+             <% end %>
+           <% elsif attr == :genres %>
+             <% @movie.send(attr).each do |genre| %>
+               <p class="tag" >
+                 <%= genre.name %>
                </p>
              <% end %>
            <% else %>

@@ -38,8 +38,11 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
 
     unless @movie.omdb_checked_date && 6.months.since(@movie.omdb_checked_date) < Date.current
-      # Omdb request for movie info and update
       Omdb.info(@movie)
+    end
+
+    unless @movie.tmdb_checked_date && 6.months.since(@movie.tmdb_checked_date) < Date.current
+      TmdbWrapper.info(@movie)
     end
 
     @movie.reload
