@@ -13,7 +13,7 @@ class TmdbWrapper
         genre = Genre.find_by_tmdb_genre_id(genre_id)
         JoinGenreToMovie.create_or_find_by(genre_id: genre.id, movie_id: movie.id)
       end
-      movie.save
+      movie.update(tmdb_checked_date: Date.current)
     end
 
     movie.reload
