@@ -16,7 +16,20 @@
 
     <%= render partial: "shared/nav" %>
 
+
     <%= yield %>
+
+    <%# Quickview %>
+    <div data-target="quickview.quickview" class="quickview">
+    </div>
+
+    <%# Modal %>
+    <div data-target="modal.modal_container" class="modal">
+      <div data-action="click->modal#toggle" class="modal-background" style=""></div>
+      <div data-target="modal.modal_content" class="modal-content">
+      </div>
+      <button data-action="modal#toggle" class="modal-close is-large" aria-label="close"></button>
+    </div>
 
     <div data-controller="rendered-flash-message"
          data-target="flash.flashContainer"

@@ -1,0 +1,33 @@
+<div class="column is-10">
+  <%# TODO Always level to have same margin? %>
+  <h3 class="is-size-5"><%= @club.name %></h3>
+
+  <table class="table is-fullwidth">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Movies in Watchlist</th>
+        <th>Voted in Current Poll?</th>
+        <th>Nominations Won</th>
+        <th>Last Login</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @club.users.each do |user| %>
+        <tr>
+          <td>
+            <%# TODO scope this to being in club %>
+            <%= link_to user.name, watchlist_path(user) %>
+          </td>
+          <td>
+            <%= user.movies.size %>
+          </td>
+          <%# TODO %>
+          <td>WIP</td>
+          <td>WIP</td>
+          <td>WIP</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

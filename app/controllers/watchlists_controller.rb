@@ -44,9 +44,7 @@ class WatchlistsController < ApplicationController
     @watchlist = Watchlist.new(watchlist_params)
 
     if @watchlist.save
-      flash[:notice] = "Movie added to watchlist"
-      # TODO Remove these params
-      # redirect_to movies_url(query: params[:query])
+      flash[:notice] = "#{@movie.title} added to watchlist"
       redirect_back fallback_location: root_path
     else
       flash.now.alert = "Could not save movie"
