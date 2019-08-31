@@ -3,6 +3,10 @@ import { Controller } from "stimulus"
 export default class extends Controller {
   static targets = [ "quickview", "overlay" ]
 
+  connection() {
+    console.log("shite");
+  }
+
   show(e) {
     // Stop close
     e.stopPropagation()

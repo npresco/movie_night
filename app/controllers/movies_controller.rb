@@ -1,14 +1,4 @@
 class MoviesController < ApplicationController
-  def autocomplete_search
-    # if params[:query]
-    #   @people = Person.search(params[:query])
-    # else
-    #   @people = Person.all
-    # end
-    #
-    # render partial: "shared/autocomplete_search", locals: { records: @people }
-  end
-
   def index
     if params[:query].present?
       @movies = ::Omdb.search(params[:query])
@@ -25,7 +15,6 @@ class MoviesController < ApplicationController
       @pagy, @movies = pagy_array(@movies)
       @query = session[:query]
       @no_result = true if @movies.empty?
-
     else
       @movies = Movie.none
 
@@ -34,6 +23,7 @@ class MoviesController < ApplicationController
   end
 
   # For the side quickview
+  # TODO movie to movie_quickview model
   def show
     @movie = Movie.find(params[:id])
 

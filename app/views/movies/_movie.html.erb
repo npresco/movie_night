@@ -1,5 +1,5 @@
-<div class="column is-3-desktop is-5-mobile" <%= movie.genres.collect { |g| "data-genre=#{g.name}".html_safe }.join(" ") %>>
-  <div class="card">
+<div class="column is-2-desktop is-5-mobile" <%= movie.genres.collect { |g| "data-genre=#{g.name}".html_safe }.join(" ") %>>
+  <div class="card field">
     <div class="card-image">
       <figure class="image is-2by3 has-badge-link has-badge-left has-badge-large"
         data-controller="poster"
@@ -101,11 +101,6 @@
              data-movie-id="<%= movie.id %>">
 
           <div class="is-centered has-text-centered has-text-weight-semibold is-hidden-mobile">
-            <div class="field">
-              <p class="is-size-5"><%= movie.title %></p>
-              <p class="is-size-6"><%= movie.year %></p>
-            </div>
-
             <button class="button is-medium is-rounded is-link has-opacity-100 is-outlined"
                     data-action="click->modal#show">
               <span class="icon">
@@ -118,5 +113,9 @@
 
       </figure>
     </div>
+  </div>
+
+  <div class="has-text-centered has-text-weight-semibold">
+    <p class="is-size-7"><%= movie.title %> - <%= movie.year %></p>
   </div>
 </div>
