@@ -23,6 +23,7 @@ import "controllers"
 import "./turbolinks-get-render"
 import "./turbolinks-scroll"
 import "./burger-show-hide"
+import "./video-playback-speed"
 
 // TODO Flatpickr Stimulus setup
 import { Application } from "stimulus";

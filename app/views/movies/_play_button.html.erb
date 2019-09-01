@@ -1,0 +1,14 @@
+<div class="overlay-box has-opacity-75 is-flex is-hidden"
+     data-target="poster.overlay quickview.overlay"
+     data-action="click->quickview#show"
+     data-movie-id="<%= movie.id %>">
+
+     <div class="is-centered has-text-centered has-text-weight-semibold is-hidden-mobile">
+       <button class="button is-medium is-rounded is-link has-opacity-100 is-outlined"
+               data-action="click->modal#show">
+               <span class="icon">
+                 <i class="fas fa-play"></i>
+               </span>
+       </button>
+     </div>
+</div>

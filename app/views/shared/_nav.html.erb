@@ -23,7 +23,7 @@
               <%= link_to "Vote", poll_path(current_club.current_poll), class: "navbar-item" %>
             <% end %>
           <% end %>
-          <%= link_to "Watchlist", watchlists_path, class: "navbar-item" %>
+          <%= link_to "Watchlist", watchlist_path(current_user.id), class: "navbar-item" %>
           <%= link_to "Movies", movies_path, class: "navbar-item" %>
           <%= link_to "Movie Lists", lists_path, class: "navbar-item" %>
         <% end %>

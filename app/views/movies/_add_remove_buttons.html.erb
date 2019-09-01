@@ -1,0 +1,34 @@
+<% if current_user.movies.include?(movie) %>
+  <%= button_to watchlist_path(current_user.watchlists.find { |w| w.movie == movie }.id),
+    method: :delete,
+    remote: true,
+    class: "button button-expand is-small is-danger is-fullwidth" do %>
+      <span class="icon is-small is-marginless">
+        <i class="fas fa-minus"></i>
+      </span>
+
+      <div class="button-message">
+        from Watchlist
+      </div>
+  <% end %>
+
+  <%# Nominate Buttons %>
+  <%= render partial: "movies/nominate_button", locals: { movie: movie } %>
+
+<% else %>
+  <%= button_to watchlists_path,
+    method: :post,
+    params: { "watchlist[movie_id]" => movie.id,
+              "watchlist[user_id]" => current_user.id,
+              "query" => @query },
+    remote: true,
+    class: "button button-expand is-link is-small is-fullwidth" do %>
+      <span class="icon is-small is-marginless">
+        <i class="fas fa-plus"></i>
+      </span>
+
+      <div class="button-message">
+        to Watchlist
+      </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,38 @@
+<section class="section">
+  <h2 class="is-size-5 has-text-weight-semibold">Your Vote</h2>
+
+  <hr />
+
+  <%= form_with model: @vote do |f| %>
+    <%= f.text_field :poll_id, value: @poll.id, class: "is-hidden" %>
+    <%= f.text_field :user_id, value: current_user.id, class: "is-hidden" %>
+    <div class="field">
+      <% @nominations.each do |nomination| %>
+        <p>
+          <%= nomination.movie.title %><span data-movie="<%= nomination.movie.id %>">
+            <% case f.object.choices[nomination.movie.id.to_s]
+            when "1" %>
+          - <span class="icon is-small has-text-link"><i class="fas fa-thumbs-up"></i></span>
+        <% when "0" %>
+        <% when "-1" %>
+          - <span class="icon is-small has-text-danger"><i class="fas fa-thumbs-down"></i></span>
+        <% end %>
+          </span>
+          <%= f.text_field "choices[#{nomination.movie.id}]",
+            value: f.object.choices[nomination.movie.id] || 0,
+            data: { movie: nomination.movie.id },
+            class: "is-hidden" %>
+        </p>
+      <% end %>
+    </div>
+    <div class="field">
+      <div class="control">
+        <div class="columns is-centered">
+          <div class="column is-3">
+            <%= f.submit "Vote", class: "button is-large is-link is-fullwidth", disabled: @locked %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</section>

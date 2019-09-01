@@ -1,16 +1,15 @@
-<div class="column is-half">
+<div class="column is-5-desktop is-10-mobile">
   <%= form_with url: movies_path, method: :get, data: { "turbolinks-get-render" => true } do |form| %>
     <div class="field has-addons">
       <div class="control is-expanded">
         <%= form.text_field "query", class: "input is-normal",
-          id: "index-search",
           autofocus: true,
           value: @query,
           onfocus: "this.setSelectionRange(this.value.length,this.value.length);",
           placeholder: "Search" %>
       </div>
       <div class="control">
-        <%= form.submit "Search", class: "button" %>
+        <%= form.submit "Search", class: "button is-link" %>
       </div>
     </div>
   <% end %>

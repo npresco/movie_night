@@ -1,0 +1,19 @@
+<div class="is-hidden-desktop">
+  <div class="level">
+
+    <div class="level-item">
+      <div data-movie-id="<%= @movie.id %>">
+        <button class="button is-medium is-rounded is-link has-opacity-100 is-outlined"
+                data-action="click->modal#show">
+                <span class="icon">
+                  <i class="fas fa-play"></i>
+                </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="level-item buttons">
+      <%= render partial: "movies/add_remove_buttons", locals: { movie: @movie } %>
+    </div>
+  </div>
+</div>

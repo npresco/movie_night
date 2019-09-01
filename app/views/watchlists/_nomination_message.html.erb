@@ -1,0 +1,10 @@
+
+<% if @viewing.present? %>
+  <div class="box has-text-centered has-text-weight-semibold">
+    <% if @locked %>
+      <p>Nominations are locked, please vote</p>
+    <% else %>
+      <p>You have <%= distance_of_time_in_words( Time.current, @viewing.datetime - 2.weeks ) %>  left to nominate</p>
+    <% end %>
+  </div>
+<% end %>

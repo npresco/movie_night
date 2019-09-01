@@ -1,0 +1,11 @@
+<div class="column is-10" data-controller="vote">
+  <%= render partial: "voting_message" %>
+  <% if !@locked %>
+    <div class="box <%= @vote.new_record? ? 'has-border-danger' : 'has-border-link'%> ">
+      <%= render partial: "vote_form" %>
+      <% if @locked %>
+        <%= render partial: "poll_results" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
