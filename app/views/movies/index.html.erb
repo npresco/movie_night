@@ -1,50 +1,7 @@
-<section class="section" data-controller="quickview modal">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-half">
-        <%= form_with url: movies_path, method: :get, data: { "turbolinks-get-render" => true } do |form| %>
-          <div class="field has-addons">
-            <div class="control is-expanded">
-              <%= form.text_field "query", class: "input is-normal",
-                id: "index-search",
-                autofocus: true,
-                value: @query,
-                onfocus: "this.setSelectionRange(this.value.length,this.value.length);",
-                placeholder: "Search" %>
-            </div>
-            <div class="control">
-              <%= form.submit "Search", class: "button" %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
+<%= render partial: "search_form",
+  layout: "shared/section",
+  locals: { section_classes: "" } %>
 
-    <section class="section">
-      <% if @movies.present? %>
-        <div class="columns is-centered is-multiline is-mobile">
-          <%= render partial: @movies, locals: { redirect_path: movies_path, show_badges: false } %>
-        </div>
-      <% elsif @no_result %>
-        <div class="columns is-centered">
-          <div class="column is-half">
-            <div class="box has-text-centered has-text-weight-semibold">
-              <p>No results or too many, try a different search term</p>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </section>
-
-    <div data-target="quickview.quickview" class="quickview">
-    </div>
-
-    <%# Modal %>
-    <div data-target="modal.modal_container" class="modal">
-      <div data-action="click->modal#toggle" class="modal-background"></div>
-      <div data-target="modal.modal_content" class="modal-content">
-      </div>
-      <button data-action="modal#toggle" class="modal-close is-large" aria-label="close"></button>
-    </div>
-  </div>
-</section>
+<%= render partial: "search_results",
+  layout: "shared/section",
+  locals: { section_classes: "" } %>

@@ -1,73 +1,24 @@
-<div class="column is-2-desktop is-5-mobile has-text-centered">
-  <div class="card">
+<div class="column is-2-desktop is-6-mobile has-text-centered">
+  <div class="card field">
     <div class="card-image">
       <figure class="image is-2by3 has-badge-left has-badge-link has-badge-large"
               data-controller="poster"
               data-badge="<%= nomination.user.name %>"
               data-action="mouseenter->poster#show mouseleave->poster#hide">
-              <% if nomination.movie.poster %>
-                <%= image_tag nomination.movie.poster,
-                  height: "200",
-                  width: "300",
-                  class: "poster",
-                  onerror: "this.onerror = null;this.src = '#{image_pack_tag('dark_movie_poster.jpeg')[/img.*?src="(.*?)"/i,1]}'" %>
-                %>
-              <% else %>
-                <%= image_pack_tag ("dark_movie_poster.jpeg"), height: "200", width: "300", class: "poster" %>
-              <% end %>
 
-              <!-- Add/Remove movie from watchlist -->
-              <div class="is-flex is-flex-column overlay-button is-hidden-mobile" data-movie="<%= nomination.movie.id %>">
+              <%= render partial: "movies/poster", locals: { movie: nomination.movie } %>
 
-                <button class="button button-expand is-link is-small" data-action="click->vote#upvote" <%= @locked ? 'disabled' : '' %>>
-                  <span class="icon is-small is-marginless">
-                    <i class="fas fa-thumbs-up"></i>
-                  </span>
 
-                  <div class="button-message">
-                    +1
-                  </div>
-                </button>
+              <%= render partial: "nominations/voting_buttons", locals: { movie: nomination.movie } %>
 
-                <button class="button button-expand is-small" data-action="click->vote#push" <%= @locked ? 'disabled' : '' %>>
-                  <span class="icon is-small is-marginless">
-                    <i class="fas fa-equals"></i>
-                  </span>
 
-                  <div class="button-message">
-                    0
-                  </div>
-                </button>
-
-                <button class="button button-expand is-danger is-small" data-action="click->vote#downvote" <%= @locked ? 'disabled' : '' %>>
-                  <span class="icon is-small is-marginless">
-                    <i class="fas fa-thumbs-down"></i>
-                  </span>
-
-                  <div class="button-message">
-                    -1
-                  </div>
-                </button>
-              </div>
-
-              <div
-                class="overlay-box has-opacity-75 is-flex is-hidden"
-                data-target="poster.overlay"
-                data-action="click->quickview#show"
-                data-movie-id="<%= nomination.movie.id %>">
-                <div class="is-centered has-text-centered has-text-weight-semibold is-hidden-mobile">
-                  <p class="is-size-5"><%= nomination.movie.title %></p>
-                  <p class="is-size-6"><%= nomination.movie.year %></p>
-                  <button class="button is-medium is-rounded is-link is-outlined"
-                          data-action="click->modal#show">
-                          <span class="icon is-small">
-                            <i class="fas fa-play"></i>
-                          </span>
-                  </button>
-                </div>
-              </div>
+              <%= render partial: "movies/play_button", locals: { movie: nomination.movie } %>
       </figure>
     </div>
+  </div>
+
+  <div class="has-text-centered has-text-weight-semibold">
+    <p class="is-size-7"><%= nomination.movie.title %> - <%= nomination.movie.year %></p>
   </div>
 </div>
 

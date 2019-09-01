@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
     club = current_user.clubs.detect { |c| c.id == params[:club_id].to_i }
     session[:club_id] = club.id if club
 
-    redirect_back fallback_location: root_path
+    redirect_to club_path(club)
   end
 
   def destroy

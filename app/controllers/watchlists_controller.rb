@@ -1,8 +1,7 @@
 class WatchlistsController < ApplicationController
-  def index
+  def show
     @genres = Genre.all
-
-    @movies = current_user.movies.order(title: :asc)
+    @movies = User.find(params[:id]).movies
 
     # Filters
     if params[:genre].present?
@@ -10,19 +9,6 @@ class WatchlistsController < ApplicationController
     end
 
     @pagy, @movies = pagy(@movies)
-
-    if current_club
-      @nomination = current_user.current_nomination(current_club.current_poll)
-      @viewing = current_club.current_viewing
-    end
-
-    if @viewing
-      @locked = Time.current > @viewing.datetime - 2.weeks
-    end
-  end
-
-  def show
-    @movies = User.find(params[:id]).movies
 
     if current_club
       @nomination = current_user.current_nomination(current_club.current_poll)
@@ -44,9 +30,7 @@ class WatchlistsController < ApplicationController
     @watchlist = Watchlist.new(watchlist_params)
 
     if @watchlist.save
-      flash[:notice] = "Movie added to watchlist"
-      # TODO Remove these params
-      # redirect_to movies_url(query: params[:query])
+      flash[:notice] = "#{@movie.title} added to watchlist"
       redirect_back fallback_location: root_path
     else
       flash.now.alert = "Could not save movie"
@@ -59,13 +43,6 @@ class WatchlistsController < ApplicationController
     flash[notice] = "Movie was removed from watchlist"
 
     redirect_back fallback_location: root_path
-
-    # TODO Remove these unused params, session and redirect_back are working instead
-    # if params[:redirect_to] == movies_path
-      # redirect_to params[:redirect_to] + "?query=#{params[:query]}"
-    # else
-      # redirect_back fallback_location: root_path
-    # end
   end
 
   private

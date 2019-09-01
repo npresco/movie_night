@@ -6,7 +6,7 @@ class NominationsController < ApplicationController
     if @nomination.save
 
       flash[:notice] = "#{movie.title} nominated for #{current_club.name}"
-      redirect_to watchlists_path
+      redirect_to watchlist_path(current_user)
     else
       render :new
     end
@@ -19,7 +19,7 @@ class NominationsController < ApplicationController
     if @nomination.update(nomination_params)
 
       flash[:notice] = "#{movie.title} nominated for #{current_club.name}"
-      redirect_to watchlists_path
+      redirect_to watchlist_path(current_user)
     else
       render :new
     end

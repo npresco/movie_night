@@ -1,0 +1,12 @@
+<div class="column is-12 has-text-centered">
+  <div class="box is-size-5">
+    <% if @viewing.present? %>
+      <p>Next viewing is on: <%= @viewing.datetime.to_formatted_s(:long_ordinal) %> </p>
+      <hr />
+      <p>Nominations must be in by <%= (@viewing.datetime - 2.weeks).to_formatted_s(:long_ordinal) %></p>
+      <p>Votes must be in by <%= (@viewing.datetime - 1.weeks).to_formatted_s(:long_ordinal) %></p>
+    <% else %>
+      <p>No viewings currently scheduled</p>
+    <% end %>
+  </div>
+</div>

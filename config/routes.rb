@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   root to: "application#home"
 
-  # get "/home" => "application#home"
-
   # Users
   get "users/new"  => "users#new", as: :new_user
   post "users"     => "users#create"
@@ -14,7 +12,7 @@ Rails.application.routes.draw do
   delete "/logout" => "sessions#destroy"
 
   resources :movies
-  resources :watchlists, only: [:index, :show, :create, :destroy]
+  resources :watchlists, only: [:show, :create, :destroy]
   resources :lists, only: [:index, :show]
   resources :clubs, only: [:index, :show, :new, :create, :destroy]
   resources :club_requests, only: [:create, :destroy, :update]

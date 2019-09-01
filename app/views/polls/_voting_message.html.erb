@@ -1,0 +1,7 @@
+<div class="notification is-warning has-text-centered has-text-weight-semibold">
+  <% if @locked %>
+    <p>Voting is locked</p>
+  <% else %>
+    <p>You have <%= distance_of_time_in_words( Time.current, @viewing.datetime - 1.weeks ) %>  left to vote</p>
+  <% end %>
+</div>

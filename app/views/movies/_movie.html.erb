@@ -1,122 +1,25 @@
-<div class="column is-3-desktop is-5-mobile" <%= movie.genres.collect { |g| "data-genre=#{g.name}".html_safe }.join(" ") %>>
-  <div class="card">
+<div class="column is-2-desktop is-6-mobile">
+  <div class="card field">
     <div class="card-image">
       <figure class="image is-2by3 has-badge-link has-badge-left has-badge-large"
-        data-controller="poster"
-        <% if show_badges %>
-          data-badge="<%= movie_iteration.size - movie_iteration.index %>"
-        <% end %>
-        data-action="mouseenter->poster#show mouseleave->poster#hide">
-        <% if movie.poster %>
-          <%= image_tag movie.poster,
-            height: "200",
-            width: "300",
-            class: "poster",
-            onerror: "this.onerror = null;this.src = '#{image_pack_tag('dark_movie_poster.jpeg')[/img.*?src="(.*?)"/i,1]}'" %>
-        <% else %>
-          <%= image_pack_tag ("dark_movie_poster.jpeg"), height: "200", width: "300", class: "poster" %>
-        <% end %>
-
-        <!-- Add/Remove movie from watchlist -->
-        <div class="overlay-button is-paddingless is-hidden-mobile">
-          <% if current_user.movies.include?(movie) %>
-            <div class="">
-              <%= button_to watchlist_path(current_user.watchlists.find { |w| w.movie == movie }.id),
-                method: :delete,
-                remote: true,
-                class: "button button-expand is-small is-danger is-fullwidth" do %>
-                <span class="icon is-small is-marginless">
-                  <i class="fas fa-minus"></i>
-                </span>
-
-                <div class="button-message">
-                  from Watchlist
-                </div>
-              <% end %>
-            </div>
-
-            <% if current_user && current_club && current_club.current_poll %>
-              <% if current_user.current_nomination(current_club.current_poll.id) %>
-                <div class="">
-                  <%= button_to nomination_path(current_user.current_nomination(current_club.current_poll.id).id),
-                    method: :patch,
-                    params: { "nomination[poll_id]" => current_club.current_poll.id,
-                              "nomination[movie_id]" => movie.id, 
-                              "nomination[user_id]" => current_user.id },
-                  remote: true,
-                  disabled: @locked,
-                  class: "button button-expand is-small is-fullwidth" do  %>
-                  <span class="icon is-small is-marginless">
-                    <i class="fas fa-person-booth"></i>
-                  </span>
-
-                  <div class="button-message">
-                    Nominate
-                  </div>
-                <% end %>
-                </div>
-              <% else %>
-                <div class="">
-                  <%= button_to nominations_path,
-                    method: :post,
-                    params: { "nomination[poll_id]" => current_club.current_poll.id,
-                              "nomination[movie_id]" => movie.id, 
-                              "nomination[user_id]" => current_user.id },
-                  remote: true,
-                  disabled: @locked,
-                  class: "button button-expand is-small is-fullwidth" do %>
-                  <span class="icon is-small is-marginless">
-                    <i class="fas fa-person-booth"></i>
-                  </span>
-
-                  <div class="button-message">
-                    Nominate
-                  </div>
-                <% end %>
-                </div>
-              <% end %>
+              data-controller="poster"
+            <% if show_badges %>
+              data-badge="<%= movie_iteration.size - movie_iteration.index %>"
             <% end %>
-          <% else %>
-            <%= button_to watchlists_path,
-              method: :post,
-              params: { "watchlist[movie_id]" => movie.id,
-                        "watchlist[user_id]" => current_user.id,
-                        "query" => @query },
-                        remote: true,
-                        class: "button button-expand is-link is-small is-fullwidth" do %>
-                        <span class="icon is-small is-marginless">
-                          <i class="fas fa-plus"></i>
-                        </span>
+              data-action="mouseenter->poster#show mouseleave->poster#hide">
 
-                        <div class="button-message">
-                          to Watchlist
-                        </div>
-                      <% end %>
-                    <% end %>
+        <%= render partial: "movies/poster", locals: { movie: movie } %>
+
+        <div class="overlay-button is-paddingless is-hidden-mobile">
+          <%= render partial: "movies/add_remove_buttons", locals: { movie: movie } %>
         </div>
 
-        <div class="overlay-box has-opacity-75 is-flex is-hidden"
-             data-target="poster.overlay quickview.overlay"
-             data-action="click->quickview#show"
-             data-movie-id="<%= movie.id %>">
-
-          <div class="is-centered has-text-centered has-text-weight-semibold is-hidden-mobile">
-            <div class="field">
-              <p class="is-size-5"><%= movie.title %></p>
-              <p class="is-size-6"><%= movie.year %></p>
-            </div>
-
-            <button class="button is-medium is-rounded is-link has-opacity-100 is-outlined"
-                    data-action="click->modal#show">
-              <span class="icon">
-                <i class="fas fa-play"></i>
-              </span>
-            </button>
-          </div>
-
-        </div>
-
+        <%= render partial: "movies/play_button", locals: { movie: movie } %>
       </figure>
     </div>
+  </div>
+
+  <div class="has-text-centered has-text-weight-semibold">
+    <p class="is-size-7"><%= movie.title %> - <%= movie.year %></p>
   </div>
 </div>

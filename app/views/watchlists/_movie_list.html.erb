@@ -1,0 +1,7 @@
+<div class="field">
+  <%== pagy_bulma_nav(@pagy) %>
+</div>
+
+<div class="columns is-centered is-multiline is-mobile">
+  <%= render partial: @movies, locals: { show_badges: false } %>
+</div>

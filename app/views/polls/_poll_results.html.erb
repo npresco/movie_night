@@ -1,0 +1,19 @@
+<% if @poll.movie %>
+  <div class="has-text-centered">
+    <h3 class="is-size-5">Results</h3>
+
+    <hr />
+
+    <h3 class="is-size-5 field">Winner - <%= @poll.movie.title %> - <%= @poll.movie.year %></h3>
+    <%= column_chart @poll.tally.each_with_object({}) { |(key, value), obj| obj[Movie.find(key).title] = value } %>
+  </div>
+<% else %>
+  <div class="has-text-centered">
+    <h3 class="is-size-5">Results</h3>
+
+    <hr />
+
+    <p>Poll results and winner calculated when poll closes</p>
+  </div>
+<% end %>
+

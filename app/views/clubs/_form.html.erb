@@ -1,0 +1,13 @@
+<div class="column is-6">
+  <%= form_with model: Club.new do |f| %>
+    <div class="field is-grouped">
+      <div class="control is-expanded">
+        <%= f.text_field :name, class: "input", placeholder: "Club Name" %>
+      </div>
+
+      <div class="control">
+        <%= f.submit "Create Club", class: "button is-link" %>
+      </div>
+    </div>
+  <% end %>
+</div>

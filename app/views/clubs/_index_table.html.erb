@@ -1,0 +1,57 @@
+<div class="column is-12">
+
+  <%# Header %>
+  <div class="level">
+    <div class="level-right">
+      <h3 class="is-size-5 level-item">Clubs</h2>
+    </div>
+    <div class="level-left">
+      <%= link_to "Create a Club", new_club_path, class: "button is-link level-item" %>
+    </div>
+  </div>
+
+  <%# Table %>
+  <table class="table is-fullwidth">
+    <thead>
+      <th width="60%">Name</th>
+      <th>Member Count</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @clubs.each do |club| %>
+        <tr>
+          <td><%= link_to club.name, club_path(club) %></td>
+          <td><%= club.users.size %></td>
+          <% if club.users.include?(current_user) %>
+            <td>
+              <%# TODO finish route to leave club %>
+              <%= button_to "Leave Club",
+                "#",
+                method: :delete,
+                remote: true,
+                class: "button is-danger" %>
+            </td>
+          <% elsif club.pending_request?(current_user) %>
+            <td>
+              <%= button_to "Cancel Join Request",
+                club_request_path(club.pending_request(current_user).id),
+                method: :delete,
+                remote: true,
+                class: "button is-danger" %>
+            </td>
+          <% else %>
+            <td>
+              <%= button_to "Request to Join",
+                club_requests_path,
+                params: { "club_request[user_id]" => current_user.id,
+                          "club_request[club_id]" => club.id },
+              remote: true,
+              class: "button is-link" %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

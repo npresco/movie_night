@@ -1,0 +1,38 @@
+<% if current_user &&
+    current_club &&
+    current_club.current_poll && 
+    current_user.current_nomination(current_club.current_poll.id) %>
+  <%= button_to nomination_path(current_user.current_nomination(current_club.current_poll.id).id),
+    method: :patch,
+    params: { "nomination[poll_id]" => current_club.current_poll.id,
+              "nomination[movie_id]" => movie.id, 
+              "nomination[user_id]" => current_user.id },
+    remote: true,
+    disabled: @locked,
+    class: "button button-expand is-small is-fullwidth" do  %>
+      <span class="icon is-small is-marginless">
+        <i class="fas fa-person-booth"></i>
+      </span>
+
+      <div class="button-message">
+        Nominate
+      </div>
+  <% end %>
+<% else %>
+  <%= button_to nominations_path,
+    method: :post,
+    params: { "nomination[poll_id]" => current_club.current_poll.id,
+              "nomination[movie_id]" => movie.id, 
+              "nomination[user_id]" => current_user.id },
+    remote: true,
+    disabled: @locked,
+    class: "button button-expand is-small is-fullwidth" do %>
+      <span class="icon is-small is-marginless">
+        <i class="fas fa-person-booth"></i>
+      </span>
+
+      <div class="button-message">
+        Nominate
+      </div>
+  <% end %>
+<% end %>

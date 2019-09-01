@@ -1,0 +1,21 @@
+<aside class="menu is-hidden-mobile" style="position: fixed">
+  <p class="menu-label">
+    Genres
+  </p>
+  <ul class="menu-list">
+    <li>
+      <%= link_to "All",
+        watchlist_path(current_user),
+        form: { class: "" },
+        class: "is-link is-small" %>
+    </li>
+    <% @genres.each do |genre| %>
+      <li>
+        <%= link_to genre.name,
+          watchlist_path(current_user, params: { genre: genre.id }),
+          form: { class: "" },
+          class: "is-link is-small" %>
+      </li>
+    <% end %>
+  </ul>
+</aside>
