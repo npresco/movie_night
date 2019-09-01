@@ -28,3 +28,4 @@ yarn-debug.log*
 .yarn-integrity
 todo.org
 api_responses.txt
+tags

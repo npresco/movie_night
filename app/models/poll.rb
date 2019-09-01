@@ -1,6 +1,7 @@
 class Poll < ApplicationRecord
   belongs_to :viewing
   belongs_to :movie, optional: true
+
   has_many :votes, dependent: :destroy
   has_many :nominations, dependent: :destroy
 

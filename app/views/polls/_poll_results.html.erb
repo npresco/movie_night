@@ -1,45 +1,19 @@
-<section class="section box">
-  <% if @poll.movie %>
-    <div class="field">
-      <h2 class="is-size-5 has-text-weight-semibold">Results</h2>
-    </div>
+<% if @poll.movie %>
+  <div class="has-text-centered">
+    <h3 class="is-size-5">Results</h3>
+
     <hr />
-    <div class="field ">
-      <div>The winner is:</div>
 
-      <div class="columns is-centered">
-        <div class="column is-2">
+    <h3 class="is-size-5 field">Winner - <%= @poll.movie.title %> - <%= @poll.movie.year %></h3>
+    <%= column_chart @poll.tally.each_with_object({}) { |(key, value), obj| obj[Movie.find(key).title] = value } %>
+  </div>
+<% else %>
+  <div class="has-text-centered">
+    <h3 class="is-size-5">Results</h3>
 
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-2by3"
-                      data-controller="poster"
-                      data-action="mouseenter->poster#show mouseleave->poster#hide">
+    <hr />
 
-                      <% if @poll.movie.poster %>
-                        <%= image_tag @poll.movie.poster, height: "200", width: "300", class: "poster has-border-link" %>
-                      <% else %>
-                        <%= image_pack_tag ("dark_movie_poster.jpeg"), height: "200", width: "300", class: "poster has-border-link" %>
-                      <% end %>
+    <p>Poll results and winner calculated when poll closes</p>
+  </div>
+<% end %>
 
-                      <div
-                        class="overlay-box has-opacity-75 is-flex is-hidden"
-                        style="background-color:white;justify-content:center;align-items:center"
-                        data-target="poster.overlay">
-                        <div class="is-centered has-text-centered has-text-weight-semibold">
-                          <p class="is-size-6"><%= @poll.movie.title %></p>
-                          <p class="is-size-7"><%= @poll.movie.year %></p>
-                        </div>
-                      </div>
-              </figure>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <div class="field">
-      <%= column_chart @poll.tally.each_with_object({}) { |(key, value), obj| obj[Movie.find(key).title] = value } %>
-    </div>
-  <% end %>
-</section>

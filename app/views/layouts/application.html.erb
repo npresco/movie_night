@@ -10,8 +10,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <%# TODO better place for vote initializer %>
   <body data-turbolinks-scroll=false
-        data-controller="flash quickview modal"
+        data-controller="flash quickview modal vote"
         data-action="messageConnected->flash#handleRenderedFlashMessage">
 
     <%= render partial: "shared/nav" %>

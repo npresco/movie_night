@@ -1,11 +1,18 @@
-<div class="column is-10" data-controller="vote">
+<div class="column is-12">
   <%= render partial: "voting_message" %>
+
   <% if !@locked %>
-    <div class="box <%= @vote.new_record? ? 'has-border-danger' : 'has-border-link'%> ">
-      <%= render partial: "vote_form" %>
-      <% if @locked %>
-        <%= render partial: "poll_results" %>
-      <% end %>
-    </div>
+
+      <div class="columns">
+        <div class="column is-6">
+          <%= render partial: "vote_form" %>
+        </div>
+
+
+        <div class="column is-6 <%= @poll.movie ? "" : "has-background-grey-lighter" %>">
+          <%= render partial: "poll_results" %>
+        </div>
+      </div>
+
   <% end %>
 </div>
