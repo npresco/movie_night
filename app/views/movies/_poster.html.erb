@@ -1,9 +1,9 @@
 <% if movie.poster %>
   <%= image_tag movie.poster,
-    height: "200",
-    width: "300",
+    height: "300",
+    width: "200",
     class: "poster",
     onerror: "this.onerror = null;this.src = '#{image_pack_tag('dark_movie_poster.jpeg')[/img.*?src="(.*?)"/i,1]}'" %>
 <% else %>
-  <%= image_pack_tag ("dark_movie_poster.jpeg"), height: "200", width: "300", class: "poster" %>
+  <%= image_pack_tag ("dark_movie_poster.jpeg"), height: "300", width: "200", class: "poster" %>
 <% end %>
