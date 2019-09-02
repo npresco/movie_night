@@ -3,6 +3,6 @@ class List < ApplicationRecord
   has_many :movies, through: :join_list_to_movies
 
   def random_collage
-    movies.sample(4).map(&:poster)
+    movies.sample(8)
   end
 end
