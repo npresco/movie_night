@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_30_140825) do
+ActiveRecord::Schema.define(version: 2019_09_03_164344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -99,6 +99,9 @@ ActiveRecord::Schema.define(version: 2019_08_30_140825) do
     t.text "actors"
     t.jsonb "ratings", default: "{}"
     t.date "tmdb_checked_date"
+    t.date "guidebox_checked_date"
+    t.integer "guidebox_id"
+    t.jsonb "sources", default: "{}"
     t.index ["title", "imdb_id"], name: "index_movies_on_title_and_imdb_id", unique: true
   end
 

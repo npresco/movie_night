@@ -11,7 +11,9 @@
     <div class="columns is-multiline is-centered">
       <div class="column is-12">
         <div class="content">
-          <% [ :rated, :runtime, :plot, :language, :country, :production,
+
+
+          <% [ :sources, :rated, :runtime, :plot, :language, :country, :production,
                :awards, :genres, :director, :writer, :actors, :ratings ].each do |attr| %>
 
                <h3 class="is-size-6 has-text-weight-semibold">
@@ -30,6 +32,45 @@
                      <%= genre.name %>
                    </p>
                  <% end %>
+               <% elsif attr == :sources %>
+
+                 <div class="columns is-multiline">
+                   <% @movie.send(attr).each do |source_type, source_type_sources| %>
+                     <div class="column is-half">
+                       <h6 class="has-text-weight-semibold is-marginless">
+                         <%= source_type.humanize.remove(" web sources") %>
+                       </h6>
+                       <% if source_type_sources.present? %>
+                         <ul>
+                           <% source_type_sources.each do |source_type_source| %>
+
+                             <li class="field">
+                               <h6 class="is-marginless">
+                                 <%= source_type_source["display_name"] %>
+                               </h6>
+
+                               <% if source_type_source["formats"].present? %>
+                                 <ul>
+                                   <% source_type_source["formats"].each do |format| %>
+                                     <li>
+                                       <%= format["type"] %> - <%= format["format"] %> - <%= format["price"] %>
+                                     </li>
+                                   <% end %>
+                                 </ul>
+                               <% end %>
+                             </li>
+                           <% end %>
+                         </ul>
+                       <% else %>
+                         <span class="icon has-text-danger">
+                           <i class="fas fa-ban"></i>
+                         </span>
+                       <% end %>
+                     </div>
+                   <% end %>
+ 
+                 </div>
+
                <% else %>
                  <%= @movie.send(attr) %>
                <% end %>

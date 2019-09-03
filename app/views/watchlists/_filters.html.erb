@@ -5,14 +5,14 @@
   <ul class="menu-list">
     <li>
       <%= link_to "All",
-        watchlist_path(current_user),
+        watchlist_path(params[:id]),
         form: { class: "" },
         class: "is-link is-small" %>
     </li>
     <% @genres.each do |genre| %>
       <li>
         <%= link_to genre.name,
-          watchlist_path(current_user, params: { genre: genre.id }),
+          watchlist_path(params[:id], params: { genre: genre.id }),
           form: { class: "" },
           class: "is-link is-small" %>
       </li>
