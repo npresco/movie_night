@@ -10,7 +10,7 @@ class PollsController < ApplicationController
       @vote = current_user.current_vote(current_club.current_poll) || Vote.new
       @viewing = current_club.current_viewing
 
-      @locked = Time.current > @viewing.datetime - 1.week || Time.current < @viewing.datetime - 2.weeks
+      @locked = Time.current > @viewing.datetime - 5.days || Time.current < @viewing.datetime - 2.weeks
     end
   end
 

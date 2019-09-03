@@ -18,7 +18,7 @@
   </div>
 
   <%# TODO Reuse voting button partial %>
-  <div class="is-flex is-flex-column buttons" data-movie="<%= nomination.movie.id %>">
+  <div class="is-flex is-flex-column buttons is-hidden-desktop" data-movie="<%= nomination.movie.id %>">
     <button class="button is-link is-small is-fullwidth" data-action="click->vote#upvote" <%= @locked ? 'disabled' : '' %>>
       <span class="icon is-small">
         <i class="fas fa-thumbs-up"></i>
