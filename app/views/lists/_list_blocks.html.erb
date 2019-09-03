@@ -10,7 +10,7 @@
           <%# TODO - move to controlller %>
           <% collage = list.random_collage %> 
 
-          <div class="columns is-gapless is-marginless">
+          <div class="columns is-mobile is-gapless is-marginless">
             <% collage[0..3].each do |movie| %>
               <div class="column is-one-quarter">
                 <figure class="image is-2by3">
@@ -20,7 +20,7 @@
             <% end %>
           </div>
 
-          <div class="columns is-gapless">
+          <div class="columns is-mobile is-gapless">
             <% collage[4..7].each do |movie| %>
               <div class="column is-one-quarter">
                 <figure class="image is-2by3">
