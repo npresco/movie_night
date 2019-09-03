@@ -1,8 +1,9 @@
 <div class="column is-12">
   <%# TODO Always level to have same margin? %>
-  <h3 class="is-size-6"><%= @club.name %></h3>
+  <h3 class="subtitle is-size-6"><%= @club.name %></h3>
 
-  <table class="table is-fullwidth">
+  <%# Table for desktop view %>
+  <table class="table is-fullwidth is-hidden-mobile">
     <thead>
       <tr>
         <th>Name</th>
@@ -30,4 +31,55 @@
       <% end %>
     </tbody>
   </table>
+
+  <%# Cards for mobile view %>
+  <%# TODO Accordion? %>
+  <% @club.users.each do |user| %>
+    <div class="card is-hidden-desktop">
+      <header class="card-header">
+        <p class="card-header-title">
+          <%= link_to user.name, watchlist_path(user) %>
+        </p>
+      </header>
+      <div class="card-content has-text-centered">
+        <div class="columns is-multiline is-mobile">
+          <%# TODO Do I like this? %>
+          <div class="column is-half">
+            Movies in Watchlist
+          </div>
+
+          <div class="column is-half">
+            <%= user.movies.size %>
+          </div>
+
+          <div class="column is-half">
+            Voted in Current Poll?
+          </div>
+
+          <div class="column is-half">
+            WIP
+          </div>
+
+          <div class="column is-half">
+            Nominations Won
+          </div>
+
+          <div class="column is-half">
+            WIP
+          </div>
+
+          <div class="column is-half">
+            Last Login
+          </div>
+
+          <div class="column is-half">
+            WIP
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+  <% end %>
+
 </div>

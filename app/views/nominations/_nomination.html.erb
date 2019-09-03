@@ -17,6 +17,39 @@
     </div>
   </div>
 
+  <%# TODO Reuse voting button partial %>
+  <div class="is-flex is-flex-column buttons" data-movie="<%= nomination.movie.id %>">
+    <button class="button is-link is-small is-fullwidth" data-action="click->vote#upvote" <%= @locked ? 'disabled' : '' %>>
+      <span class="icon is-small">
+        <i class="fas fa-thumbs-up"></i>
+      </span>
+
+      <div>
+        +1
+      </div>
+    </button>
+
+    <button class="button is-small is-fullwidth" data-action="click->vote#push" <%= @locked ? 'disabled' : '' %>>
+      <span class="icon is-small">
+        <i class="fas fa-equals"></i>
+      </span>
+
+      <div>
+        0
+      </div>
+    </button>
+
+    <button class="button is-danger is-small is-fullwidth" data-action="click->vote#downvote" <%= @locked ? 'disabled' : '' %>>
+      <span class="icon is-small">
+        <i class="fas fa-thumbs-down"></i>
+      </span>
+
+      <div>
+        -1
+      </div>
+    </button>
+  </div>
+
   <div class="has-text-centered has-text-weight-semibold">
     <p class="is-size-7"><%= nomination.movie.title %> - <%= nomination.movie.year %></p>
   </div>
