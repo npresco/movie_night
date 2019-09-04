@@ -21,14 +21,7 @@
                </h3>
 
                <% if attr == :ratings %>
-
                  <%= render partial: "movies/ratings", locals: { movie: @movie } %>
-                 <%# <% @movie.send(attr).each do |rating| %>
-                 <%#   <p>
-                   <%#     <span><%= rating["Source"] %>
-                   <!-- </span> &#45; <span><%#= rating["Value"] %></span> -->
-                 <%#   </p>
-                 <%# <% end %>
                <% elsif attr == :genres %>
                  <% @movie.send(attr).each do |genre| %>
                    <p class="tag is-medium" >
