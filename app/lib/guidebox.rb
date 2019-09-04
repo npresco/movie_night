@@ -8,13 +8,13 @@ class Guidebox
     # check for guidebox_id through imdb
     unless movie.guidebox_id
       response = HTTParty.get("http://api-public.guidebox.com/v2/search?type=movie&field=id&id_type=imdb&query=#{movie.imdb_id}&api_key=#{KEY}")
-      movie.update(guidebox_id: response["id"]) if response
+      movie.update(guidebox_id: response["id"]) if response.present?
     end
 
     # check for guidebox_id through search
     unless movie.guidebox_id
       response = HTTParty.get("http://api-public.guidebox.com/v2/search?type=movie&field=title&query=#{::CGI.escape(movie.title)}&api_key=#{KEY}")
-      movie.update(guidebox_id: response["results"].first["id"]) if response
+      movie.update(guidebox_id: response["results"].first["id"]) if response.present? && response["results"].present?
     end
 
     if movie.guidebox_id

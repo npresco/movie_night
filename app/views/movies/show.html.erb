@@ -30,6 +30,7 @@
                  <% end %>
                <% elsif attr == :sources %>
 
+                 <% if @movie.send(attr) == "{}" %>
                  <div class="columns is-multiline">
                    <% @movie.send(attr).each do |source_type, source_type_sources| %>
                      <div class="column is-half">
@@ -66,6 +67,7 @@
                    <% end %>
  
                  </div>
+               <% end %>
 
                <% else %>
                  <%= @movie.send(attr) %>
