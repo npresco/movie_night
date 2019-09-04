@@ -2,9 +2,13 @@
   <h3 class="is-size-5">Your Vote</h3>
 
   <% if @vote.new_record? %>
-    <span>No vote recorded yet</span>
+    <span class="icon has-text-link is-large">
+      <i class="fas fa-question-circle fa-3x"></i>
+    </span>
   <% else %>
-    <span>Thanks for voting</span>
+    <span class="icon has-text-success is-large">
+      <i class="fas fa-check-circle fa-3x"></i>
+    </span>
   <% end %>
 
   <hr />
@@ -25,7 +29,7 @@
         <% end %>
           </span>
           <%= f.text_field "choices[#{nomination.movie.id}]",
-            value: f.object.choices[nomination.movie.id] || 0,
+            value: f.object.choices[nomination.movie.id.to_s].to_i || 0,
             data: { movie: nomination.movie.id },
             class: "is-hidden" %>
         </p>
