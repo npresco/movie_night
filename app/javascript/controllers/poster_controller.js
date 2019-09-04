@@ -25,10 +25,14 @@ export default class extends Controller {
     // }
     // document.append
 
-    this.overlayTarget.classList.remove("is-hidden")
+    this.overlayTargets.forEach(t => {
+      t.classList.remove("is-hidden")
+    });
   }
 
   hide(e) {
-    this.overlayTarget.classList.add("is-hidden")
+    this.overlayTargets.forEach(t => {
+      t.classList.add("is-hidden")
+    });
   }
 }
