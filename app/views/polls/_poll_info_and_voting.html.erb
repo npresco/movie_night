@@ -1,18 +1,21 @@
 <div class="column is-12">
   <%= render partial: "voting_message" %>
 
-  <% if !@locked %>
+  <div class="columns is-centered">
+    <% if !@locked %>
 
-      <div class="columns">
-        <div class="column is-6">
-          <%= render partial: "vote_form" %>
-        </div>
-
-
-        <div class="column is-6 <%= @poll.movie ? "" : "has-background-grey-lighter" %>">
-          <%= render partial: "poll_results" %>
-        </div>
+      <div class="column is-6">
+        <%= render partial: "vote_form" %>
       </div>
 
-  <% end %>
+    <% end %>
+
+    <% if !@locked || @poll.movie?%>
+
+      <div class="column is-6 <%= @poll.movie ? "" : "has-background-grey-lighter" %>">
+        <%= render partial: "poll_results" %>
+      </div>
+
+    <% end %>
+  </div>
 </div>
