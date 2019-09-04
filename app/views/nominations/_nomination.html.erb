@@ -13,6 +13,10 @@
 
 
               <%= render partial: "movies/play_button", locals: { movie: nomination.movie } %>
+
+              <% if nomination.movie.guidebox_checked_date %>
+                <%= render partial: "movies/ratings", locals: { movie: nomination.movie } %>
+              <% end %>
       </figure>
     </div>
   </div>

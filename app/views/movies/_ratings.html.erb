@@ -1,0 +1,29 @@
+<div class="columns is-marginless has-text-centered has-text-weight-semibold">
+  <div class="column is-one-third">
+    <figure class="image is-32x32 is-inline-block has-background-black">
+      <%= image_pack_tag ("imdb.svg") %>
+    </figure>
+    <div class="is-size-6 <%= float_rating_range(movie.ratings[0]["Value"].to_i) %> ">
+      <%= movie.ratings[0]["Value"].to_f %>
+    </div>
+  </div>
+
+  <div class="column is-one-third">
+    <figure class="image is-32x32 is-inline-block">
+      <%= image_pack_tag ("rotten_tomatoes.svg") %>
+    </figure>
+    <div class="is-size-6 <%= rating_range(movie.ratings[1]["Value"].to_i) %> ">
+      <%= movie.ratings[1]["Value"].to_i %>
+    </div>
+  </div>
+
+  <div class="column is-one-third">
+    <figure class="image is-32x32 is-inline-block">
+      <%= image_pack_tag ("metacritic.svg") %>
+    </figure>
+    <div class="is-size-6 <%= rating_range(movie.ratings[2]["Value"].to_i) %> ">
+      <%= movie.ratings[2]["Value"].to_i %>
+    </div>
+  </div>
+</div>
+

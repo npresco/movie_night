@@ -3,21 +3,30 @@
     <div class="card-image">
       <figure class="image is-2by3 has-badge-link has-badge-left has-badge-large"
               data-controller="poster"
-            <% if show_badges %>
-              data-badge="<%= movie_iteration.size - movie_iteration.index %>"
-            <% end %>
-              data-action="mouseenter->poster#show mouseleave->poster#hide">
+              <% if show_badges %>
+                data-badge="<%= movie_iteration.size - movie_iteration.index %>"
+              <% end %>
+                data-action="mouseenter->poster#show mouseleave->poster#hide">
 
-        <%= render partial: "movies/poster", locals: { movie: movie } %>
+                <%= render partial: "movies/poster", locals: { movie: movie } %>
 
-        <div class="overlay-button is-paddingless is-hidden-mobile">
-          <%= render partial: "movies/add_remove_buttons", locals: { movie: movie } %>
-        </div>
+                <div class="overlay-button is-paddingless is-hidden-mobile">
+                  <%= render partial: "movies/add_remove_buttons", locals: { movie: movie } %>
+                </div>
 
-        <%= render partial: "movies/play_button", locals: { movie: movie } %>
+
+                <%= render partial: "movies/play_button", locals: { movie: movie } %>
+
+                <% if movie.guidebox_checked_date %>
+                  <div class="overlay-ratings is-hidden"
+                       data-target="poster.overlay">
+                    <%= render partial: "movies/ratings", locals: { movie: movie } %>
+                  </div>
+                <% end %>
       </figure>
     </div>
   </div>
+
 
   <div class="has-text-centered has-text-weight-semibold">
     <p class="is-size-7"><%= movie.title %> - <%= movie.year %></p>
