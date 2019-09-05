@@ -5,6 +5,6 @@
 
 require_relative "config/application"
 
-Dir.glob("app/lib/tasks/*.rake").each { |r| load r }
+Dir.glob("app/lib/tasks/*.rake").each { |r| import r }
 
 Rails.application.load_tasks

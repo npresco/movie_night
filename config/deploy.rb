@@ -10,6 +10,8 @@ set :repo_url, "git@github.com:npresco/movie_night.git"
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/deploy/#{fetch :application}"
 
+after "deploy:updated", "assets:precompile"
+
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 
