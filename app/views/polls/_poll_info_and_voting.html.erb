@@ -10,7 +10,7 @@
 
     <% end %>
 
-    <% if !@locked || @poll.movie?%>
+    <% if !@locked || @poll.movie %>
 
       <div class="column is-6 <%= @poll.movie ? "" : "has-background-grey-lighter" %>">
         <%= render partial: "poll_results" %>
