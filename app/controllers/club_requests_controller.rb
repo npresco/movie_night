@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ClubRequestsController < ApplicationController
   def create
     @club_request = ClubRequest.new(club_params)
@@ -12,11 +14,10 @@ class ClubRequestsController < ApplicationController
   def update
     @club_request = ClubRequest.find(params[:id])
 
+    # TODO what to do when denied?
     if club_params[:status] == "approved"
       @club_request.update(club_params)
       @club_request.club.users << @club_request.user
-    elsif club_params[:status] == "approved"
-      @club_request.update(club_params)
     end
 
     redirect_to club_path(@club_request.club)
