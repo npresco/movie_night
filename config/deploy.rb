@@ -1,6 +1,11 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.0"
 
+set :rbenv_type, :user
+set :rbenv_ruby, File.read(".ruby-version").strip
+
+# set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} /usr/local/bin/rbenv exec"
+
 set :application, "movie_night"
 set :repo_url, "git@github.com:npresco/movie_night.git"
 
@@ -10,7 +15,7 @@ set :repo_url, "git@github.com:npresco/movie_night.git"
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/deploy/#{fetch :application}"
 
-after "deploy:updated", "assets:precompile"
+after "deploy:updated", "local_assets:precompile"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -24,7 +29,7 @@ after "deploy:updated", "assets:precompile"
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml"
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads', 'public/packs'
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
