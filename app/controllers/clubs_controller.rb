@@ -16,7 +16,8 @@ class ClubsController < ApplicationController
       flash[:notice] = "Club created successfully!"
       redirect_to clubs_path
     else
-      flash.now.alert = "Oops, couldn't create account. Please make sure you are using a valid email and password and try again."
+      flash.now.alert = "Oops, couldn't create account.
+      \ Please make sure you are using a valid email and password and try again."
       render :new
     end
   end
