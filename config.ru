@@ -4,4 +4,7 @@
 
 require_relative "config/environment"
 
+# Turns on prometheus reporting
+use Yabeda::Prometheus::Exporter
+
 run Rails.application
