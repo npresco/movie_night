@@ -8,7 +8,7 @@ class WatchlistsController < ApplicationController
       @movies = @movies.joins(:genres).where(genres: { id: params[:genre] })
     end
 
-    @pagy, @movies = pagy(@movies)
+    @pagy, @movies = pagy(@movies, items: 24)
 
     if current_club
       @nomination = current_user.current_nomination(current_club.current_poll)
@@ -16,6 +16,7 @@ class WatchlistsController < ApplicationController
     end
 
     if @viewing
+      # TODO always relevant nomination during dev
       @locked = Time.current > @viewing.datetime - 2.weeks
     end
   end

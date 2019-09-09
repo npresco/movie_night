@@ -30,8 +30,8 @@ class User < ApplicationRecord
     requests.detect { |cr| cr.club == club }
   end
 
-  def current_nomination(poll_id)
-    nominations.where(poll_id: poll_id).limit(1).first
+  def current_nominations(poll_id)
+    nominations.where(poll_id: poll_id).limit(5).first
   end
 
   def current_vote(poll_id)
