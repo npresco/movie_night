@@ -31,7 +31,7 @@ class User < ApplicationRecord
   end
 
   def current_nominations(poll_id)
-    nominations.where(poll_id: poll_id).limit(5).first
+    @_current_nominations ||= nominations.where(poll_id: poll_id).limit(5)
   end
 
   def current_vote(poll_id)

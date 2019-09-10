@@ -11,7 +11,7 @@ class WatchlistsController < ApplicationController
     @pagy, @movies = pagy(@movies, items: 24)
 
     if current_club
-      @nomination = current_user.current_nomination(current_club.current_poll)
+      @nominations = current_user.current_nominations(current_club.current_poll)
       @viewing = current_club.current_viewing
     end
 
@@ -29,6 +29,7 @@ class WatchlistsController < ApplicationController
     save_tmdb_info(@movie)
 
     @watchlist = Watchlist.new(watchlist_params)
+
 
     if @watchlist.save
       flash[:notice] = "#{@movie.title} added to watchlist"

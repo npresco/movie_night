@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :club_requests, only: [:create, :destroy, :update]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :viewings, only: [:create]
-  resources :nominations, only: [:create, :update]
+  resources :nominations, only: [:create, :update, :destroy]
   resources :polls, only: [:show]
   resources :movie_trailers, only: [:show]
   resources :votes, only: [:create, :update]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_03_164344) do
+ActiveRecord::Schema.define(version: 2019_09_09_151737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 2019_09_03_164344) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["movie_id"], name: "index_nominations_on_movie_id"
-    t.index ["poll_id", "user_id"], name: "index_nominations_on_poll_id_and_user_id", unique: true
+    t.index ["poll_id", "movie_id"], name: "index_nominations_on_poll_id_and_movie_id", unique: true
     t.index ["poll_id"], name: "index_nominations_on_poll_id"
     t.index ["user_id"], name: "index_nominations_on_user_id"
   end
