@@ -63,7 +63,7 @@
           <tr class="<%= viewing == @club.current_viewing ? 'is-selected' : '' %>">
             <td><%= i + 1 %></td>
             <td><%= viewing.datetime.to_formatted_s(:long_ordinal) %></td>
-            <td><%= viewing.movie %></td>
+            <td><%= viewing.movie.try(:title) %></td>
           </tr>
         <% end %>
       </tbody>

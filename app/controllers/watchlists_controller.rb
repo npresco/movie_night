@@ -1,11 +1,37 @@
 class WatchlistsController < ApplicationController
   def show
     @genres = Genre.all
+    @decades = []
+    13.times { |n| @decades << 1900 + (10 * n) }
     @movies = User.find(params[:id]).movies
 
     # Filters
     if params[:genre].present?
       @movies = @movies.joins(:genres).where(genres: { id: params[:genre] })
+    end
+
+    if params[:decade].present?
+      beginning_year = params[:decade].to_i
+      end_year = params[:decade].to_i + 9
+
+      @movies = @movies.where("CAST(year as INT) >= ? AND CAST(year as INT) <= ?", beginning_year, end_year)
+    end
+
+    if params[:sort].present?
+      case params[:sort]
+      when "alpha_asc"
+        @movies = @movies.order(title: :asc)
+      when "alpha_desc"
+        @movies = @movies.order(title: :desc)
+      when "added_asc"
+        @movies =  @movies.order("watchlists.created_at ASC")
+      when "added_desc"
+        @movies =  @movies.order("watchlists.created_at DESC")
+      when "year_asc"
+        @movies =  @movies.order(year: :asc)
+      when "year_desc"
+        @movies =  @movies.order(year: :desc)
+      end
     end
 
     @pagy, @movies = pagy(@movies, items: 24)

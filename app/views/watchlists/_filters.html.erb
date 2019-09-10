@@ -1,21 +1,83 @@
-<aside class="menu is-hidden-mobile" style="position: fixed">
-  <p class="menu-label">
-    Genres
+<%# TODO move fixed style %>
+<aside class="menu is-hidden-mobile is-fixed" data-turbolinks-permanent id="filters">
+
+  <p class="menu-label button">
+    <%= link_to "All",
+      watchlist_path(params[:id]),
+      class: "is-link is-small has-text-grey" %>
   </p>
-  <ul class="menu-list">
-    <li>
-      <%= link_to "All",
-        watchlist_path(params[:id]),
-        form: { class: "" },
-        class: "is-link is-small" %>
-    </li>
-    <% @genres.each do |genre| %>
+
+  <div data-controller="filter">
+    <p class="menu-label button" data-action="click->filter#toggle">
+      + Genres
+    </p>
+    <ul class="menu-list is-hidden" data-target="filter.list">
+      <% @genres.each do |genre| %>
+        <li>
+          <%= link_to genre.name,
+            watchlist_path(params[:id], params: { genre: genre.id }),
+            class: "is-link is-small" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div data-controller="filter">
+    <p class="menu-label button" data-action="click->filter#toggle">
+      + Decade
+    </p>
+    <ul class="menu-list is-hidden" data-target="filter.list">
+      <% @decades.each do |decade| %>
+        <li>
+          <%= link_to decade,
+            watchlist_path(params[:id], params: { decade: decade }),
+            class: "is-link is-small" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div data-controller="filter">
+    <p class="menu-label button" data-action="click->filter#toggle">
+      + Sort
+    </p>
+    <ul class="menu-list is-hidden" data-target="filter.list">
       <li>
-        <%= link_to genre.name,
-          watchlist_path(params[:id], params: { genre: genre.id }),
-          form: { class: "" },
+        <%= link_to "↓ Alphabetically",
+          watchlist_path(params[:id], params: { sort: :alpha_asc }),
           class: "is-link is-small" %>
       </li>
-    <% end %>
-  </ul>
+
+      <li>
+        <%= link_to "↑ Alphabetically",
+          watchlist_path(params[:id], params: { sort: :alpha_desc }),
+          class: "is-link is-small" %>
+      </li>
+
+      <li>
+        <%= link_to "↓ Added to List",
+          watchlist_path(params[:id], params: { sort: :added_asc }),
+          class: "is-link is-small" %>
+      </li>
+
+      <li>
+        <%= link_to "↑ Added to List",
+          watchlist_path(params[:id], params: { sort: :added_desc }),
+          class: "is-link is-small" %>
+      </li>
+
+      <li>
+        <%= link_to "↓ Year",
+          watchlist_path(params[:id], params: { sort: :year_asc }),
+          class: "is-link is-small" %>
+      </li>
+
+      <li>
+        <%= link_to "↑ Year",
+          watchlist_path(params[:id], params: { sort: :year_desc }),
+          class: "is-link is-small" %>
+      </li>
+    </ul>
+  </div>
+
 </aside>
