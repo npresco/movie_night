@@ -11,7 +11,7 @@ class Viewing < ApplicationRecord
   end
 
   def winning_nominator
-    poll.winning_nominator
+    poll.winning_nominator.try(:name)
   end
 
   def add_poll
