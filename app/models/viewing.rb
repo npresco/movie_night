@@ -10,6 +10,10 @@ class Viewing < ApplicationRecord
     poll.movie
   end
 
+  def winning_nominator
+    poll.winning_nominator
+  end
+
   def add_poll
     create_poll
   end

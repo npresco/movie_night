@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   def home
     @viewing = current_club.current_viewing if current_club
+    @viewings = current_club.viewings if current_club
   end
 
   def current_user
