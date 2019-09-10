@@ -60,7 +60,9 @@
       </div>
   <% end %>
 
-<% else %>
+<% elsif current_user &&
+    current_club &&
+    current_club.current_poll %>
 
   <%= button_to nominations_path,
     method: :post,

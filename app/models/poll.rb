@@ -17,6 +17,11 @@ class Poll < ApplicationRecord
     Poll.all.select { |p| Time.current > p.viewing.datetime - 1.week }.each(&:pick_winner)
   end
 
+  # TODO save this information to db
+  def winning_nominator
+    nominations.detect { |nom| nom.movie == movie }.try(:user)
+  end
+
   def winner
     movie || pick_winner
   end
