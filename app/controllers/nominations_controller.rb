@@ -1,15 +1,26 @@
 class NominationsController < ApplicationController
   def create
-    @nomination = Nomination.new(nomination_params)
+
+    if current_user.nominations.size >= 5
+      flash[:notice] = "You have reached the nomination limit, remove another nomination to keep nominating"
+
+      redirect_to watchlist_path(current_user)
+      return
+    end
+
+    create_check = false
+
+    @nomination = Nomination.find_or_initialize_by(nomination_params.slice(:poll_id, :movie_id)) { create_check = true }
     movie = Movie.find(nomination_params[:movie_id])
 
-    if @nomination.save
-
+    if create_check
+      @nomination.update(user_id: nomination_params[:user_id])
       flash[:notice] = "#{movie.title} nominated for #{current_club.name}"
-      redirect_to watchlist_path(current_user)
     else
-      render :new
+      flash[:notice] = "#{movie.title} already nominated for #{current_club.name}"
     end
+
+    redirect_to watchlist_path(current_user)
   end
 
   def update
@@ -22,6 +33,17 @@ class NominationsController < ApplicationController
       redirect_to watchlist_path(current_user)
     else
       render :new
+    end
+  end
+
+  def destroy
+    @nomination = Nomination.find(params[:id])
+    if @nomination.destroy
+      flash[:notice] = "Nomination removed"
+      redirect_to watchlist_path(current_user)
+    else
+      # Couldnt' find
+      redirect_to watchlist_path(current_user)
     end
   end
 

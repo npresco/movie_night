@@ -3,7 +3,6 @@
     <div class="card-image">
       <figure class="image is-2by3 has-badge-left has-badge-link has-badge-large"
               data-controller="poster"
-              data-badge="<%= nomination.user.name %>"
               data-action="mouseenter->poster#show mouseleave->poster#hide">
 
               <%= render partial: "movies/poster", locals: { movie: nomination.movie } %>
@@ -62,6 +61,7 @@
   </div>
 </div>
 
-<% unless nomination_iteration.last? %>
-  <div class="is-divider-vertical"></div>
-<% end %>
+<%# TODO only use if not anonymous, i.e. using a data-badge %>
+<%# <% unless (nomination_iteration.index  + 1) % 4 == 0 || nomination_iteration.last? %>
+<%#   <div class="is-divider-vertical"></div>
+<%# <% end %>

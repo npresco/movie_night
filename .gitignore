@@ -29,3 +29,4 @@ yarn-debug.log*
 todo.org
 api_responses.txt
 tags
+app/javascript/fonts/*

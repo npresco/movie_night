@@ -8,14 +8,15 @@ class WatchlistsController < ApplicationController
       @movies = @movies.joins(:genres).where(genres: { id: params[:genre] })
     end
 
-    @pagy, @movies = pagy(@movies)
+    @pagy, @movies = pagy(@movies, items: 24)
 
     if current_club
-      @nomination = current_user.current_nomination(current_club.current_poll)
+      @nominations = current_user.current_nominations(current_club.current_poll)
       @viewing = current_club.current_viewing
     end
 
     if @viewing
+      # TODO always relevant nomination during dev
       @locked = Time.current > @viewing.datetime - 2.weeks
     end
   end
@@ -28,6 +29,7 @@ class WatchlistsController < ApplicationController
     save_tmdb_info(@movie)
 
     @watchlist = Watchlist.new(watchlist_params)
+
 
     if @watchlist.save
       flash[:notice] = "#{@movie.title} added to watchlist"
