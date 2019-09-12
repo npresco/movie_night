@@ -35,9 +35,10 @@ class MoviesController < ApplicationController
       TmdbWrapper.info(@movie)
     end
 
-    unless @movie.guidebox_checked_date && 1.month.since(@movie.guidebox_checked_date) < Date.current
-      @sources = Guidebox.sources(@movie)
-    end
+    # Guidebox turn off
+    # unless @movie.guidebox_checked_date && 1.month.since(@movie.guidebox_checked_date) < Date.current
+    #   @sources = Guidebox.sources(@movie)
+    # end
 
     @movie.reload
 
