@@ -26,11 +26,43 @@ $table-row-active-background-color: hsl(217, 71%, 53%);
 
 // Poster
 
-.image .overlay-button {
+.image .overlay-box {
   position: absolute;
-  top: 0.5rem; 
-  right: 0.5rem;
-  z-index: 9;
+  bottom: 0px; 
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.image .overlay-top-left {
+  position: absolute;
+  top: 0.25rem;
+  left: 0.25rem;
+  padding: 0.5rem;
+}
+
+.image .overlay-top-right {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  padding: 0.5rem;
+}
+
+.image .overlay-bottom-left {
+  position: absolute;
+  bottom: 0.25rem;
+  left: 0.25rem;
+  padding: 0.5rem;
+}
+
+.image .overlay-bottom-right {
+  position: absolute;
+  bottom: 0.25rem;
+  right: 0.25rem;
+  padding: 0.5rem;
 }
 
 .image .overlay-ratings {
@@ -41,33 +73,20 @@ $table-row-active-background-color: hsl(217, 71%, 53%);
   z-index: 9;
 }
 
-.image .overlay-play {
+.image .overlay-button {
   position: absolute;
-  bottom: 0.5rem;
+  top: 0.5rem; 
+  right: 0.5rem;
   z-index: 9;
-}
-
-.image .overlay-box {
-  position: absolute;
-  bottom: 0px; 
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  padding: 1rem;
-  justify-content:center;
-  align-items: center;
 }
 
 .button-message {
   display: none;
-  opacity: 0;
   padding-left: 0.25rem;
 }
 
-.card:hover .button-message,
-.buttons .button-message {
+.card:hover .button-message {
   display: block;
-  opacity: 100;
 }
 
 .card .button-expand {
@@ -145,6 +164,10 @@ video {
 
 .has-border-danger {
   border: 0.5rem solid hsl(348, 100%, 61%) !important;
+}
+
+.is-height-100 {
+  height: 100%;
 }
 
 // Toast

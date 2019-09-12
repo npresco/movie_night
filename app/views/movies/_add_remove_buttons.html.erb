@@ -1,4 +1,37 @@
-<% if current_user.movies.include?(movie) %>
+<%# Seenlist %>
+<% if current_user.seenlist_movies.include?(movie) %>
+  <%= button_to watchlist_path(current_user.watchlists.find { |w| w.movie == movie }.id),
+    method: :delete,
+    remote: true,
+    class: "button button-expand is-small is-danger is-fullwidth" do %>
+      <span class="icon is-small is-marginless">
+        <i class="fas fa-eye-slash"></i>
+      </span>
+
+      <div class="button-message">
+        I Ain't Seent it
+      </div>
+  <% end %>
+<% else %>
+  <%= button_to watchlists_path,
+    method: :post,
+    params: { "watchlist[movie_id]" => movie.id,
+              "watchlist[user_id]" => current_user.id,
+              "query" => @query },
+    remote: true,
+    class: "button button-expand is-small is-fullwidth is-rounded" do %>
+      <span class="icon is-small is-marginless">
+        <i class="fas fa-eye"></i>
+      </span>
+
+      <div class="button-message">
+        I've Seent it
+      </div>
+  <% end %>
+<% end %>
+
+<%# Watchlist %>
+<% if current_user.watchlist_movies.include?(movie) %>
   <%= button_to watchlist_path(current_user.watchlists.find { |w| w.movie == movie }.id),
     method: :delete,
     remote: true,
@@ -32,3 +65,4 @@
       </div>
   <% end %>
 <% end %>
+

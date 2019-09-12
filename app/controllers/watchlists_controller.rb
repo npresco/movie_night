@@ -3,7 +3,7 @@ class WatchlistsController < ApplicationController
     @genres = Genre.all
     @decades = []
     13.times { |n| @decades << 1900 + (10 * n) }
-    @movies = User.find(params[:id]).movies
+    @movies = User.find(params[:id]).watchlist_movies
 
     # Filters
     if params[:genre].present?

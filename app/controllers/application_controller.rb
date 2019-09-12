@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.includes(:movies).find(session[:user_id]) if session[:user_id]
+    @current_user ||= User.includes(:watchlist_movies).find(session[:user_id]) if session[:user_id]
   rescue ActiveRecord::RecordNotFound
     @current_user = nil
   end

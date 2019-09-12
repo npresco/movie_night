@@ -1,4 +1,5 @@
-<div class="column is-2-desktop is-6-mobile">
+<div class="column is-2-desktop is-6-mobile is-flex is-flex-column" data-controller="ratings">
+
   <div class="card field">
     <div class="card-image">
       <figure class="image is-2by3 has-badge-link has-badge-left has-badge-large"
@@ -10,25 +11,38 @@
 
                 <%= render partial: "movies/poster", locals: { movie: movie } %>
 
-                <div class="overlay-button is-paddingless is-hidden-mobile">
-                  <%= render partial: "movies/add_remove_buttons", locals: { movie: movie } %>
-                </div>
-
-
-                <%= render partial: "movies/play_button", locals: { movie: movie } %>
+                <%# Play Button %>
+                <!-- <div class="is&#45;centered has&#45;text&#45;centered has&#45;text&#45;weight&#45;semibold is&#45;hidden&#45;mobile"> -->
+                <!--   <button class="button is&#45;normal is&#45;rounded is&#45;link has&#45;opacity&#45;100 is&#45;outlined" -->
+                <!--     data&#45;action="click&#45;>modal#show"> -->
+                <!--     <span class="icon"> -->
+                <!--       <i class="fas fa&#45;play"></i> -->
+                <!--     </span> -->
+                <!--   </button> -->
+                <!-- </div> -->
 
                 <% if movie.omdb_checked_date && movie.ratings.present? %>
-                  <div class="overlay-ratings is-hidden is-hidden-mobile"
-                       data-target="poster.overlay">
-                    <%= render partial: "movies/ratings", locals: { movie: movie } %>
-                  </div>
+                  <!-- <div class="is&#45;hidden is&#45;hidden&#45;mobile" -->
+                  <!--   data&#45;target="poster.overlay"> -->
+                  <!--   <%#= render partial: "movies/ratings", locals: { movie: movie } %> -->
+                  <!-- </div> -->
                 <% end %>
+
+                <div class="overlay-button is-paddingless is-hidden-mobile">
+                  <%# <%= render partial: "movies/add_remove_buttons", locals: { movie: movie } %>
+                </div>
+
+                <%= render partial: "movies/play_button", locals: { movie: movie } %>
       </figure>
     </div>
   </div>
 
 
-  <div class="has-text-centered has-text-weight-semibold">
-    <p class="is-size-7"><%= movie.title %> - <%= movie.year %></p>
+  <div class="has-text-centered has-text-weight-semibold is-flex is-flex-column is-height-100">
+    <div class="is-size-7 is-height-100"><%= movie.title %> - <%= movie.year %></div>
+
+    <% if movie.omdb_checked_date && movie.ratings.present? %>
+      <%= render partial: "movies/ratings", locals: { movie: movie } %>
+    <% end %>
   </div>
 </div>

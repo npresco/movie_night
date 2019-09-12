@@ -5,7 +5,10 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   has_many :watchlists, dependent: :destroy
-  has_many :movies, through: :watchlists
+  has_many :watchlist_movies, through: :watchlists, source: :movie
+
+  has_many :seenlists, dependent: :destroy
+  has_many :seenlist_movies, through: :seenlists, source: :movie
 
   has_many :club_users, dependent: :destroy
   has_many :clubs, through: :club_users

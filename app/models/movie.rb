@@ -3,6 +3,9 @@ class Movie < ApplicationRecord
   has_many :watchlists
   has_many :users, through: :watchlists
 
+  has_many :seenlists
+  has_many :users, through: :seenlists
+
   has_many :join_list_to_movies
   has_many :lists, through: :join_list_to_movies
 
