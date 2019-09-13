@@ -18,6 +18,24 @@
 $modal-content-width: 1120px;
 $table-row-active-background-color: hsl(217, 71%, 53%);
 
+// Size tiny
+$size-8: 0.50rem !default;
+$size-tiny: $size-8 !default;
+$radius-tiny:  1px !default;
+
+@mixin button-tiny {
+  border-radius: $radius-tiny;
+  font-size: $size-tiny;
+}
+
+.button.is-tiny {
+  @include button-tiny;
+}
+
+.is-size-8 {
+  font-size: $size-8 !important
+}
+
 // 3rd Party CSS
 @import "bulma/bulma.sass";
 @import "bulma-extensions/src/sass/index.sass";
@@ -26,7 +44,7 @@ $table-row-active-background-color: hsl(217, 71%, 53%);
 
 // Poster
 
-.image .overlay-box {
+.image .is-overlay {
   position: absolute;
   bottom: 0px; 
   top: 0px;
@@ -42,6 +60,7 @@ $table-row-active-background-color: hsl(217, 71%, 53%);
   top: 0.25rem;
   left: 0.25rem;
   padding: 0.5rem;
+  z-index: 2;
 }
 
 .image .overlay-top-right {
@@ -49,13 +68,15 @@ $table-row-active-background-color: hsl(217, 71%, 53%);
   top: 0.25rem;
   right: 0.25rem;
   padding: 0.5rem;
+  z-index: 3;
 }
 
 .image .overlay-bottom-left {
   position: absolute;
-  bottom: 0.25rem;
+  bottom: 4.75rem;
   left: 0.25rem;
   padding: 0.5rem;
+  z-index: 2;
 }
 
 .image .overlay-bottom-right {
@@ -63,6 +84,7 @@ $table-row-active-background-color: hsl(217, 71%, 53%);
   bottom: 0.25rem;
   right: 0.25rem;
   padding: 0.5rem;
+  z-index: 2;
 }
 
 .image .overlay-ratings {
@@ -70,7 +92,7 @@ $table-row-active-background-color: hsl(217, 71%, 53%);
   bottom: 0px;
   left: 0px;
   right: 0px;
-  z-index: 9;
+  z-index: 2;
 }
 
 .image .overlay-button {
@@ -86,16 +108,16 @@ $table-row-active-background-color: hsl(217, 71%, 53%);
 }
 
 .card:hover .button-message {
-  display: block;
+  display: flex;
 }
 
 .card .button-expand {
-  transition: all 110ms ease;
+  transition: all 110ms ease !important;
 }
 
 .card:hover .button-expand {
   padding-right: 0.75rem;
-  transition: all 110ms ease;
+  transition: all 110ms ease !important;
 }
 
 .overlay-button .button {
@@ -170,6 +192,14 @@ video {
   height: 100%;
 }
 
+.is-rounded-border {
+  border-radius: 10px;
+}
+
+.is-cursor-default {
+  cursor: default !important;
+}
+
 // Toast
 
 #toast-container {
@@ -200,3 +230,4 @@ video {
   overflow-y:scroll;
   overflow-x:hidden;
 }
+
