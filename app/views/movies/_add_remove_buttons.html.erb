@@ -7,7 +7,7 @@
 
     <div class="buttons is-centered button-message">
 
-      <%= button_to watchlist_path(current_user.watchlists.find { |w| w.movie == movie }.id),
+      <%= button_to seenlist_path(current_user.seenlists.find { |w| w.movie == movie }.id),
         method: :delete,
         remote: true,
         class: "button is-danger is-rounded is-small" do %>
@@ -16,7 +16,7 @@
         </span>
       <% end %>
 
-      <%= button_to watchlists_path,
+      <%= button_to seenlist_path(current_user.seenlists.find { |w| w.movie == movie }.id),
         method: :post,
         params: { "watchlist[movie_id]" => movie.id,
                   "watchlist[user_id]" => current_user.id,
