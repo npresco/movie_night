@@ -1,7 +1,7 @@
 class NominationsController < ApplicationController
   def create
 
-    if current_user.nominations.size >= 5
+    if current_user.current_nominations(current_club.current_poll).size >= 5
       flash[:notice] = "You have reached the nomination limit, remove another nomination to keep nominating"
 
       redirect_to watchlist_path(current_user)
