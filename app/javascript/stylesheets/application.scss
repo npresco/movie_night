@@ -18,6 +18,24 @@
 $modal-content-width: 1120px;
 $table-row-active-background-color: hsl(217, 71%, 53%);
 
+// Size tiny
+$size-8: 0.65rem !default;
+$size-tiny: $size-8 !default;
+$radius-tiny:  1px !default;
+
+@mixin button-tiny {
+  border-radius: $radius-tiny;
+  font-size: $size-tiny;
+}
+
+.button.is-tiny {
+  @include button-tiny;
+}
+
+.is-size-8 {
+  font-size: $size-8 !important
+}
+
 // 3rd Party CSS
 @import "bulma/bulma.sass";
 @import "bulma-extensions/src/sass/index.sass";
@@ -26,11 +44,47 @@ $table-row-active-background-color: hsl(217, 71%, 53%);
 
 // Poster
 
-.image .overlay-button {
+.image .is-overlay {
   position: absolute;
-  top: 0.5rem; 
-  right: 0.5rem;
-  z-index: 9;
+  bottom: 0px; 
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.image .overlay-top-left {
+  position: absolute;
+  top: 0.25rem;
+  left: 0.25rem;
+  padding: 0.5rem;
+  z-index: 2;
+}
+
+.image .overlay-top-right {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  padding: 0.5rem;
+  z-index: 3;
+}
+
+.image .overlay-bottom-left {
+  position: absolute;
+  bottom: 4.75rem;
+  left: 0.25rem;
+  padding: 0.5rem;
+  z-index: 2;
+}
+
+.image .overlay-bottom-right {
+  position: absolute;
+  bottom: 0.25rem;
+  right: 0.25rem;
+  padding: 0.5rem;
+  z-index: 2;
 }
 
 .image .overlay-ratings {
@@ -38,45 +92,41 @@ $table-row-active-background-color: hsl(217, 71%, 53%);
   bottom: 0px;
   left: 0px;
   right: 0px;
-  z-index: 9;
+  z-index: 2;
 }
 
-.image .overlay-play {
+.image .overlay-button {
   position: absolute;
-  bottom: 0.5rem;
+  top: 0.5rem; 
+  right: 0.5rem;
   z-index: 9;
-}
-
-.image .overlay-box {
-  position: absolute;
-  bottom: 0px; 
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  padding: 1rem;
-  justify-content:center;
-  align-items: center;
 }
 
 .button-message {
   display: none;
-  opacity: 0;
   padding-left: 0.25rem;
 }
 
-.card:hover .button-message,
-.buttons .button-message {
-  display: block;
-  opacity: 100;
+.card .button-expand {
+  transition: all 110ms ease !important;
 }
 
-.card .button-expand {
-  transition: all 110ms ease;
+.card:hover .button-message {
+  display: flex;
 }
 
 .card:hover .button-expand {
-  padding-right: 0.75rem;
-  transition: all 110ms ease;
+  // padding-right: 0.75rem;
+  transition: all 110ms ease !important;
+}
+
+.card:hover .is-padding-contract {
+  padding-right: 0.1rem;
+  padding-left: 0.1rem;
+}
+
+.card:hover span.expand-hidden {
+  display: none;
 }
 
 .overlay-button .button {
@@ -147,6 +197,18 @@ video {
   border: 0.5rem solid hsl(348, 100%, 61%) !important;
 }
 
+.is-height-100 {
+  height: 100%;
+}
+
+.is-rounded-border {
+  border-radius: 10px;
+}
+
+.is-cursor-default {
+  cursor: default !important;
+}
+
 // Toast
 
 #toast-container {
@@ -177,3 +239,4 @@ video {
   overflow-y:scroll;
   overflow-x:hidden;
 }
+

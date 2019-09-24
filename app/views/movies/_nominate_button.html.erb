@@ -50,14 +50,11 @@
     method: :delete,
     remote: true,
     disabled: @locked,
-    class: "button button-expand is-small is-fullwidth is-danger" do %>
-      <span class="icon is-small is-marginless">
+    data: { tooltip: "Un-Nominate" },
+    class: "button is-danger is-rounded is-small tooltip is-tooltip-danger is-tooltip-right" do %>
+      <span class="icon is-marginless">
         <i class="fas fa-trash-restore"></i>
       </span>
-
-      <div class="button-message">
-        Un-Nominate
-      </div>
   <% end %>
 
 <% elsif current_user &&
@@ -71,14 +68,10 @@
               "nomination[user_id]" => current_user.id },
     remote: true,
     disabled: @locked,
-    class: "button button-expand is-small is-fullwidth" do %>
-      <span class="icon is-small is-marginless">
+    data: { tooltip: "Nominate" },
+    class: "button is-rounded is-small tooltip is-tooltip-right" do %>
+      <span class="icon is-marginless">
         <i class="fas fa-person-booth"></i>
       </span>
-
-      <div class="button-message">
-        Nominate
-      </div>
   <% end %>
-
 <% end %>

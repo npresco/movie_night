@@ -7,18 +7,9 @@
 
               <%= render partial: "movies/poster", locals: { movie: nomination.movie } %>
 
-
               <%= render partial: "nominations/voting_buttons", locals: { movie: nomination.movie } %>
 
-
-              <%= render partial: "movies/play_button", locals: { movie: nomination.movie } %>
-
-              <% if nomination.movie.omdb_checked_date  && nomination.movie.ratings.present? %>
-                <div class="overlay-ratings is-hidden is-hidden-mobile"
-                     data-target="poster.overlay">
-                  <%= render partial: "movies/ratings", locals: { movie: nomination.movie } %>
-                </div>
-              <% end %>
+              <%= render partial: "movies/overlay", locals: { movie: nomination.movie } %>
       </figure>
     </div>
   </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_151737) do
+ActiveRecord::Schema.define(version: 2019_09_10_151222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -126,6 +126,16 @@ ActiveRecord::Schema.define(version: 2019_09_09_151737) do
     t.index ["viewing_id"], name: "index_polls_on_viewing_id"
   end
 
+  create_table "seenlists", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "movie_id", null: false
+    t.integer "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_seenlists_on_movie_id"
+    t.index ["user_id"], name: "index_seenlists_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -177,6 +187,8 @@ ActiveRecord::Schema.define(version: 2019_09_09_151737) do
   add_foreign_key "nominations", "users"
   add_foreign_key "polls", "movies"
   add_foreign_key "polls", "viewings"
+  add_foreign_key "seenlists", "movies"
+  add_foreign_key "seenlists", "users"
   add_foreign_key "viewings", "clubs"
   add_foreign_key "votes", "polls"
   add_foreign_key "votes", "users"

@@ -1,9 +1,9 @@
-class WatchlistsController < ApplicationController
+class SeenlistsController < ApplicationController
   def show
     @genres = Genre.all
     @decades = []
     13.times { |n| @decades << 1900 + (10 * n) }
-    @movies = User.find(params[:id]).watchlist_movies
+    @movies = User.find(params[:id]).seenlist_movies
 
     # Filters
     if params[:genre].present?
@@ -24,14 +24,22 @@ class WatchlistsController < ApplicationController
       when "alpha_desc"
         @movies = @movies.order(title: :desc)
       when "added_asc"
-        @movies =  @movies.order("watchlists.created_at ASC")
+        @movies =  @movies.order("seenlists.created_at ASC")
       when "added_desc"
-        @movies =  @movies.order("watchlists.created_at DESC")
+        @movies =  @movies.order("seenlists.created_at DESC")
       when "year_asc"
         @movies =  @movies.order(year: :asc)
       when "year_desc"
         @movies =  @movies.order(year: :desc)
       end
+    end
+
+    if params[:liked]
+      @movies = current_user.liked_movies
+    end
+
+    if params[:disliked]
+      @movies = current_user.disliked_movies
     end
 
     @pagy, @movies = pagy(@movies, items: 24)
@@ -48,17 +56,30 @@ class WatchlistsController < ApplicationController
   end
 
   def create
-    @movie = Movie.find(watchlist_params[:movie_id])
+    @movie = Movie.find(seenlist_params[:movie_id])
 
     # TODO Background Jobs
     save_omdb_info(@movie)
     save_tmdb_info(@movie)
 
-    @watchlist = Watchlist.new(watchlist_params)
+    @seenlist = Seenlist.new(seenlist_params)
 
+    if @seenlist.save
+      flash[:notice] = "#{@movie.title} added to seenlist"
+      redirect_back fallback_location: root_path
+    else
+      flash.now.alert = "Could not save movie"
+      render :new
+    end
+  end
 
-    if @watchlist.save
-      flash[:notice] = "#{@movie.title} added to watchlist"
+  def update
+    @movie = Movie.find(seenlist_params[:movie_id])
+
+    @seenlist = Seenlist.find(params[:id])
+
+    if @seenlist.update(seenlist_params)
+      flash[:notice] = "#{@movie.title} rating removed"
       redirect_back fallback_location: root_path
     else
       flash.now.alert = "Could not save movie"
@@ -67,8 +88,8 @@ class WatchlistsController < ApplicationController
   end
 
   def destroy
-    Watchlist.find(params[:id]).destroy
-    flash[notice] = "Movie was removed from watchlist"
+    Seenlist.find(params[:id]).destroy
+    flash[notice] = "Movie was removed from seenlist"
 
     redirect_back fallback_location: root_path
   end
@@ -88,7 +109,7 @@ class WatchlistsController < ApplicationController
     end
   end
 
-  def watchlist_params
-    params.require(:watchlist).permit(:movie_id, :user_id)
+  def seenlist_params
+    params.require(:seenlist).permit(:movie_id, :user_id, :score)
   end
 end

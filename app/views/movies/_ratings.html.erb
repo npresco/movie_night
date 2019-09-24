@@ -2,10 +2,10 @@
   <% if movie.ratings[0] %>
     <div class="column is-one-third">
       <%#= TODO move style to css %>
-      <figure class="image is-32x32 field has-background-black" style="margin-left:auto;margin-right:auto;">
+      <figure class="image is-24x24 field has-background-black" style="margin-left:auto;margin-right:auto;">
         <%= image_pack_tag ("imdb.svg") %>
       </figure>
-      <div class="is-size-6 <%= float_rating_range(movie.ratings[0]["Value"].to_f) %> ">
+      <div class="is-size-7 <%= float_rating_range(movie.ratings[0]["Value"].to_f) %> is-rounded-border">
         <%= movie.ratings[0]["Value"].to_f %>
       </div>
     </div>
@@ -13,10 +13,10 @@
 
   <% if movie.ratings[1] %>
     <div class="column is-one-third">
-      <figure class="image is-32x32 field" style="margin-left:auto;margin-right:auto;">
+      <figure class="image is-24x24 field" style="margin-left:auto;margin-right:auto;">
         <%= image_pack_tag ("rotten_tomatoes.svg") %>
       </figure>
-      <div class="is-size-6 <%= rating_range(movie.ratings[1]["Value"].to_i) %> ">
+      <div class="is-size-7 <%= rating_range(movie.ratings[1]["Value"].to_i) %> is-rounded-border">
         <%= movie.ratings[1]["Value"].to_i %>
       </div>
     </div>
@@ -25,10 +25,10 @@
 
   <% if movie.ratings[2] %>
     <div class="column is-one-third">
-      <figure class="image is-32x32 field" style="margin-left:auto;margin-right:auto;">
+      <figure class="image is-24x24 field" style="margin-left:auto;margin-right:auto;">
         <%= image_pack_tag ("metacritic.svg") %>
       </figure>
-      <div class="is-size-6 <%= rating_range(movie.ratings[2]["Value"].to_i) %> ">
+      <div class="is-size-7 <%= rating_range(movie.ratings[2]["Value"].to_i) %> is-rounded-border">
         <%= movie.ratings[2]["Value"].to_i %>
       </div>
     </div>

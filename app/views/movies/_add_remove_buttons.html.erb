@@ -1,34 +1,115 @@
-<% if current_user.movies.include?(movie) %>
-  <%= button_to watchlist_path(current_user.watchlists.find { |w| w.movie == movie }.id),
-    method: :delete,
-    remote: true,
-    class: "button button-expand is-small is-danger is-fullwidth" do %>
-      <span class="icon is-small is-marginless">
-        <i class="fas fa-minus"></i>
+<%# Seenlist %>
+<div class="overlay-top-left is-flex is-flex-column buttons">
+
+  <% if current_user.seenlist_movies.include?(movie) %>
+
+      <% if current_user.liked_movies.include?(movie) %>
+
+          <%= button_to seenlist_path(current_user.seenlists.find { |s| s.movie == movie }.id ),
+            method: :delete,
+            params: { "seenlist[movie_id]" => movie.id,
+                      "seenlist[user_id]" => current_user.id,
+                      "seenlist[score]" => nil },
+            remote: true,
+            data: { tooltip: "My Rating (click to remove from seenlist)" },
+            class: "button is-rounded has-opacity-75 is-small tooltip is-tooltip-top" do %>
+
+            <span class="icon is-small is-marginless has-text-success">
+              <i class="fas fa-thumbs-up"></i>
+            </span>
+
+          <% end %>
+
+      <% elsif current_user.disliked_movies.include?(movie) %>
+
+          <%= button_to seenlist_path(current_user.seenlists.find { |s| s.movie == movie }.id ),
+            method: :delete,
+            params: { "seenlist[movie_id]" => movie.id,
+                      "seenlist[user_id]" => current_user.id,
+                      "seenlist[score]" => nil },
+            remote: true,
+            data: { tooltip: "My Rating (click to remove from seenlist)" },
+            class: "button is-rounded has-opacity-75 is-small tooltip is-tooltip-top" do %>
+
+
+            <span class="icon is-small is-marginless has-text-danger">
+              <i class="fas fa-thumbs-down"></i>
+            </span>
+
+          <% end %>
+
+      <% end %>
+
+
+  <% else %>
+    <div class="button is-rounded is-flex has-opacity-75 button-expand is-cursor-default is-small is-padding-contract tooltip is-tooltip-top" data-tooltip="My Rating">
+      <span class="icon is-small is-marginless expand-hidden">
+        <i class="fas fa-eye"></i>
       </span>
 
-      <div class="button-message">
-        from Watchlist
+      <div class="buttons is-centered button-message">
+
+        <%= button_to seenlists_path,
+          method: :post,
+          params: { "seenlist[movie_id]" => movie.id,
+                    "seenlist[user_id]" => current_user.id,
+                    "seenlist[score]" => 0 },
+          remote: true,
+          class: "button is-danger is-rounded is-tiny is-outlined" do %>
+          <span class="icon">
+            <i class="fas fa-thumbs-down"></i>
+          </span>
+        <% end %>
+
+        <%= button_to seenlists_path,
+          method: :post,
+          params: { "seenlist[movie_id]" => movie.id,
+                    "seenlist[user_id]" => current_user.id,
+                    "seenlist[score]" => 1 },
+          remote: true,
+          class: "button is-rounded is-success is-tiny is-outlined" do %>
+          <span class="icon" >
+            <i class="fas fa-thumbs-up"></i>
+          </span>
+        <% end %>
+
       </div>
+    </div>
+  <% end %>
+</div>
+
+<%# Watchlist %>
+<div class="overlay-top-right is-flex is-flex-column buttons">
+  <% if current_user.watchlist_movies.include?(movie) %>
+    <%= button_to watchlist_path(current_user.watchlists.find { |w| w.movie == movie }.id),
+      method: :delete,
+      remote: true,
+      data: { tooltip: "Remove from Watchlist" },
+      class: "button is-danger is-rounded is-small tooltip is-tooltip-danger is-tooltip-top" do %>
+        <span class="icon is-marginless">
+          <i class="fas fa-list"></i>
+        </span>
+    <% end %>
+
+
+  <% else %>
+    <%= button_to watchlists_path,
+      method: :post,
+      params: { "watchlist[movie_id]" => movie.id,
+                "watchlist[user_id]" => current_user.id,
+                "query" => @query },
+      remote: true,
+      data: { tooltip: "Add to Watchlist" },
+      class: "button is-link is-rounded is-small tooltip is-tooltip-link is-tooltip-top" do %>
+        <span class="icon is-marginless">
+          <i class="fas fa-list"></i>
+        </span>
+    <% end %>
   <% end %>
 
-  <%# Nominate Buttons %>
-  <%= render partial: "movies/nominate_button", locals: { movie: movie } %>
+    <%# Nominate Buttons %>
+    <% unless @locked %>
+      <%= render partial: "movies/nominate_button", locals: { movie: movie } %>
+    <% end %>
+</div>
 
-<% else %>
-  <%= button_to watchlists_path,
-    method: :post,
-    params: { "watchlist[movie_id]" => movie.id,
-              "watchlist[user_id]" => current_user.id,
-              "query" => @query },
-    remote: true,
-    class: "button button-expand is-link is-small is-fullwidth" do %>
-      <span class="icon is-small is-marginless">
-        <i class="fas fa-plus"></i>
-      </span>
-
-      <div class="button-message">
-        to Watchlist
-      </div>
-  <% end %>
-<% end %>
