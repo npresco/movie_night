@@ -19,7 +19,7 @@ $modal-content-width: 1120px;
 $table-row-active-background-color: hsl(217, 71%, 53%);
 
 // Size tiny
-$size-8: 0.50rem !default;
+$size-8: 0.65rem !default;
 $size-tiny: $size-8 !default;
 $radius-tiny:  1px !default;
 
@@ -107,17 +107,26 @@ $radius-tiny:  1px !default;
   padding-left: 0.25rem;
 }
 
-.card:hover .button-message {
-  display: flex;
-}
-
 .card .button-expand {
   transition: all 110ms ease !important;
 }
 
+.card:hover .button-message {
+  display: flex;
+}
+
 .card:hover .button-expand {
-  padding-right: 0.75rem;
+  // padding-right: 0.75rem;
   transition: all 110ms ease !important;
+}
+
+.card:hover .is-padding-contract {
+  padding-right: 0.1rem;
+  padding-left: 0.1rem;
+}
+
+.card:hover span.expand-hidden {
+  display: none;
 }
 
 .overlay-button .button {

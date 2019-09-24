@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :movies
   resources :watchlists, only: [:show, :create, :destroy]
-  resources :seenlists, only: [:show, :create, :destroy]
+  resources :seenlists, only: [:show, :create, :update, :destroy]
   resources :lists, only: [:index, :show]
   resources :clubs, only: [:index, :show, :new, :create, :destroy]
   resources :club_requests, only: [:create, :destroy, :update]

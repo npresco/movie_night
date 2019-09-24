@@ -10,6 +10,12 @@ class User < ApplicationRecord
   has_many :seenlists, dependent: :destroy
   has_many :seenlist_movies, through: :seenlists, source: :movie
 
+  has_many :liked_seenlists, -> { liked }, class_name: "Seenlist"
+  has_many :liked_movies, through: :liked_seenlists, class_name: "Movie", source: :movie
+
+  has_many :disliked_seenlists, -> { disliked }, class_name: "Seenlist"
+  has_many :disliked_movies, through: :disliked_seenlists, class_name: "Movie", source: :movie
+
   has_many :club_users, dependent: :destroy
   has_many :clubs, through: :club_users
   has_many :club_requests, dependent: :destroy

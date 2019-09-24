@@ -34,6 +34,14 @@ class SeenlistsController < ApplicationController
       end
     end
 
+    if params[:liked]
+      @movies = current_user.liked_movies
+    end
+
+    if params[:disliked]
+      @movies = current_user.disliked_movies
+    end
+
     @pagy, @movies = pagy(@movies, items: 24)
 
     if current_club
@@ -56,9 +64,22 @@ class SeenlistsController < ApplicationController
 
     @seenlist = Seenlist.new(seenlist_params)
 
-
     if @seenlist.save
       flash[:notice] = "#{@movie.title} added to seenlist"
+      redirect_back fallback_location: root_path
+    else
+      flash.now.alert = "Could not save movie"
+      render :new
+    end
+  end
+
+  def update
+    @movie = Movie.find(seenlist_params[:movie_id])
+
+    @seenlist = Seenlist.find(params[:id])
+
+    if @seenlist.update(seenlist_params)
+      flash[:notice] = "#{@movie.title} rating removed"
       redirect_back fallback_location: root_path
     else
       flash.now.alert = "Could not save movie"
@@ -89,6 +110,6 @@ class SeenlistsController < ApplicationController
   end
 
   def seenlist_params
-    params.require(:seenlist).permit(:movie_id, :user_id)
+    params.require(:seenlist).permit(:movie_id, :user_id, :score)
   end
 end
