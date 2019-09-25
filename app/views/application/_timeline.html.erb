@@ -1,0 +1,32 @@
+<% if @viewings %>
+  <div class="column is-6-desktop is-12-mobile">
+    <div class="timeline">
+      <header class="timeline-header">
+        <span class="tag is-medium is-link">Start</span>
+      </header>
+
+      <% @viewings.each do |viewing| %>
+
+        <div class="timeline-item">
+          <div class="timeline-marker is-icon">
+            <i class="fa fa-film"></i>
+          </div>
+          <div class="timeline-content">
+            <p class="heading">
+              <%= link_to viewing.datetime.to_formatted_s(:long_ordinal), poll_path(viewing.poll) %>
+            </p>
+
+            <a data-action="click->quickview#show" data-movie-id="<%= viewing.movie.try(:id) %>"><%= viewing.movie.try(:title) %></a>
+            <p class="is-size-7"><%= viewing.winning_nominator %></p>
+          </div>
+        </div>
+
+      <% end %>
+
+      <div class="timeline-header">
+        <span class="tag is-medium is-link">End</span>
+      </div>
+
+    </div>
+  </div>
+<% end %>
