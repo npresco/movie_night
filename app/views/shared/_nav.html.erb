@@ -18,11 +18,6 @@
     <div id="navMenu" class="navbar-menu">
       <div class="navbar-start">
         <% if current_user %>
-          <% if current_club %>
-            <% if current_club.current_poll %>
-              <%= link_to "Vote", poll_path(current_club.current_poll), class: "navbar-item" %>
-            <% end %>
-          <% end %>
           <%= link_to "Watchlist", watchlist_path(current_user.id), class: "navbar-item" %>
           <%= link_to "Seenlist", seenlist_path(current_user.id), class: "navbar-item" %>
           <%= link_to "Movies", movies_path, class: "navbar-item" %>

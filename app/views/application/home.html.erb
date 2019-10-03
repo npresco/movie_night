@@ -2,6 +2,21 @@
   layout: "shared/section",
   locals: { section_classes: "" } %>
 
-<%= render partial: "features",
-  layout: "shared/section",
-  locals: { section_classes: "" } %>
+<%# Remove/ no one cares %>
+<%# <%= render partial: "features",
+<%#   layout: "shared/section",
+<%#   locals: { section_classes: "" } %>
+
+<% if current_club %>
+  <% if current_club.current_poll %>
+
+  <%= render partial: "polls/poll_info_and_voting",
+    layout: "shared/section",
+    locals: { section_classes: "" } %>
+
+  <%= render partial: "polls/nomination_list",
+    layout: "shared/section",
+    locals: { section_classes: "" } %>
+
+  <% end %>
+<% end %>
