@@ -5,7 +5,7 @@
     <% if !@locked %>
 
       <div class="column is-6">
-        <%= render partial: "vote_form" %>
+        <%= render partial: "polls/vote_form" %>
       </div>
 
     <% end %>
@@ -13,7 +13,7 @@
     <% if !@locked || @poll.movie %>
 
       <div class="column is-6 <%= @poll.movie ? "" : "has-background-grey-lighter" %>">
-        <%= render partial: "poll_results" %>
+        <%= render partial: "polls/poll_results" %>
       </div>
 
     <% end %>
