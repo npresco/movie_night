@@ -13,7 +13,13 @@
           </div>
           <div class="timeline-content">
             <p class="heading">
-              <%= link_to viewing.datetime.to_formatted_s(:long_ordinal), poll_path(viewing.poll) %>
+              <% if current_club.current_viewing == viewing %>
+                <strong>
+                  <%=  viewing.datetime.to_formatted_s(:long_ordinal) %>
+                </strong>
+              <% else %>
+                <%= link_to viewing.datetime.to_formatted_s(:long_ordinal), poll_path(viewing.poll) %>
+              <% end %>
             </p>
 
             <a data-action="click->quickview#show" data-movie-id="<%= viewing.movie.try(:id) %>"><%= viewing.movie.try(:title) %></a>
