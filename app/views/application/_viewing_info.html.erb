@@ -1,4 +1,6 @@
-<%= render partial: "timeline" %>
+<% if @viewings.present? %>
+  <%= render partial: "timeline" %>
+<% end %>
 
 <div class="column is-half has-text-centered">
   <div class="box is-size-5">
