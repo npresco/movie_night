@@ -3,47 +3,9 @@
      data-action="click->quickview#show"
      data-movie-id="<%= movie.id %>">
 
-
-
      <%# Ratings %>
      <% if movie.omdb_checked_date && movie.ratings.present? %>
        <div class="overlay-ratings is-hidden-mobile">
-
-         <!-- <div class="columns"> -->
-         <!--   <div class="column is&#45;half"> -->
-         <!--     <div class="columns is&#45;centered"> -->
-         <!--       <div class="column is&#45;narrow"> -->
-         <!--         <%#= button_to watchlist_path(current_user.watchlists.find { |w| w.movie == movie }.id), -->
-         <!--           method: :delete, -->
-         <!--           remote: true, -->
-         <!--           class: "button is&#45;danger is&#45;rounded" do %> -->
-         <!--           <span class="icon is&#45;small"> -->
-         <!--             <i class="fas fa&#45;times"></i> -->
-         <!--           </span> -->
-         <!--         <%# end %> -->
-         <!--       </div> -->
-         <!--     </div> -->
-         <!--   </div> -->
-         <!--  -->
-         <!--   <div class="column is&#45;half"> -->
-         <!--     <div class="columns is&#45;centered"> -->
-         <!--       <div class="column is&#45;narrow"> -->
-         <!--         <%#= button_to watchlists_path, -->
-         <!--           method: :post, -->
-         <!--           params: { "watchlist[movie_id]" => movie.id, -->
-         <!--                     "watchlist[user_id]" => current_user.id, -->
-         <!--                     "query" => @query }, -->
-         <!--           remote: true, -->
-         <!--           class: "button is&#45;rounded is&#45;success" do %> -->
-         <!--           <span class="icon is&#45;small"> -->
-         <!--             <i class="fas fa&#45;check"></i> -->
-         <!--           </span> -->
-         <!--         <%# end %> -->
-         <!--       </div> -->
-         <!--     </div> -->
-         <!--   </div> -->
-         <!-- </div> -->
-
          <%= render partial: "movies/ratings", locals: { movie: movie } %>
        </div>
      <% end %>

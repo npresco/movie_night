@@ -1,10 +1,9 @@
-<%# Watchlist %>
 <div class="overlay-top-right is-flex is-flex-column buttons">
   <% if current_user.movies.include?(movie) %>
     <%= button_to join_movie_to_user_path(current_user.join_movie_to_users.find { |w| w.movie == movie }.id),
       method: :delete,
       remote: true,
-      data: { tooltip: "Remove from Watchlist" },
+      data: { tooltip: "Remove from Movies list" },
       class: "button is-danger is-rounded is-small tooltip is-tooltip-danger is-tooltip-top" do %>
         <span class="icon is-marginless">
           <i class="fas fa-list"></i>
@@ -19,7 +18,7 @@
                 "join_movie_to_user[user_id]" => current_user.id,
                 "query" => @query },
       remote: true,
-      data: { tooltip: "Add to Watchlist" },
+      data: { tooltip: "Add to Movies list" },
       class: "button is-link is-rounded is-small tooltip is-tooltip-link is-tooltip-top" do %>
         <span class="icon is-marginless">
           <i class="fas fa-list"></i>
