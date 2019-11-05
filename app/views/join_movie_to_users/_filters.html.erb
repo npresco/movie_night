@@ -3,7 +3,7 @@
 
   <p class="menu-label button">
     <%= link_to "All",
-      seenlist_path(params[:id]),
+      join_movie_to_user_path(params[:id]),
       class: "is-link is-small has-text-grey" %>
   </p>
 
@@ -15,7 +15,7 @@
       <% @genres.each do |genre| %>
         <li>
           <%= link_to genre.name,
-            seenlist_path(params[:id], params: { genre: genre.id }),
+            join_movie_to_user_path(params[:id], params: { genre: genre.id }),
             class: "is-link is-small" %>
         </li>
       <% end %>
@@ -30,7 +30,7 @@
       <% @decades.each do |decade| %>
         <li>
           <%= link_to decade,
-            seenlist_path(params[:id], params: { decade: decade }),
+            join_movie_to_user_path(params[:id], params: { decade: decade }),
             class: "is-link is-small" %>
         </li>
       <% end %>
@@ -44,39 +44,40 @@
     <ul class="menu-list is-hidden" data-target="filter.list">
       <li>
         <%= link_to "↓ Alphabetically",
-          seenlist_path(params[:id], params: { sort: :alpha_asc }),
+          join_movie_to_user_path(params[:id], params: { sort: :alpha_asc }),
           class: "is-link is-small" %>
       </li>
 
       <li>
         <%= link_to "↑ Alphabetically",
-          seenlist_path(params[:id], params: { sort: :alpha_desc }),
+          join_movie_to_user_path(params[:id], params: { sort: :alpha_desc }),
           class: "is-link is-small" %>
       </li>
 
       <li>
         <%= link_to "↓ Added to List",
-          seenlist_path(params[:id], params: { sort: :added_asc }),
+          join_movie_to_user_path(params[:id], params: { sort: :added_asc }),
           class: "is-link is-small" %>
       </li>
 
       <li>
         <%= link_to "↑ Added to List",
-          seenlist_path(params[:id], params: { sort: :added_desc }),
+          join_movie_to_user_path(params[:id], params: { sort: :added_desc }),
           class: "is-link is-small" %>
       </li>
 
       <li>
         <%= link_to "↓ Year",
-          seenlist_path(params[:id], params: { sort: :year_asc }),
+          join_movie_to_user_path(params[:id], params: { sort: :year_asc }),
           class: "is-link is-small" %>
       </li>
 
       <li>
         <%= link_to "↑ Year",
-          seenlist_path(params[:id], params: { sort: :year_desc }),
+          join_movie_to_user_path(params[:id], params: { sort: :year_desc }),
           class: "is-link is-small" %>
       </li>
     </ul>
   </div>
+
 </aside>
