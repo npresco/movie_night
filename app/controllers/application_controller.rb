@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     @viewings = current_club.viewings if current_club
 
     # Poll info
-    @poll = current_club.current_poll
+    @poll = current_club&.current_poll
 
     return unless @poll
 

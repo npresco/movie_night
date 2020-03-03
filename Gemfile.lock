@@ -310,7 +310,6 @@ DEPENDENCIES
   pry-rails
   puma (~> 3.12)
   rails (~> 6.0.0)
-  selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
   themoviedb-api
