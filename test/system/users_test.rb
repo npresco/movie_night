@@ -19,8 +19,8 @@ class UsersTest < ApplicationSystemTestCase
     fill_in "Password confirmation", with: "password"
     click_on "Submit"
 
-    take_screenshot
-    # Test redirected home
+    # take_screenshot
+    has_content? "Welcome John"
   end
 
   # Creating a club
