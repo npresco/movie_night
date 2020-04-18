@@ -1,0 +1,47 @@
+# source database URL
+# database URLs take the format of:
+#   postgres://user:password@host:port/dbname
+#
+# we recommend a command which outputs a database URL
+# so sensitive information is not included in this file
+#
+# we *highly recommend* you use sslmode=verify-full when possible
+# see https://ankane.org/postgres-sslmode-explained for more info
+# from: $(some_command)?sslmode=require
+from: $(movie_night_pg)
+
+# destination database URL
+to: postgres://localhost:5432/movie_night_development
+
+# exclude tables
+exclude:
+  - schema_migrations
+  - ar_internal_metadata
+
+# define groups
+groups:
+  group1:
+    - movies
+    - users
+    - clubs
+    - lists
+    - viewings
+    - polls
+    - club_requests
+    - club_users
+    - genres
+    - join_genre_to_movies
+    - join_list_to_movies
+    - join_movie_to_users
+    - nominations
+    - watchlists
+    - seenlists
+    - votes
+
+# protect sensitive information
+data_rules:
+  # email: unique_email
+  # phone: unique_phone
+  # last_name: random_letter
+  # birthday: random_date
+  # encrypted_*: null
