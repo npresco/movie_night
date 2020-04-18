@@ -1,0 +1,35 @@
+<div class="container flex flex-wrap">
+
+<% @movies.each do |movie| %>
+  <div class="flex max-w-lg h-64 bg-gray-300 rounded-r-lg mr-12 mb-12">
+
+    <%= image_tag movie.poster, class: "object-cover h-full rounded-l-lg" %>
+
+    <div class="w-full m-6">
+      <div class="flex justify-between mb-4">
+        <div class="font-bold"><%= movie.title %></div>
+        <div><%= movie.year %></div>
+      </div>
+      <div class="flex justify-between items-center text-sm mb-4">
+        <div class="flex items-center">
+          <%= image_pack_tag ("imdb_tw.svg"), class: "mr-4" %>
+          <%# <%= movie&.ratings[0]["value"].to_f %>
+        </div>
+        <div class="flex items-center">
+          <%= image_pack_tag ("rotten_tomatoes_tw.svg"), class: "mr-4" %>
+          <%# <%= movie&.ratings[1]["Value"].to_i %>
+        </div>
+        <div class="flex items-center">
+          <%= image_pack_tag ("metacritic_tw.svg"), class: "mr-4" %>
+          <%# <%= movie&.ratings[2]["Value"].to_i %>
+        </div>
+      </div>
+      <div class="text-sm">
+        <%= movie&.plot %>
+      </div>
+    </div>
+
+  </div>
+<% end %>
+
+</div>
