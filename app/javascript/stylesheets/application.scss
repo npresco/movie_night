@@ -14,6 +14,7 @@
 //
 // $body-family: Vulf;
 
+
 // Variables
 $modal-content-width: 1120px;
 $table-row-active-background-color: hsl(217, 71%, 53%);
@@ -41,6 +42,10 @@ $radius-tiny:  1px !default;
 @import "bulma-extensions/src/sass/index.sass";
 @import "flatpickr/dist/themes/light.css";
 @import "animate.css/animate.css";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 // Poster
 

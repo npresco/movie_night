@@ -2,6 +2,11 @@ class MoviesController < ApplicationController
   def index
     if params[:query].present?
       @movies = ::Omdb.search(params[:query])
+      @movies.each do |movie|
+        Omdb.info(movie)
+        TmdbWrapper.info(movie)
+      end
+
 
       # Save the current query in session to it can be used during redirect_back
       session[:query] = params[:query].to_s
@@ -11,6 +16,10 @@ class MoviesController < ApplicationController
       @no_result = true if @movies.empty?
     elsif session[:query].present?
       @movies = ::Omdb.search(session[:query])
+      @movies.each do |movie|
+        Omdb.info(movie)
+        TmdbWrapper.info(movie)
+      end
 
       @pagy, @movies = pagy_array(@movies)
       @query = session[:query]
